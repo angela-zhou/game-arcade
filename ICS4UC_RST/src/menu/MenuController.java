@@ -9,4 +9,12 @@ public class MenuController {
 		
 	}
 	
+	@FXML
+	private void runAsteroids() {
+		//Looking to run your game? easy peasy
+		//Get the instance of the Menu class and create a run method from there
+		//(Look at Menu.runAsteroids for an example)
+		Menu.getInstance().runAsteroids();
+	}
+	
 }

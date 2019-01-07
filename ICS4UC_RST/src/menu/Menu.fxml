@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.*?>
-<?import java.lang.*?>
-<?import javafx.scene.canvas.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<SplitPane dividerPositions="0.15789473684210525" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.MenuController">
+<SplitPane dividerPositions="0.15789473684210525" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.MenuController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="277.0" prefWidth="598.0">
          <children>
@@ -31,7 +32,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" text="Asteroids" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#runAsteroids" prefHeight="40.0" prefWidth="175.0" text="Asteroids" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" text="Ultimate TicTacToe" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
                   <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" text="PacMan" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                   <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" text="Egyptian War" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
