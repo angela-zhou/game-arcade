@@ -589,9 +589,4 @@ public class Game extends Application{
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
-	public static Game astGame;
-    public void astGame(){
-            astGame = this;
-    }
 }
