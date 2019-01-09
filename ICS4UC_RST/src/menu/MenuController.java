@@ -21,7 +21,7 @@ public class MenuController {
 		//imgAsteroids.setImage(new Image(getClass().getResource("/images/Asteroids.png").toString()));
 		//imgTicTacToe.setImage(new Image(getClass().getResource("/images/TicTacToe.png").toString()));
 		//imgPacMan.setImage(new Image(getClass().getResource("/images/PacMan.png").toString()));
-		imgEgyptianWar.setImage(new Image(getClass().getResource("/images/EgyptianWar.png").toString()));
+		//imgEgyptianWar.setImage(new Image(getClass().getResource("/images/EgyptianWar.png").toString()));
 	}
 	
 	@FXML
@@ -30,6 +30,11 @@ public class MenuController {
 		//Get the instance of the Menu class and create a run method from there
 		//(Look at Menu.runAsteroids for an example)
 		Menu.getInstance().runAsteroids();
+	}
+	
+	@FXML
+	private void runPac() {
+		Menu.getInstance().runPac();
 	}
 	
 }

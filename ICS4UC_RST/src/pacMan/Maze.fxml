@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane fx:id="root" onKeyPressed="#handleKeyPressed" onKeyReleased="#handleKeyReleased" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pacMan.MazeController">
+   <children>
+      <Rectangle fx:id="r1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="31.0" stroke="TRANSPARENT" strokeType="INSIDE" width="800.0" />
+      <Rectangle fx:id="r2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutY="575.0" stroke="TRANSPARENT" strokeType="INSIDE" width="800.0" />
+      <Rectangle fx:id="r3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="600.0" stroke="TRANSPARENT" strokeType="INSIDE" width="25.0" />
+      <Rectangle fx:id="r4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="600.0" layoutX="777.0" stroke="TRANSPARENT" strokeType="INSIDE" width="25.0" />
+      <Rectangle fx:id="r5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="8.0" layoutY="204.0" stroke="TRANSPARENT" strokeType="INSIDE" width="127.0" />
+      <Rectangle fx:id="r6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="182.0" layoutY="64.0" stroke="TRANSPARENT" strokeType="INSIDE" width="150.0" />
+      <Rectangle fx:id="r7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="463.0" layoutY="64.0" stroke="TRANSPARENT" strokeType="INSIDE" width="150.0" />
+      <Rectangle fx:id="r8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="665.0" layoutY="142.0" stroke="TRANSPARENT" strokeType="INSIDE" width="66.0" />
+      <Rectangle fx:id="r9" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="86.0" layoutX="388.0" layoutY="6.0" stroke="TRANSPARENT" strokeType="INSIDE" width="25.0" />
+      <Rectangle fx:id="r10" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="458.0" layoutY="204.0" stroke="TRANSPARENT" strokeType="INSIDE" width="142.0" />
+      <Rectangle fx:id="r11" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="102.0" layoutX="513.0" layoutY="279.0" stroke="TRANSPARENT" strokeType="INSIDE" width="25.0" />
+      <Rectangle fx:id="r12" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="171.0" layoutX="110.0" layoutY="2.0" stroke="TRANSPARENT" strokeType="INSIDE" width="25.0" />
+      <Rectangle fx:id="r13" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="666.0" layoutY="203.0" stroke="TRANSPARENT" strokeType="INSIDE" width="136.0" />
+      <Rectangle fx:id="r14" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="73.0" layoutX="589.0" layoutY="343.0" stroke="TRANSPARENT" strokeType="INSIDE" width="25.0" />
+      <Rectangle fx:id="r15" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="180.0" layoutX="186.0" layoutY="129.0" stroke="TRANSPARENT" strokeType="INSIDE" width="25.0" />
+      <Rectangle fx:id="r16" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="262.0" layoutY="129.0" stroke="TRANSPARENT" strokeType="INSIDE" width="280.0" />
+      <Rectangle fx:id="r17" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="102.0" layoutX="388.0" layoutY="129.0" stroke="TRANSPARENT" strokeType="INSIDE" width="25.0" />
+      <Rectangle fx:id="r18" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="180.0" layoutX="589.0" layoutY="129.0" stroke="TRANSPARENT" strokeType="INSIDE" width="25.0" />
+      <Rectangle fx:id="r19" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="199.0" layoutY="204.0" stroke="TRANSPARENT" strokeType="INSIDE" width="142.0" />
+      <Rectangle fx:id="r20" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="102.0" layoutX="257.0" layoutY="279.0" stroke="TRANSPARENT" strokeType="INSIDE" width="25.0" />
+      <Rectangle fx:id="r21" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="258.0" layoutY="356.0" stroke="TRANSPARENT" strokeType="INSIDE" width="280.0" />
+      <Rectangle fx:id="r22" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="262.0" layoutY="279.0" stroke="TRANSPARENT" strokeType="INSIDE" width="100.0" />
+      <Rectangle fx:id="r23" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="429.0" layoutY="279.0" stroke="TRANSPARENT" strokeType="INSIDE" width="100.0" />
+      <Rectangle fx:id="r24" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="86.0" layoutX="386.0" layoutY="448.0" stroke="TRANSPARENT" strokeType="INSIDE" width="25.0" />
+      <Rectangle fx:id="r25" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="73.0" layoutX="188.0" layoutY="343.0" stroke="TRANSPARENT" strokeType="INSIDE" width="25.0" />
+      <Rectangle fx:id="r26" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="73.0" layoutX="186.0" layoutY="446.0" stroke="TRANSPARENT" strokeType="INSIDE" width="25.0" />
+      <Rectangle fx:id="r27" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="277.0" layoutY="437.0" stroke="TRANSPARENT" strokeType="INSIDE" width="250.0" />
+      <Rectangle fx:id="r28" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="70.0" layoutY="507.0" stroke="TRANSPARENT" strokeType="INSIDE" width="206.0" />
+      <Rectangle fx:id="r29" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="528.0" layoutY="507.0" stroke="TRANSPARENT" strokeType="INSIDE" width="206.0" />
+      <Rectangle fx:id="r30" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="73.0" layoutX="589.0" layoutY="446.0" stroke="TRANSPARENT" strokeType="INSIDE" width="25.0" />
+      <Rectangle fx:id="r31" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="148.0" layoutX="110.0" layoutY="261.0" stroke="TRANSPARENT" strokeType="INSIDE" width="25.0" />
+      <Rectangle fx:id="r32" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="69.0" layoutY="257.0" stroke="TRANSPARENT" strokeType="INSIDE" width="66.0" />
+      <Rectangle fx:id="r33" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="6.0" layoutY="326.0" stroke="TRANSPARENT" strokeType="INSIDE" width="56.0" />
+      <Rectangle fx:id="r34" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="69.0" layoutY="390.0" stroke="TRANSPARENT" strokeType="INSIDE" width="66.0" />
+      <Rectangle fx:id="r35" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="665.0" layoutY="388.0" stroke="TRANSPARENT" strokeType="INSIDE" width="66.0" />
+      <Rectangle fx:id="r36" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="733.0" layoutY="326.0" stroke="TRANSPARENT" strokeType="INSIDE" width="56.0" />
+      <Rectangle fx:id="r37" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="665.0" layoutY="257.0" stroke="TRANSPARENT" strokeType="INSIDE" width="66.0" />
+      <Rectangle fx:id="r38" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="148.0" layoutX="665.0" layoutY="260.0" stroke="TRANSPARENT" strokeType="INSIDE" width="25.0" />
+      <Rectangle fx:id="r39" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="1.0" layoutY="80.0" stroke="TRANSPARENT" strokeType="INSIDE" width="66.0" />
+      <Rectangle fx:id="r40" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="736.0" layoutY="80.0" stroke="TRANSPARENT" strokeType="INSIDE" width="66.0" />
+      <Rectangle fx:id="r41" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="69.0" layoutY="448.0" stroke="TRANSPARENT" strokeType="INSIDE" width="66.0" />
+      <Rectangle fx:id="r42" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="665.0" layoutY="448.0" stroke="TRANSPARENT" strokeType="INSIDE" width="66.0" />
+      <Rectangle fx:id="r43" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="69.0" layoutY="148.0" stroke="TRANSPARENT" strokeType="INSIDE" width="66.0" />
+      <Rectangle fx:id="r44" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="156.0" layoutX="665.0" layoutY="8.0" stroke="TRANSPARENT" strokeType="INSIDE" width="25.0" />
+      <Rectangle fx:id="r45" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="460.0" layoutY="508.0" stroke="TRANSPARENT" strokeType="INSIDE" width="25.0" />
+      <Rectangle fx:id="r46" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="310.0" layoutY="508.0" stroke="TRANSPARENT" strokeType="INSIDE" width="25.0" />
+      <ImageView fx:id="pacMan" fitHeight="25.0" fitWidth="25.0" layoutX="386.0" layoutY="318.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fx:id="txtUserScore" fill="WHITE" layoutX="31.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Score: 0">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Circle fx:id="f1" fill="#f2bc1c" layoutX="173.0" layoutY="554.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f2" fill="#f2bc1c" layoutX="204.0" layoutY="554.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f3" fill="#f2bc1c" layoutX="270.0" layoutY="554.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f4" fill="#f2bc1c" layoutX="236.0" layoutY="554.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f5" fill="#f2bc1c" layoutX="82.0" layoutY="554.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f6" fill="#f2bc1c" layoutX="51.0" layoutY="554.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f7" fill="#f2bc1c" layoutX="113.0" layoutY="554.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f8" fill="#f2bc1c" layoutX="144.0" layoutY="554.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f9" fill="#f2bc1c" layoutX="293.0" layoutY="554.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f10" fill="#f2bc1c" layoutX="507.0" layoutY="513.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f11" fill="#f2bc1c" layoutX="441.0" layoutY="554.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f12" fill="#f2bc1c" layoutX="398.0" layoutY="554.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f13" fill="#f2bc1c" layoutX="293.0" layoutY="513.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f14" fill="#f2bc1c" layoutX="358.0" layoutY="554.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f15" fill="#f2bc1c" layoutX="572.0" layoutY="554.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f16" fill="#f2bc1c" layoutX="603.0" layoutY="554.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f17" fill="#f2bc1c" layoutX="538.0" layoutY="554.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f18" fill="#f2bc1c" layoutX="507.0" layoutY="554.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f19" fill="#f2bc1c" layoutX="753.0" layoutY="554.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f20" fill="#f2bc1c" layoutX="728.0" layoutY="554.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f21" fill="#f2bc1c" layoutX="697.0" layoutY="554.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f22" fill="#f2bc1c" layoutX="635.0" layoutY="554.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f23" fill="#f2bc1c" layoutX="666.0" layoutY="554.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f24" fill="#f2bc1c" layoutX="402.0" layoutY="109.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f25" fill="#f2bc1c" layoutX="362.0" layoutY="109.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f26" fill="#f2bc1c" layoutX="337.0" layoutY="109.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f27" fill="#f2bc1c" layoutX="275.0" layoutY="109.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f28" fill="#f2bc1c" layoutX="306.0" layoutY="109.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f29" fill="#f2bc1c" layoutX="498.0" layoutY="109.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f30" fill="#f2bc1c" layoutX="533.0" layoutY="109.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f31" fill="#f2bc1c" layoutX="464.0" layoutY="109.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f32" fill="#f2bc1c" layoutX="463.0" layoutY="180.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f33" fill="#f2bc1c" layoutX="368.0" layoutY="180.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f34" fill="#f2bc1c" layoutX="334.0" layoutY="180.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f35" fill="#f2bc1c" layoutX="303.0" layoutY="180.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f36" fill="#f2bc1c" layoutX="241.0" layoutY="180.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f37" fill="#f2bc1c" layoutX="272.0" layoutY="180.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f38" fill="#f2bc1c" layoutX="464.0" layoutY="180.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f39" fill="#f2bc1c" layoutX="495.0" layoutY="180.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f40" fill="#f2bc1c" layoutX="430.0" layoutY="180.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f41" fill="#f2bc1c" layoutX="358.0" layoutY="487.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f42" fill="#f2bc1c" layoutX="358.0" layoutY="513.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f43" fill="#f2bc1c" layoutX="322.0" layoutY="487.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f44" fill="#f2bc1c" layoutX="236.0" layoutY="487.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f45" fill="#f2bc1c" layoutX="293.0" layoutY="487.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f46" fill="#f2bc1c" layoutX="441.0" layoutY="513.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f47" fill="#f2bc1c" layoutX="473.0" layoutY="487.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f48" fill="#f2bc1c" layoutX="441.0" layoutY="487.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f49" fill="#f2bc1c" layoutX="282.0" layoutY="49.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f50" fill="#f2bc1c" layoutX="248.0" layoutY="49.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f51" fill="#f2bc1c" layoutX="217.0" layoutY="49.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f52" fill="#f2bc1c" layoutX="155.0" layoutY="49.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f53" fill="#f2bc1c" layoutX="186.0" layoutY="49.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f54" fill="#f2bc1c" layoutX="362.0" layoutY="50.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f55" fill="#f2bc1c" layoutX="326.0" layoutY="50.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f56" fill="#f2bc1c" layoutX="567.0" layoutY="49.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f57" fill="#f2bc1c" layoutX="525.0" layoutY="50.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f58" fill="#f2bc1c" layoutX="494.0" layoutY="50.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f59" fill="#f2bc1c" layoutX="432.0" layoutY="50.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f60" fill="#f2bc1c" layoutX="463.0" layoutY="50.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f61" fill="#f2bc1c" layoutX="639.0" layoutY="50.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f62" fill="#f2bc1c" layoutX="613.0" layoutY="50.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f63" fill="#f2bc1c" layoutX="362.0" layoutY="77.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f64" fill="#f2bc1c" layoutX="155.0" layoutY="80.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f65" fill="#f2bc1c" layoutX="639.0" layoutY="76.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f66" fill="#f2bc1c" layoutX="432.0" layoutY="77.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f67" fill="#f2bc1c" layoutX="199.0" layoutY="109.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f68" fill="#f2bc1c" layoutX="240.0" layoutY="109.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f69" fill="#f2bc1c" layoutX="569.0" layoutY="109.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f70" fill="#f2bc1c" layoutX="602.0" layoutY="109.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f71" fill="#f2bc1c" layoutX="155.0" layoutY="148.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f72" fill="#f2bc1c" layoutX="155.0" layoutY="109.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f73" fill="#f2bc1c" layoutX="262.0" layoutY="487.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f74" fill="#f2bc1c" layoutX="155.0" layoutY="247.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f75" fill="#f2bc1c" layoutX="155.0" layoutY="191.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f76" fill="#f2bc1c" layoutX="155.0" layoutY="400.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f77" fill="#f2bc1c" layoutX="155.0" layoutY="437.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f78" fill="#f2bc1c" layoutX="155.0" layoutY="487.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f79" fill="#f2bc1c" layoutX="155.0" layoutY="460.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f80" fill="#f2bc1c" layoutX="358.0" layoutY="532.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f81" fill="#f2bc1c" layoutX="155.0" layoutY="360.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f82" fill="#f2bc1c" layoutX="155.0" layoutY="330.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f83" fill="#f2bc1c" layoutX="155.0" layoutY="301.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f84" fill="#f2bc1c" layoutX="639.0" layoutY="245.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f85" fill="#f2bc1c" layoutX="639.0" layoutY="356.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f86" fill="#f2bc1c" layoutX="639.0" layoutY="396.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f87" fill="#f2bc1c" layoutX="639.0" layoutY="326.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f88" fill="#f2bc1c" layoutX="538.0" layoutY="487.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f89" fill="#f2bc1c" layoutX="639.0" layoutY="487.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f90" fill="#f2bc1c" layoutX="639.0" layoutY="437.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f91" fill="#f2bc1c" layoutX="639.0" layoutY="465.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f92" fill="#f2bc1c" layoutX="639.0" layoutY="187.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f93" fill="#f2bc1c" layoutX="441.0" layoutY="534.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f94" fill="#f2bc1c" layoutX="639.0" layoutY="219.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f95" fill="#f2bc1c" layoutX="639.0" layoutY="109.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f96" fill="#f2bc1c" layoutX="639.0" layoutY="155.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f97" fill="#f2bc1c" layoutX="565.0" layoutY="180.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f98" fill="#f2bc1c" layoutX="533.0" layoutY="180.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f99" fill="#f2bc1c" layoutX="507.0" layoutY="487.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f100" fill="#f2bc1c" layoutX="567.0" layoutY="487.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f101" fill="#f2bc1c" layoutX="567.0" layoutY="142.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f102" fill="#f2bc1c" layoutX="240.0" layoutY="144.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f103" fill="#f2bc1c" layoutX="47.0" layoutY="304.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f104" fill="#f2bc1c" layoutX="47.0" layoutY="189.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f105" fill="#f2bc1c" layoutX="155.0" layoutY="277.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f106" fill="#f2bc1c" layoutX="47.0" layoutY="275.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f107" fill="#f2bc1c" layoutX="47.0" layoutY="249.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f108" fill="#f2bc1c" layoutX="47.0" layoutY="127.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f109" fill="#f2bc1c" layoutX="47.0" layoutY="158.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f110" fill="#f2bc1c" layoutX="753.0" layoutY="302.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f111" fill="#f2bc1c" layoutX="753.0" layoutY="187.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f112" fill="#f2bc1c" layoutX="639.0" layoutY="275.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f113" fill="#f2bc1c" layoutX="753.0" layoutY="273.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f114" fill="#f2bc1c" layoutX="754.0" layoutY="245.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f115" fill="#f2bc1c" layoutX="753.0" layoutY="125.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f116" fill="#f2bc1c" layoutX="753.0" layoutY="156.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f117" fill="#f2bc1c" layoutX="51.0" layoutY="435.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f118" fill="#f2bc1c" layoutX="51.0" layoutY="466.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f119" fill="#f2bc1c" layoutX="51.0" layoutY="528.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f120" fill="#f2bc1c" layoutX="51.0" layoutY="491.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f121" fill="#f2bc1c" layoutX="51.0" layoutY="373.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f122" fill="#f2bc1c" layoutX="51.0" layoutY="404.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f123" fill="#f2bc1c" layoutX="753.0" layoutY="406.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f124" fill="#f2bc1c" layoutX="753.0" layoutY="375.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f125" fill="#f2bc1c" layoutX="754.0" layoutY="491.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f126" fill="#f2bc1c" layoutX="753.0" layoutY="524.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f127" fill="#f2bc1c" layoutX="753.0" layoutY="468.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f128" fill="#f2bc1c" layoutX="753.0" layoutY="437.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f129" fill="#f2bc1c" layoutX="86.0" layoutY="373.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f130" fill="#f2bc1c" layoutX="86.0" layoutY="306.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f131" fill="#f2bc1c" layoutX="86.0" layoutY="338.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f132" fill="#f2bc1c" layoutX="711.0" layoutY="337.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f133" fill="#f2bc1c" layoutX="711.0" layoutY="305.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f134" fill="#f2bc1c" layoutX="711.0" layoutY="372.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f135" fill="#f2bc1c" layoutX="90.0" layoutY="91.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f136" fill="#f2bc1c" layoutX="90.0" layoutY="59.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f137" fill="#f2bc1c" layoutX="90.0" layoutY="126.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f138" fill="#f2bc1c" layoutX="707.0" layoutY="90.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f139" fill="#f2bc1c" layoutX="707.0" layoutY="58.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f140" fill="#f2bc1c" layoutX="707.0" layoutY="125.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f141" fill="#f2bc1c" layoutX="51.0" layoutY="59.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f142" fill="#f2bc1c" layoutX="753.0" layoutY="55.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f143" fill="#f2bc1c" layoutX="123.0" layoutY="191.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f144" fill="#f2bc1c" layoutX="82.0" layoutY="191.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f145" fill="#f2bc1c" layoutX="123.0" layoutY="247.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f146" fill="#f2bc1c" layoutX="82.0" layoutY="247.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f147" fill="#f2bc1c" layoutX="123.0" layoutY="437.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f148" fill="#f2bc1c" layoutX="82.0" layoutY="437.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f149" fill="#f2bc1c" layoutX="123.0" layoutY="487.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f150" fill="#f2bc1c" layoutX="82.0" layoutY="487.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f151" fill="#f2bc1c" layoutX="155.0" layoutY="222.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f152" fill="#f2bc1c" layoutX="719.0" layoutY="187.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f153" fill="#f2bc1c" layoutX="678.0" layoutY="187.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f154" fill="#f2bc1c" layoutX="719.0" layoutY="245.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f155" fill="#f2bc1c" layoutX="678.0" layoutY="245.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f156" fill="#f2bc1c" layoutX="719.0" layoutY="437.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f157" fill="#f2bc1c" layoutX="678.0" layoutY="437.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f158" fill="#f2bc1c" layoutX="719.0" layoutY="487.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f159" fill="#f2bc1c" layoutX="678.0" layoutY="487.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f160" fill="#f2bc1c" layoutX="507.0" layoutY="534.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f161" fill="#f2bc1c" layoutX="237.0" layoutY="405.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f162" fill="#f2bc1c" layoutX="237.0" layoutY="435.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f163" fill="#f2bc1c" layoutX="237.0" layoutY="374.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f164" fill="#f2bc1c" layoutX="199.0" layoutY="435.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f165" fill="#f2bc1c" layoutX="567.0" layoutY="405.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f166" fill="#f2bc1c" layoutX="567.0" layoutY="460.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f167" fill="#f2bc1c" layoutX="567.0" layoutY="374.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f168" fill="#f2bc1c" layoutX="567.0" layoutY="437.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f169" fill="#f2bc1c" layoutX="237.0" layoutY="465.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f170" fill="#f2bc1c" layoutX="199.0" layoutY="330.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f171" fill="#f2bc1c" layoutX="602.0" layoutY="326.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f172" fill="#f2bc1c" layoutX="600.0" layoutY="437.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f173" fill="#f2bc1c" layoutX="293.0" layoutY="532.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f174" fill="#f2bc1c" layoutX="238.0" layoutY="282.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f175" fill="#f2bc1c" layoutX="237.0" layoutY="330.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f176" fill="#f2bc1c" layoutX="639.0" layoutY="298.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f177" fill="#f2bc1c" layoutX="568.0" layoutY="286.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f178" fill="#f2bc1c" layoutX="568.0" layoutY="326.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f179" fill="#f2bc1c" layoutX="532.0" layoutY="253.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f180" fill="#f2bc1c" layoutX="568.0" layoutY="253.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f181" fill="#f2bc1c" layoutX="429.0" layoutY="253.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f182" fill="#f2bc1c" layoutX="494.0" layoutY="253.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f183" fill="#f2bc1c" layoutX="463.0" layoutY="253.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f184" fill="#f2bc1c" layoutX="271.0" layoutY="253.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f185" fill="#f2bc1c" layoutX="240.0" layoutY="253.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f186" fill="#f2bc1c" layoutX="302.0" layoutY="253.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f187" fill="#f2bc1c" layoutX="333.0" layoutY="253.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f188" fill="#f2bc1c" layoutX="367.0" layoutY="253.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f189" fill="#f2bc1c" layoutX="400.0" layoutY="253.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="f190" fill="#f2bc1c" layoutX="432.0" layoutY="109.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <ImageView fx:id="ghostBlue" fitHeight="25.0" fitWidth="25.0" layoutX="39.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="ghostPink" fitHeight="25.0" fitWidth="25.0" layoutX="741.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="ghostRed" fitHeight="25.0" fitWidth="25.0" layoutX="34.0" layoutY="537.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="ghostYellow" fitHeight="25.0" fitWidth="25.0" layoutX="736.0" layoutY="537.0" pickOnBounds="true" preserveRatio="true" />
+      <Text fx:id="welcome" fill="#fcf83a" layoutX="297.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="READY?" textAlignment="CENTER" wrappingWidth="206.205078125">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Text>
+      <Text fx:id="start" fill="#fcf83a" layoutX="193.0" layoutY="593.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press the spacebar to start and P to pause" textAlignment="CENTER" wrappingWidth="413.205078125">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="gameOver" fill="#f42020" layoutX="313.0" layoutY="417.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME OVER!" textAlignment="CENTER" visible="false">
+         <font>
+            <Font size="31.0" />
+         </font></Text>
+      <Text fx:id="reset" fill="#fcf83a" layoutX="315.0" layoutY="595.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press R to reset " textAlignment="CENTER" visible="false" wrappingWidth="170.12158203125">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="pause" fill="WHITE" layoutX="327.0" layoutY="418.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PAUSED" textAlignment="CENTER" visible="false" wrappingWidth="142.0">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Text>
+      <Text fx:id="continuePlaying" fill="WHITE" layoutX="236.0" layoutY="593.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Press the spacebar to continue" textAlignment="CENTER" visible="false" wrappingWidth="327.205078125">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="win" fill="#fcf83a" layoutX="331.0" layoutY="417.0" strokeType="OUTSIDE" strokeWidth="0.0" text="YOU WIN!" textAlignment="CENTER" visible="false">
+         <font>
+            <Font size="31.0" />
+         </font>
+      </Text>
+   </children>
+</Pane>
