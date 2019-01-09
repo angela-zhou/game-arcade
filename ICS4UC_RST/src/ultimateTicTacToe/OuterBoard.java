@@ -8,11 +8,11 @@ public class OuterBoard {
 	int nextPlay;
 	int turns = 0;
 	
-	OuterBoard(GridPane node) {
+	OuterBoard(GridPane node, int squareSpace) {
 		gameSpace = new InnerBoard[3][3];
 		for(int row = 0; row < 3; row++) {
 			for(int col = 0; col < 3; col++) {
-				gameSpace[row][col] = new InnerBoard(3 * row + col, node, this); // int div 3 of num = row, mod 3 of num = col
+				gameSpace[row][col] = new InnerBoard(3 * row + col, node, squareSpace, this); // int div 3 of num = row, mod 3 of num = col
 			}
 		}
 		nextPlay = -1;

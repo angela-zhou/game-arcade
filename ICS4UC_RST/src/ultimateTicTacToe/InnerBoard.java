@@ -1,6 +1,7 @@
 package ultimateTicTacToe;
 
 import javafx.event.Event;
+import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 
 public class InnerBoard {
@@ -10,18 +11,30 @@ public class InnerBoard {
 	Square[][] grid;
 	int superPos;
 	OuterBoard container;
+	GridPane innerNode;
+	static int SQUARE_SPACE = 10;
 	
-	InnerBoard(int superPos, GridPane node, OuterBoard gameSpace) {
+	InnerBoard(int superPos, GridPane node, int squareSpace, OuterBoard gameSpace) {
 		this.superPos = superPos;
 		container = gameSpace;
+		SQUARE_SPACE = squareSpace;
 		grid = new Square[3][3];
+		innerInit();
 		for(int row = 0; row < 3; row++) {
 			for(int col = 0; col < 3; col++) {
 				grid[row][col] = new Square(3 * row + col);
 				grid[row][col].setOnAction(e -> playSquare(e));
-				node.add(grid[row][col], 3 * (superPos % 3) + col, 3 * (superPos / 3) + row);
+				innerNode.add(grid[row][col], col, row);
 			}
 		}
+		node.add(innerNode, (superPos % 3), (superPos / 3));
+	}
+	
+	private void innerInit() {
+		innerNode = new GridPane();
+		innerNode.setVgap(SQUARE_SPACE);
+		innerNode.setHgap(SQUARE_SPACE);
+//		innerNode.setPadding(new Insets(SQUARE_SPACE, SQUARE_SPACE, SQUARE_SPACE, SQUARE_SPACE));
 	}
 	
 	private void playSquare(Event e) {

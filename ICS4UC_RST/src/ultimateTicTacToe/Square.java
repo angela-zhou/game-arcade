@@ -12,22 +12,30 @@ public class Square extends Button{
 	
 	private char value;
 	private int superPos;
+	private ImageView curImage;
 	
 	public Square(int gridPos) {
 		super();
 		superPos = gridPos;
 		value = ' ';
-		setGraphic(new ImageView(imgBLANK));
+		curImage = new ImageView();
+		curImage.setFitHeight(50);
+		curImage.setFitWidth(50);
+		curImage.setImage(imgBLANK);
+		setGraphic(curImage);
+		//setGraphic(new ImageView(imgBLANK));
 	}
 	
 	public void playSquare(char val) {
 		
 		switch (val) {
 		case 'X':
-			setGraphic(new ImageView(imgX));
+			curImage.setImage(imgX);
+//			setGraphic(new ImageView(imgX));
 			break;
 		case 'O':
-			setGraphic(new ImageView(imgO));
+			curImage.setImage(imgO);
+//			setGraphic(new ImageView(imgO));
 			break;
 		}
 	}
