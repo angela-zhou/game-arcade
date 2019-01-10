@@ -27,7 +27,7 @@ public class Square extends Button{
 	}
 	
 	public void playSquare(char val) {
-		
+		value = val;
 		switch (val) {
 		case 'X':
 			curImage.setImage(imgX);

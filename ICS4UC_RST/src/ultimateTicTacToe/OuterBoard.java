@@ -4,12 +4,12 @@ import javafx.scene.layout.GridPane;
 
 public class OuterBoard {
 
-	Game gameInstance;
+	Main gameInstance;
 	InnerBoard[][] gameSpace;
 	int nextPlay;
 	int turns = 0;
 	
-	OuterBoard(GridPane node, int squareSpace, Game instance) {
+	OuterBoard(GridPane node, int squareSpace, Main instance) {
 		gameInstance = instance;
 		gameSpace = new InnerBoard[3][3];
 		for(int row = 0; row < 3; row++) {
@@ -21,7 +21,6 @@ public class OuterBoard {
 	}
 	
 	public void gridWon(char winVal, int gamePos) {
-		
 		checkWinner();
 	}
 	

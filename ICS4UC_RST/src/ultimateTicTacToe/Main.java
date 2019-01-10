@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class Game extends Application{
+public class Main extends Application{
 
 	final static int GRID_GAP = 18;
 	final static int SQUARE_SPACE = 3;
