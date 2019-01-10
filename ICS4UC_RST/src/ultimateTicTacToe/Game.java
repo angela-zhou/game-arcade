@@ -21,13 +21,16 @@ public class Game extends Application{
 	final static int LABEL_FONT = 20;
 	final static int[] LABEL_INS = {10, 10, 0, 10}; //TOP, RIGHT, BOTTOM, LEFT
 	
+	Label lblNext, lblTurn;
+	
+	
 	@Override
 	public void start(Stage stgMain) throws Exception {
 		
 		VBox root = new VBox();
 		HBox text = new HBox();
 		
-		Label lblTurn = new Label("Current Turn: X");
+		lblTurn = new Label("Current Turn: X");
 		lblTurn.setFont(new Font(LABEL_FONT));
 		
 		Label lblTitle = new Label("Ultimate Tic-Tac-Toe");
@@ -35,7 +38,7 @@ public class Game extends Application{
 		lblTitle.setAlignment(Pos.TOP_CENTER);
 		lblTitle.setFont(new Font("Times New Roman", TITLE_FONT));
 		
-		Label lblNext = new Label("Next Square: Any");
+		lblNext = new Label("Next Square: Any          ");
 		lblNext.setFont(new Font(LABEL_FONT));
 		lblNext.setMaxWidth(Double.MAX_VALUE);
 		lblNext.setAlignment(Pos.CENTER_RIGHT);
@@ -54,13 +57,21 @@ public class Game extends Application{
 		
 		root.getChildren().addAll(lblTitle, text, board);
 		
-		OuterBoard gameSpace = new OuterBoard(board, SQUARE_SPACE);
+		OuterBoard gameSpace = new OuterBoard(board, SQUARE_SPACE, this);
 		
 		Scene scnMain = new Scene(root);
 		
 		stgMain.setScene(scnMain);
 		stgMain.setTitle("Ultimate Tic-Tac-Toe");
 		stgMain.show();
+	}
+	
+	public void setNext(String txt) {
+		lblNext.setText(txt);
+	}
+	
+	public void setTurn(String txt) {
+		lblTurn.setText(txt);
 	}
 	
 	public static void main(String[] args) {
