@@ -25,7 +25,7 @@ public class PacMan extends Application {
 		
 		this.primaryStage = primaryStage;
 		
-		Pane root = (Pane)FXMLLoader.load(PacMan.class.getResource("pacMan/Maze.fxml"));
+		Pane root = (Pane)FXMLLoader.load(PacMan.class.getResource("../pacMan/Maze.fxml"));
 		
 		Scene scene = new Scene (root, SCREEN_WIDTH, SCREEN_HEIGHT);
 		
