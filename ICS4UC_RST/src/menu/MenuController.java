@@ -18,7 +18,7 @@ public class MenuController {
 	@FXML
 	protected void initialize() {
 		//set images in their place
-		//imgAsteroids.setImage(new Image(getClass().getResource("/images/Asteroids.png").toString()));
+		//imgAsteroids.setImage(new Image(getClass().getResource("../../res/MenuImages/Asteroid Graphic.png").toString()));
 		//imgTicTacToe.setImage(new Image(getClass().getResource("/images/TicTacToe.png").toString()));
 		//imgPacMan.setImage(new Image(getClass().getResource("/images/PacMan.png").toString()));
 		//imgEgyptianWar.setImage(new Image(getClass().getResource("/images/EgyptianWar.png").toString()));
