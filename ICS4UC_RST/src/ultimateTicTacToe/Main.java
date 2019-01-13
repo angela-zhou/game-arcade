@@ -1,6 +1,7 @@
 package ultimateTicTacToe;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -21,12 +22,30 @@ public class Main extends Application{
 	final static int LABEL_FONT = 20;
 	final static int[] LABEL_INS = {10, 10, 0, 10}; //TOP, RIGHT, BOTTOM, LEFT
 	
+	OuterBoard gameSpace;
+	Stage myStage;
 	Label lblNext, lblTurn;
-	
+	Scene scnMain, scnMenu, scnHelp, scnOver;
+	static Main instance;
 	
 	@Override
-	public void start(Stage stgMain) throws Exception {
+	public void start(Stage myStage) throws Exception {
 		
+		instance = this;
+		this.myStage = myStage;
+		
+		gameInit();
+		
+		scnMenu = new Scene(FXMLLoader.load(getClass().getResource("TTTMenu.fxml")));
+		scnHelp = new Scene(FXMLLoader.load(getClass().getResource("TTTHelp.fxml")));
+		scnOver = new Scene(FXMLLoader.load(getClass().getResource("TTTGameOver.fxml")));
+		
+		myStage.setScene(scnMenu);
+		myStage.setTitle("Ultimate Tic-Tac-Toe");
+		myStage.show();
+	}
+	
+	private void gameInit() {
 		VBox root = new VBox();
 		HBox text = new HBox();
 		
@@ -57,13 +76,25 @@ public class Main extends Application{
 		
 		root.getChildren().addAll(lblTitle, text, board);
 		
-		OuterBoard gameSpace = new OuterBoard(board, SQUARE_SPACE, this);
+		gameSpace = new OuterBoard(board, SQUARE_SPACE, this);
 		
-		Scene scnMain = new Scene(root);
-		
-		stgMain.setScene(scnMain);
-		stgMain.setTitle("Ultimate Tic-Tac-Toe");
-		stgMain.show();
+		scnMain = new Scene(root);
+	}
+	
+	public void exit() {
+		myStage.hide();
+	}
+	
+	public void getHelp() {
+		myStage.setScene(scnHelp);
+	}
+	
+	public void playGame() {
+		myStage.setScene(scnMain);
+	}
+	
+	public void gameOver() {
+		myStage.setScene(scnOver);
 	}
 	
 	public void setNext(String txt) {
@@ -72,6 +103,10 @@ public class Main extends Application{
 	
 	public void setTurn(String txt) {
 		lblTurn.setText(txt);
+	}
+	
+	static public Main getInstance() {
+		return instance;
 	}
 	
 	public static void main(String[] args) {

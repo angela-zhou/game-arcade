@@ -23,7 +23,6 @@ public class Square extends Button{
 		curImage.setFitWidth(50);
 		curImage.setImage(imgBLANK);
 		setGraphic(curImage);
-		//setGraphic(new ImageView(imgBLANK));
 	}
 	
 	public void playSquare(char val) {
@@ -31,11 +30,9 @@ public class Square extends Button{
 		switch (val) {
 		case 'X':
 			curImage.setImage(imgX);
-//			setGraphic(new ImageView(imgX));
 			break;
 		case 'O':
 			curImage.setImage(imgO);
-//			setGraphic(new ImageView(imgO));
 			break;
 		}
 	}
