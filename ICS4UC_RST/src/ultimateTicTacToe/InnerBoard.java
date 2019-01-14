@@ -1,18 +1,24 @@
 package ultimateTicTacToe;
 
 import javafx.event.Event;
-import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class InnerBoard {
 
+	Pane innerPane;
 	char wonVal = ' ';
 	boolean won;
 	Square[][] grid;
 	int superPos;
 	OuterBoard container;
 	GridPane innerNode;
+	Rectangle highLight;
 	static int SQUARE_SPACE = 10;
+	static double HL_PADDING = 3.0;
+	static double HL_OPACITY = 1;
 	
 	InnerBoard(int superPos, GridPane node, int squareSpace, OuterBoard gameSpace) {
 		this.superPos = superPos;
@@ -27,21 +33,24 @@ public class InnerBoard {
 				innerNode.add(grid[row][col], col, row);
 			}
 		}
-		node.add(innerNode, (superPos % 3), (superPos / 3));
+		innerPane = new Pane();
+		innerPane.getChildren().addAll(highLight, innerNode);
+		node.add(innerPane, (superPos % 3), (superPos / 3));
 	}
 	
 	private void innerInit() {
 		innerNode = new GridPane();
 		innerNode.setVgap(SQUARE_SPACE);
 		innerNode.setHgap(SQUARE_SPACE);
-//		innerNode.setPadding(new Insets(SQUARE_SPACE, SQUARE_SPACE, SQUARE_SPACE, SQUARE_SPACE));
+		highLight = new Rectangle(-HL_PADDING, -HL_PADDING, 157 + (2 * HL_PADDING), 157 + (2 * HL_PADDING));
+		highLight.setOpacity(0.0);
 	}
 	
 	private void playSquare(Event e) {
 		Square temp = (Square)e.getSource();
 		
 		//Only will play square if grid is okay to be played in and square is blank
-		if(won || (superPos != container.getNextPlay() && container.getNextPlay() != -1) || temp.getValue() != ' ') {
+		if(won || (superPos != container.getNextPlay() && container.getNextPlay() != -1) || temp.getValue() != ' ' || container.getGameState()) {
 			return;
 		}
 		
@@ -51,7 +60,43 @@ public class InnerBoard {
 			temp.playSquare('O');
 		
 		container.setNextPlay(temp.getPos());
+		
 		checkWinner();
+	}
+	
+	private void wonGraphic() {
+		if(wonVal == 'X') {
+			for(Square[] row: grid) {
+				for(Square square: row)
+					square.setRed();
+			}
+			grid[0][1].setBlank();
+			grid[1][0].setBlank();
+			grid[2][1].setBlank();
+			grid[1][2].setBlank();
+		}
+		if(wonVal == 'O') {
+			for(Square[] row: grid) {
+				for(Square square: row)
+					square.setBlue();
+			}
+			grid[1][1].setBlank();
+		}
+	}
+	
+	public void setHighLight(char turn) {
+		highLight.setOpacity(HL_OPACITY);
+		switch(turn) {
+		case 'X':
+			highLight.setFill(Color.RED);
+			break;
+		case 'O':
+			highLight.setFill(Color.BLUE);
+			break;
+		default:
+			highLight.setOpacity(0.0);
+			break;
+		}
 	}
 	
 	private void checkWinner() {
@@ -61,6 +106,7 @@ public class InnerBoard {
 				won = true;
 				wonVal = grid[row][0].getValue();
 				container.gridWon(wonVal, superPos);
+				wonGraphic();
 			}
 		}
 		//Col check
@@ -69,8 +115,8 @@ public class InnerBoard {
 				won = true;
 				wonVal = grid[0][col].getValue();
 				container.gridWon(wonVal, superPos);
+				wonGraphic();
 			}
-				
 		}
 		
 		//Diag check
@@ -80,11 +126,16 @@ public class InnerBoard {
 				won = true;
 				wonVal = grid[1][1].getValue();
 				container.gridWon(wonVal, superPos);
+				wonGraphic();
 			}
 		}
 	}
 	
 	public boolean getWon() {
 		return won;
+	}
+	
+	public char getWonVal() {
+		return wonVal;
 	}
 }
