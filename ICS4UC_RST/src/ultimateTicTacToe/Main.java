@@ -44,10 +44,10 @@ public class Main extends Application{
 		scnMenu = new Scene(FXMLLoader.load(getClass().getResource("TTTMenu.fxml")));
 		scnHelp = new Scene(FXMLLoader.load(getClass().getResource("TTTHelp.fxml")));
 		
-//		loadOver = new FXMLLoader(getClass().getResource("TTTGameOver.fxml"));
-//		Parent parOver = loadOver.load();
-//		scnOver = new Scene(parOver);
-//		gOverControl = loadOver.getController();
+		loadOver = new FXMLLoader(getClass().getResource("TTTGameOver.fxml"));
+		Parent parOver = loadOver.load();
+		scnOver = new Scene(parOver);
+		gOverControl = loadOver.getController();
 		
 		myStage.setScene(scnMenu);
 		myStage.setTitle("Ultimate Tic-Tac-Toe");
