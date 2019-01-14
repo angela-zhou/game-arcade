@@ -6,13 +6,8 @@ import javafx.scene.text.Text;
 
 public class TTTGameOverControl {
 
-	static public TTTGameOverControl instance;
 	@FXML
 	Text winner;
-	
-	TTTGameOverControl() {
-
-	}
 	
 	@FXML
 	private void mainMenu() {
@@ -35,9 +30,5 @@ public class TTTGameOverControl {
 			winner.setText("O" + winner.getText().substring(1));
 			winner.setFill(Color.BLUE);
 		}
-	}
-	
-	static public TTTGameOverControl getInstance() {
-		return instance;
 	}
 }
