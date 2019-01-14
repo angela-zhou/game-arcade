@@ -131,6 +131,15 @@ public class InnerBoard {
 		}
 	}
 	
+	public void reset() {
+		won = false;
+		wonVal = ' ';
+		for(Square[] row : grid) {
+			for(Square square : row)
+				square.reset();
+		}
+	}
+	
 	public boolean getWon() {
 		return won;
 	}

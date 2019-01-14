@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -24,10 +25,12 @@ public class Main extends Application{
 	final static int[] LABEL_INS = {10, 10, 0, 10}; //TOP, RIGHT, BOTTOM, LEFT
 	
 	OuterBoard gameSpace;
+	TTTGameOverControl gOverControl;
 	Stage myStage, secondStage;
 	Label lblNext, lblTurn, lblTurnChar;
 	Scene scnMain, scnMenu, scnHelp, scnOver;
 	static Main instance;
+	FXMLLoader loadOver;
 	
 	@Override
 	public void start(Stage myStage) throws Exception {
@@ -40,7 +43,11 @@ public class Main extends Application{
 		
 		scnMenu = new Scene(FXMLLoader.load(getClass().getResource("TTTMenu.fxml")));
 		scnHelp = new Scene(FXMLLoader.load(getClass().getResource("TTTHelp.fxml")));
-		scnOver = new Scene(FXMLLoader.load(getClass().getResource("TTTGameOver.fxml")));
+		
+//		loadOver = new FXMLLoader(getClass().getResource("TTTGameOver.fxml"));
+//		Parent parOver = loadOver.load();
+//		scnOver = new Scene(parOver);
+//		gOverControl = loadOver.getController();
 		
 		myStage.setScene(scnMenu);
 		myStage.setTitle("Ultimate Tic-Tac-Toe");
@@ -92,7 +99,7 @@ public class Main extends Application{
 	}
 	
 	public void mainMenu() {
-		myStage.setScene(scnMain);
+		myStage.setScene(scnMenu);
 		gameSpace.reset();
 	}
 	
@@ -107,6 +114,7 @@ public class Main extends Application{
 	}
 	
 	public void gameOver() {
+		gOverControl.setWinnerText(gameSpace.getWinner());
 		secondStage.setTitle("Game Over");
 		secondStage.setScene(scnOver);
 		secondStage.show();
