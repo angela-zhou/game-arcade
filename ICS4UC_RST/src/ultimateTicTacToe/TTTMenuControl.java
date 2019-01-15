@@ -26,6 +26,11 @@ public class TTTMenuControl {
 	}
 	
 	@FXML
+	private void help() {
+		Main.getInstance().getHelp();
+	}
+	
+	@FXML
 	private void exit() {
 		Main.getInstance().exit();
 	}
