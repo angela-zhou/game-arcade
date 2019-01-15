@@ -4,12 +4,14 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -23,22 +25,29 @@ public class Main extends Application{
 	final static int[] LABEL_INS = {10, 10, 0, 10}; //TOP, RIGHT, BOTTOM, LEFT
 	
 	OuterBoard gameSpace;
-	Stage myStage;
-	Label lblNext, lblTurn;
+	TTTGameOverControl gOverControl;
+	Stage myStage, secondStage;
+	Label lblNext, lblTurn, lblTurnChar;
 	Scene scnMain, scnMenu, scnHelp, scnOver;
 	static Main instance;
+	FXMLLoader loadOver;
 	
 	@Override
 	public void start(Stage myStage) throws Exception {
 		
 		instance = this;
 		this.myStage = myStage;
+		secondStage = new Stage();
 		
 		gameInit();
 		
 		scnMenu = new Scene(FXMLLoader.load(getClass().getResource("TTTMenu.fxml")));
 		scnHelp = new Scene(FXMLLoader.load(getClass().getResource("TTTHelp.fxml")));
-		scnOver = new Scene(FXMLLoader.load(getClass().getResource("TTTGameOver.fxml")));
+		
+		loadOver = new FXMLLoader(getClass().getResource("TTTGameOver.fxml"));
+		Parent parOver = loadOver.load();
+		scnOver = new Scene(parOver);
+		gOverControl = loadOver.getController();
 		
 		myStage.setScene(scnMenu);
 		myStage.setTitle("Ultimate Tic-Tac-Toe");
@@ -49,8 +58,11 @@ public class Main extends Application{
 		VBox root = new VBox();
 		HBox text = new HBox();
 		
-		lblTurn = new Label("Current Turn: X");
+		lblTurn = new Label("Current Turn: ");
 		lblTurn.setFont(new Font(LABEL_FONT));
+		lblTurnChar = new Label("X");
+		lblTurnChar.setFont(new Font(LABEL_FONT));
+		lblTurnChar.setTextFill(Color.RED);
 		
 		Label lblTitle = new Label("Ultimate Tic-Tac-Toe");
 		lblTitle.setMaxWidth(Double.MAX_VALUE);
@@ -66,7 +78,7 @@ public class Main extends Application{
 		HBox.setHgrow(lblNext, Priority.ALWAYS);
 		
 		text.setPadding(new Insets(LABEL_INS[0], LABEL_INS[1], LABEL_INS[2], LABEL_INS[3]));
-		text.getChildren().addAll(lblTurn, lblNext);
+		text.getChildren().addAll(lblTurn, lblTurnChar, lblNext);
 		
 		GridPane board = new GridPane();
 		board.setVgap(GRID_GAP);
@@ -74,8 +86,9 @@ public class Main extends Application{
 		board.setPadding(new Insets(PADDING_GAP, PADDING_GAP, PADDING_GAP, PADDING_GAP));
 		board.setAlignment(Pos.CENTER);
 		
-		root.getChildren().addAll(lblTitle, text, board);
 		
+		root.getChildren().addAll(lblTitle, text, board);
+		root.setStyle("-fx-background-color: #D3D3D3;");
 		gameSpace = new OuterBoard(board, SQUARE_SPACE, this);
 		
 		scnMain = new Scene(root);
@@ -85,8 +98,15 @@ public class Main extends Application{
 		myStage.hide();
 	}
 	
+	public void mainMenu() {
+		myStage.setScene(scnMenu);
+		gameSpace.reset();
+	}
+	
 	public void getHelp() {
-		myStage.setScene(scnHelp);
+		secondStage.setTitle("Game Rules");
+		secondStage.setScene(scnHelp);
+		secondStage.show();
 	}
 	
 	public void playGame() {
@@ -94,15 +114,23 @@ public class Main extends Application{
 	}
 	
 	public void gameOver() {
-		myStage.setScene(scnOver);
+		gOverControl.setWinnerText(gameSpace.getWinner());
+		secondStage.setTitle("Game Over");
+		secondStage.setScene(scnOver);
+		secondStage.show();
 	}
 	
 	public void setNext(String txt) {
 		lblNext.setText(txt);
 	}
 	
-	public void setTurn(String txt) {
-		lblTurn.setText(txt);
+	public void setTurn(String txt, Color textCol) {
+		lblTurnChar.setText(txt);
+		lblTurnChar.setTextFill(textCol);
+	}
+	
+	public void hideSecond() {
+		secondStage.hide();
 	}
 	
 	static public Main getInstance() {

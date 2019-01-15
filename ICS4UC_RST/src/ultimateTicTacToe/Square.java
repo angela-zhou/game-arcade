@@ -1,14 +1,18 @@
 package ultimateTicTacToe;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class Square extends Button{
 
-	private static final Image imgX = new Image(Square.class.getResource("images/X.jpg").toString());
-	private static final Image imgO = new Image(Square.class.getResource("images/O.jpg").toString());
-	private static final Image imgBLANK = new Image(Square.class.getResource("images/cardback.jpg").toString());
+	private static final Image imgX = new Image(Square.class.getResource("images/X.png").toString());
+	private static final Image imgO = new Image(Square.class.getResource("images/O.png").toString());
+	private static final Image imgBlank = new Image(Square.class.getResource("images/blank.png").toString());
+	private static final Image imgBlue = new Image(Square.class.getResource("images/blue.png").toString());
+	private static final Image imgRed = new Image(Square.class.getResource("images/red.png").toString());
+	private static final Image imgPurple = new Image(Square.class.getResource("images/purple.png").toString());
 	
 	private char value;
 	private int superPos;
@@ -21,8 +25,9 @@ public class Square extends Button{
 		curImage = new ImageView();
 		curImage.setFitHeight(50);
 		curImage.setFitWidth(50);
-		curImage.setImage(imgBLANK);
+		curImage.setImage(imgBlank);
 		setGraphic(curImage);
+		this.setPadding(Insets.EMPTY);
 	}
 	
 	public void playSquare(char val) {
@@ -41,9 +46,25 @@ public class Square extends Button{
 		return superPos;
 	}
 	
+	public void setBlue() {
+		curImage.setImage(imgBlue);
+	}
+	
+	public void setRed() {
+		curImage.setImage(imgRed);
+	}
+	
+	public void setBlank() {
+		curImage.setImage(imgBlank);
+	}
+	
+	public void setPurple() {
+		curImage.setImage(imgPurple);
+	}
+	
 	public void reset() {
 		value = ' ';
-		setGraphic(new ImageView(imgBLANK));
+		curImage.setImage(imgBlank);
 	}
 	
 	public char getValue() {

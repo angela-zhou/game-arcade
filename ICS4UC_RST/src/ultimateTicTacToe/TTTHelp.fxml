@@ -1,8 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="ultimateTicTacToe.TTTHelpControl">
-	<!-- TODO Add Nodes -->
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="450.0" style="-fx-background-color: #D3D3D3;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ultimateTicTacToe.TTTHelpControl">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#69696980" height="354.0" layoutY="53.0" stroke="TRANSPARENT" strokeType="INSIDE" width="450.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00000097" height="54.0" layoutY="-1.0" stroke="TRANSPARENT" strokeType="INSIDE" width="450.0" />
+      <Text fill="WHITE" layoutX="140.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How to Play">
+         <font>
+            <Font name="Consolas Bold Italic" size="28.0" />
+         </font></Text>
+      <Text layoutX="19.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1. The main board consists of 9 smaller boards each consisting of 9 squares.">
+         <font>
+            <Font name="Candara" size="13.0" />
+         </font></Text>
+      <Text layoutX="20.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2. When you win a tic-tac-toe game in a smaller board, you win that space in the main board." wrappingWidth="402.1171875">
+         <font>
+            <Font name="Candara" size="13.0" />
+         </font></Text>
+      <Text layoutX="20.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3. To win the game, you must win a tic-tac-toe game in the main board.">
+         <font>
+            <Font name="Candara" size="13.0" />
+         </font></Text>
+      <Text layoutX="20.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4. The space that is played in the smaller board determines which space on the main board that the next player must play in." wrappingWidth="402.07037353515625">
+         <font>
+            <Font name="Candara" size="13.0" />
+         </font></Text>
+      <Text layoutX="146.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ie. If 'X' plays in the top right of a smaller board, 'O' must play in the top right of the main board next turn." wrappingWidth="287.81317138671875">
+         <font>
+            <Font name="Candara" size="13.0" />
+         </font></Text>
+      <Text layoutX="18.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- A tied game on a smaller board results in a tied main square (can't be used by either player)." wrappingWidth="372.7265625">
+         <font>
+            <Font name="Candara" size="13.0" />
+         </font></Text>
+      <Text layoutX="15.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- A tie on the main board results in a tied game.">
+         <font>
+            <Font name="Candara" size="13.0" />
+         </font></Text>
+      <Text layoutX="17.0" layoutY="363.0" strokeType="OUTSIDE" strokeWidth="0.0" text="- If the square you must play in is already won or tied, you may play in any open main square" wrappingWidth="393.6015319824219">
+         <font>
+            <Font name="Candara" size="13.0" />
+         </font></Text>
+      <Button layoutX="69.0" layoutY="436.0" mnemonicParsing="false" onAction="#playGame" style="-fx-background-color: #FFFFFF; -fx-background-radius: 8, 7, 6; -fx-background-insets: 0, 1, 2;" text="Play Now">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow color="#0000009a" height="4.75" radius="1.8125" spread="0.5" width="4.5" />
+         </effect>
+         <font>
+            <Font name="Consolas Bold" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="272.0" layoutY="436.0" mnemonicParsing="false" onAction="#mainMenu" style="-fx-background-color: #FFFFFF; -fx-background-radius: 8, 7, 6; -fx-background-insets: 0, 1, 2;" text="Main Menu">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow color="#0000009a" height="4.75" radius="1.8125" spread="0.5" width="4.5" />
+         </effect>
+         <font>
+            <Font name="Consolas Bold" size="18.0" />
+         </font>
+      </Button>
+   </children>
 </AnchorPane>
