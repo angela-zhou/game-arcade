@@ -34,13 +34,13 @@ public class OuterBoard {
 		gameOver = false;
 		curTurn = 'X';
 		nextPlay = -1;
-		setNextHighlight(0, 0);
 		setTurnLabel();
 		setNextLabel();
 		for(InnerBoard[] row : gameSpace) {
 			for(InnerBoard board : row)
 				board.reset();
 		}
+		setNextHighlight(0, 0);
 	}
 	
 	public void checkWinner() {
