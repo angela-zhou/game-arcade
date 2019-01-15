@@ -1,8 +1,10 @@
 package ultimateTicTacToe;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
 public class TTTGameOverControl {
 
@@ -23,12 +25,19 @@ public class TTTGameOverControl {
 	
 	public void setWinnerText(char winChar) {
 		if(winChar == 'X') {
-			winner.setText("X" + winner.getText().substring(1));
+			winner.setText("X's Win!");
 			winner.setFill(Color.RED);
+			winner.setX(0);
 		}
 		if(winChar == 'O') {
-			winner.setText("O" + winner.getText().substring(1));
+			winner.setText("O's Win!");
 			winner.setFill(Color.BLUE);
+			winner.setX(0);
+		}
+		if(winChar == 'T') {
+			winner.setText("Game Tied!");
+			winner.setFill(Color.PURPLE);
+			winner.setX(-50);
 		}
 	}
 }

@@ -12,6 +12,7 @@ public class Square extends Button{
 	private static final Image imgBlank = new Image(Square.class.getResource("images/blank.png").toString());
 	private static final Image imgBlue = new Image(Square.class.getResource("images/blue.png").toString());
 	private static final Image imgRed = new Image(Square.class.getResource("images/red.png").toString());
+	private static final Image imgPurple = new Image(Square.class.getResource("images/purple.png").toString());
 	
 	private char value;
 	private int superPos;
@@ -55,6 +56,10 @@ public class Square extends Button{
 	
 	public void setBlank() {
 		curImage.setImage(imgBlank);
+	}
+	
+	public void setPurple() {
+		curImage.setImage(imgPurple);
 	}
 	
 	public void reset() {

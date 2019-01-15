@@ -46,26 +46,43 @@ public class OuterBoard {
 	public void checkWinner() {
 		//Row check
 		for(int row = 0; row < 3; row++) {
-			if(gameSpace[row][0].getWonVal() == gameSpace[row][1].getWonVal() && gameSpace[row][0].getWonVal() == gameSpace[row][2].getWonVal() && gameSpace[row][0].getWonVal() != ' ') {
-				gameOver = true;
-				gameWinner = gameSpace[row][0].getWonVal();
+			if(gameSpace[row][0].getWonVal() == gameSpace[row][1].getWonVal() && gameSpace[row][0].getWonVal() == gameSpace[row][2].getWonVal()) {
+				if(gameSpace[row][0].getWonVal() != ' ' && gameSpace[row][0].getWonVal() != 'T') {
+					gameOver = true;
+					gameWinner = gameSpace[row][0].getWonVal();
+				}
 			}
 		}
 		
 		//Col check
 		for(int col = 0; col < 3; col++) {
-			if(gameSpace[0][col].getWonVal() == gameSpace[1][col].getWonVal() && gameSpace[0][col].getWonVal() == gameSpace[2][col].getWonVal() && gameSpace[0][col].getWonVal() != ' ') {
-				gameOver = true;
-				gameWinner = gameSpace[0][col].getWonVal();
+			if(gameSpace[0][col].getWonVal() == gameSpace[1][col].getWonVal() && gameSpace[0][col].getWonVal() == gameSpace[2][col].getWonVal()) {
+				if(gameSpace[0][col].getWonVal() != ' ' && gameSpace[0][col].getWonVal() != 'T') {
+					gameOver = true;
+					gameWinner = gameSpace[0][col].getWonVal();
+				}
 			}
 		}
 		
 		//Diag check
 		if(gameSpace[0][0].getWonVal() == gameSpace[1][1].getWonVal() && gameSpace[0][0].getWonVal() == gameSpace[2][2].getWonVal() || 
 				gameSpace[0][2].getWonVal() == gameSpace[1][1].getWonVal() && gameSpace[0][2].getWonVal() == gameSpace[2][0].getWonVal())
-			if(gameSpace[1][1].getWonVal() != ' ') {
+			if(gameSpace[1][1].getWonVal() != ' ' && gameSpace[1][1].getWonVal() != 'T') {
 				gameOver = true;
 				gameWinner = gameSpace[1][1].getWonVal();
+		}
+		
+		//Tie Check
+		boolean allPlayed = true;
+		for(InnerBoard[] row : gameSpace) {
+			for(InnerBoard board : row) {
+				if(!board.getWon())
+					allPlayed = false;
+			}
+		}
+		if(allPlayed && !gameOver) {
+			gameOver = true;
+			gameWinner = 'T';
 		}
 		
 		if(gameOver) {
@@ -147,7 +164,8 @@ public class OuterBoard {
 		if(nextPlay == -1) {
 			for(int i = 0; i < 3; i++) {
 				for(int j = 0; j < 3; j++)
-					gameSpace[i][j].setHighLight(curTurn);
+					if(!gameSpace[i][j].getWon())
+						gameSpace[i][j].setHighLight(curTurn);
 			}
 		}
 		else

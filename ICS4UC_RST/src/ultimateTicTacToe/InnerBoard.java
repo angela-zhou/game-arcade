@@ -59,9 +59,8 @@ public class InnerBoard {
 		else
 			temp.playSquare('O');
 		
-		container.setNextPlay(temp.getPos());
-		
 		checkWinner();
+		container.setNextPlay(temp.getPos());
 	}
 	
 	private void wonGraphic() {
@@ -81,6 +80,16 @@ public class InnerBoard {
 					square.setBlue();
 			}
 			grid[1][1].setBlank();
+		}
+		if(wonVal == 'T') {
+			for(Square[] row: grid) {
+				for(Square square: row)
+					square.setPurple();
+			}
+			grid[1][0].setBlank();
+			grid[2][0].setBlank();
+			grid[2][2].setBlank();
+			grid[1][2].setBlank();
 		}
 	}
 	
@@ -129,6 +138,21 @@ public class InnerBoard {
 				wonGraphic();
 			}
 		}
+		
+		//Check Tie
+		boolean allPlayed = true;
+		for(Square[] row : grid) {
+			for(Square square : row)
+				if(square.getValue() == ' ')
+					allPlayed = false;
+		}
+		if(allPlayed && !won) {
+			won = true;
+			wonVal = 'T';
+			container.gridWon('T', superPos);
+			wonGraphic();
+		}
+			
 	}
 	
 	public void reset() {
