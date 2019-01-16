@@ -37,11 +37,6 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" text="Ultimate TicTacToe" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#runPac" prefHeight="40.0" prefWidth="175.0" text="PacMan" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
-                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" text="Egyptian War" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" text="MattGame3" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
-                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" text="AngelaGame3" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
                   <StackPane prefHeight="150.0" prefWidth="200.0">
                      <children>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
@@ -49,6 +44,36 @@
                               <Image url="@../../res/MenuImages/Asteriod%20Graphic.png" />
                            </image></ImageView>
                         <Button alignment="CENTER" mnemonicParsing="false" onAction="#runAsteroids" prefHeight="40.0" text="Asteroids" />
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" text="Egyptian War" />
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#runPac" prefHeight="40.0" prefWidth="175.0" text="PacMan" textAlignment="CENTER" />
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" text="Ultimate TicTacToe" />
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" text="MattGame3" />
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" text="AngelaGame3" />
                      </children>
                   </StackPane>
                </children>
