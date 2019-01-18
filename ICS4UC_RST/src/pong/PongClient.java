@@ -2,44 +2,80 @@ package pong;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
+import java.net.InetAddress;
 import java.net.Socket;
 
 public class PongClient {
 	
-	public static void main(String[] args) throws IOException {
-	    Socket socket = new Socket("localhost", 12900);
-	    System.out.println("Started client  socket at "
-	        + socket.getLocalSocketAddress());
-	    BufferedReader socketReader = new BufferedReader(new InputStreamReader(
-	        socket.getInputStream()));
-	    BufferedWriter socketWriter = new BufferedWriter(new OutputStreamWriter(
-	        socket.getOutputStream()));
-	    BufferedReader consoleReader = new BufferedReader(
-	        new InputStreamReader(System.in));
+	private ObjectOutputStream output;
+	private ObjectInputStream input;
+	private String serverIP;
+	private Socket server;
 	
-	    String promptMsg = "Please enter a  message  (Bye  to quit):";
-	    String outMsg = null;
+	public PongClient(String serverIP) {
+		this.serverIP = serverIP;
+	}
 	
-	    System.out.print(promptMsg);
-	    while ((outMsg = consoleReader.readLine()) != null) {
-	      if (outMsg.equalsIgnoreCase("bye")) {
-	        break;
-	      }
-	      // Add a new line to the message to the server,
-	      // because the server reads one line at a time.
-	      socketWriter.write(outMsg);
-	      socketWriter.write("\n");
-	      socketWriter.flush();
+	public void run() {
+		try {
+			connectToServer();
+			setupStreams();
+			whilePlaying();
+		} catch(EOFException eofException) {
+			System.out.println("Connection Ended");
+		} catch(IOException error) {
+			error.printStackTrace();
+		} finally {
+			endStream();
+		}
+	}
 	
-	      // Read and display the message from the server
-	      String inMsg = socketReader.readLine();
-	      System.out.println("Server: " + inMsg);
-	      System.out.println(); // Print a blank line
-	      System.out.print(promptMsg);
-	    }
-	    socket.close();
+	private void connectToServer() throws IOException{
+		System.out.println("Attempting Connection...");
+		server = new Socket(InetAddress.getByName(serverIP), 6789);
+		System.out.println("Connected to: " + server.getInetAddress().getHostName());
+	}
+	
+	private void setupStreams() throws IOException{
+		output = new ObjectOutputStream(server.getOutputStream());
+		output.flush();
+		input = new ObjectInputStream(server.getInputStream());
+		System.out.println("Streams Setup!");
+	}
+	
+	private void endStream() {
+		System.out.println("Closing Connection...");
+		try {
+			output.close();
+			input.close();
+			server.close();
+		} catch(IOException error) {
+			error.printStackTrace();
+		}
+	}
+	
+	private void whilePlaying() throws IOException{
+		GameState serverState = new GameState(1);
+		do {
+			try {
+				serverState = (GameState) input.readObject();
+			} catch(ClassNotFoundException classNotFoundException) {
+				System.out.println("Server didn't send game-state.");
+			}
+		}while(!serverState.getEnd());
+	}
+	
+	public void sendState(GameState state) {
+		try {
+			output.writeObject(state);
+		} catch(IOException error) {
+			System.out.println("GameState Send Error.");
+		}
 	}
 }
