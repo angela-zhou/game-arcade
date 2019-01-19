@@ -10,16 +10,19 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class Main extends Application{
 
-	double SCREEN_HEIGHT = 600, SCREEN_WIDTH = 800, PADDLE_WIDTH = 10, PADDLE_HEIGHT = 70, PADDLE_SPEED = 5;
+	double SCREEN_HEIGHT = 600, SCREEN_WIDTH = 800, PADDLE_WIDTH = 10, PADDLE_HEIGHT = 70, PADDLE_SPEED = 5, PADDLE_GAP = 30;
 	GameTimer timer;
 	Stage myStage;
 	Scene scnMenu, scnGame, scnSettings;
 	Group gameGroup;
 	Paddle p1, p2;
+	Ball b1;
 	ArrayList<Ball> balls= new ArrayList<Ball>();
 	
 	@Override
@@ -31,6 +34,9 @@ public class Main extends Application{
 		
 		scnGame = new Scene(gameGroup, SCREEN_WIDTH, SCREEN_HEIGHT);
 		scnGame.addEventHandler(KeyEvent.ANY, new PongKeyEvent());
+		scnGame.setFill(Color.LIGHTGRAY);
+		myStage.widthProperty().addListener(e -> updateScreenSize());
+		myStage.heightProperty().addListener(e -> updateScreenSize());
 		
 		timer = new GameTimer();
 		timer.start();
@@ -41,9 +47,18 @@ public class Main extends Application{
 	}
 	
 	public void twoPlayerInit() {
-		p1 = new Paddle(gameGroup, PADDLE_SPEED, 30, SCREEN_HEIGHT / 2, PADDLE_WIDTH, PADDLE_HEIGHT);
-		p2 = new Paddle(gameGroup, PADDLE_SPEED, SCREEN_WIDTH - (30 + PADDLE_WIDTH), SCREEN_HEIGHT / 2, PADDLE_WIDTH, PADDLE_HEIGHT);
-		new Ball(gameGroup, balls, 0.0, 0.0, 10.0);
+		p1 = new Paddle(PADDLE_SPEED, 1, PADDLE_WIDTH, PADDLE_HEIGHT, PADDLE_GAP, SCREEN_WIDTH, SCREEN_HEIGHT);
+		p2 = new Paddle(PADDLE_SPEED, 2, PADDLE_WIDTH, PADDLE_HEIGHT, PADDLE_GAP, SCREEN_WIDTH, SCREEN_HEIGHT);
+		b1 = new Ball(1, 5, 15, SCREEN_WIDTH, SCREEN_HEIGHT);
+		gameGroup.getChildren().addAll(p1, p2, b1);
+	}
+	
+	private void updateScreenSize() {
+		SCREEN_WIDTH = scnGame.getWindow().getWidth();
+		SCREEN_HEIGHT = scnGame.getWindow().getHeight();
+		p1.updateScreen(SCREEN_WIDTH, SCREEN_HEIGHT);
+		p2.updateScreen(SCREEN_WIDTH, SCREEN_HEIGHT);
+		b1.updateScreen(SCREEN_WIDTH, SCREEN_HEIGHT);
 	}
 	
 	class GameTimer extends AnimationTimer {
@@ -52,6 +67,7 @@ public class Main extends Application{
 		public void handle(long arg0) {
 			p1.move();
 			p2.move();
+			b1.move();
 		}
 	}
 	
