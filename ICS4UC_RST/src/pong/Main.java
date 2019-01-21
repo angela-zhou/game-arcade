@@ -6,30 +6,23 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class Main extends Application{
 
-	static Main instance;
-	double SCREEN_HEIGHT = 600, SCREEN_WIDTH = 800, PADDLE_WIDTH = 10, PADDLE_HEIGHT = 70, PADDLE_SPEED = 5, PADDLE_GAP = 30;
 	GameTimer timer;
 	Stage myStage;
 	Scene scnMenu, scnGame, scnSettings;
 	Group gameGroup;
 	Paddle p1, p2;
-	Ball b1;
 	ArrayList<Ball> balls= new ArrayList<Ball>();
 	
 	@Override
 	public void start(Stage myStage) throws Exception {
-		instance = this;
 		this.myStage = myStage;
 		
 		gameGroup = new Group();
@@ -90,7 +83,6 @@ public class Main extends Application{
 		public boolean isRunning() {
 			return running;
 		}
-		
 		@Override
 		public void handle(long arg0) {
 			p1.move();
