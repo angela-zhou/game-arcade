@@ -11,6 +11,7 @@ public class Menu extends Application{
 	// instances of games
 	asteroids.Game astGame = new asteroids.Game();
 	pacMan.PacMan pacGame = new pacMan.PacMan();
+	ultimateTicTacToe.Main tttGame = new ultimateTicTacToe.Main();
 	
 	@Override
 	public void start(Stage stgMenu) throws Exception {
@@ -40,6 +41,14 @@ public class Menu extends Application{
 			pacGame.start(new Stage());
 		} catch (Exception e) {
 			System.out.println("Unable to start game ### Error @ Menu.java - public void runPac()");
+		}
+	}
+	
+	public void runTTT() {
+		try {
+			tttGame.start(new Stage());
+		} catch (Exception e) {
+			System.out.println("Unable to start game ### Error @ Menu.java - public void runTTT()");
 		}
 	}
 	
