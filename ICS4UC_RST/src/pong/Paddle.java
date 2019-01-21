@@ -6,7 +6,7 @@ public class Paddle extends Rectangle{
 
 	double SIDE_GAP;
 	double SCREEN_WIDTH, SCREEN_HEIGHT;
-	double speed;
+	double moveSpeed, speed, decel;
 	int playerNum;
 	Rectangle paddle;
 	boolean moveU, moveD;
@@ -27,7 +27,8 @@ public class Paddle extends Rectangle{
 		else
 			this.setX(sWidth - (SIDE_GAP + pWidth));
 		
-		this.speed = speed;
+		this.moveSpeed = speed;
+		this.decel = 0;
 		
 		moveU = false;
 		moveD = false;
@@ -35,9 +36,13 @@ public class Paddle extends Rectangle{
 	
 	public void move() {
 		if(moveU && !moveD)
-			this.setY(this.getY() - speed);
-		if(moveD && !moveU)
-			this.setY(this.getY() + speed);
+			speed = -moveSpeed;
+		else if(moveD && !moveU)
+			speed = moveSpeed;
+		else
+			speed *= decel;
+		
+		this.setY(this.getY() + speed);
 		
 		if(this.getY() < 0)
 			this.setY(0);

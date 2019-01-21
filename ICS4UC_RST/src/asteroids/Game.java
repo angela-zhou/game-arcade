@@ -34,7 +34,7 @@ public class Game extends Application{
 	Label lScore, lLives, lLevel, lPaused, lGOver, lFinalScore, lContinue, lLevelComplete, lNextLevel, lLevelStart;
 	
 	//Game Variables
-	int level = 0, score = 0, lives = 1;
+	int level = 100, score = 0, lives = 1;
 	GameTimer timer;
 	boolean timerRunning = false;
 	
@@ -45,7 +45,7 @@ public class Game extends Application{
 	//Ship variables
 	Ship ship;
 	Polygon pShip;
-	static final double SHIP_MAX_SPEED = 4, SHIP_ACCEL = 0.2, SHIP_DECEL = 0.95, SHIP_TURN_SPEED = 0.1, SHOTS_PER_SECOND = 3, SHIP_RAD = 4;
+	static final double SHIP_MAX_SPEED = 4, SHIP_ACCEL = 0.2, SHIP_DECEL = 0.95, SHIP_TURN_SPEED = 0.1, SHOTS_PER_SECOND = 100, SHIP_RAD = 4;
 	
 	//Shot variables
 	Group shotGroup;
