@@ -14,4 +14,9 @@ public class MenuController {
 		Menu.getInstance().runPac();
 	}
 	
+	@FXML
+	private void runTTT() {
+		Menu.getInstance().runTTT();
+	}
+	
 }
