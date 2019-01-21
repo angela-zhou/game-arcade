@@ -14,19 +14,32 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<SplitPane dividerPositions="0.15789473684210525" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.MenuController">
+<SplitPane dividerPositions="0.23546511627906977" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="690.0" prefWidth="490.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.MenuController">
   <items>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="277.0" prefWidth="598.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="600.0">
          <children>
-            <Text layoutX="164.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Menu " textAlignment="CENTER" wrappingWidth="270.3544921875">
-               <font>
-                  <Font size="40.0" />
-               </font>
-            </Text>
+            <ImageView fitHeight="690.0" fitWidth="490.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../res/MenuImages/Menu%20Background.jpg" />
+               </image></ImageView>
+            <ImageView fitHeight="150.0" fitWidth="120.0" layoutX="31.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../res/MenuImages/Zap%20Graphic.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="150.0" fitWidth="120.0" layoutX="361.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../res/MenuImages/Pow%20Graphic.png" />
+               </image>
+            </ImageView>
          </children></AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="101.0" prefWidth="598.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="600.0">
          <children>
-            <GridPane layoutX="75.0" layoutY="30.0" prefHeight="507.0" prefWidth="448.0">
+            <ImageView fitHeight="521.0" fitWidth="488.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../res/MenuImages/Menu%20Backdrop.jpg" />
+               </image></ImageView>
+            <GridPane layoutX="34.0" layoutY="27.0" prefHeight="407.0" prefWidth="421.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -43,42 +56,51 @@
                            <image>
                               <Image url="@../../res/MenuImages/Asteriod%20Graphic.png" />
                            </image></ImageView>
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#runAsteroids" prefHeight="40.0" text="Asteroids" />
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#runAsteroids" prefHeight="40.0" prefWidth="85.0" text="Asteroids" />
                      </children>
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" text="Egyptian War" />
+                        <ImageView fitHeight="135.0" fitWidth="143.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../res/MenuImages/Cards%20Graphic.png" />
+                           </image></ImageView>
+                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="85.0" text="War" />
                      </children>
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#runPac" prefHeight="40.0" prefWidth="175.0" text="PacMan" textAlignment="CENTER" />
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../res/MenuImages/PacMan%20Graphic.png" />
+                           </image></ImageView>
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#runPac" prefHeight="40.0" prefWidth="85.0" text="PacMan" textAlignment="CENTER" />
                      </children>
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" text="Ultimate TicTacToe" />
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../res/MenuImages/Tic%20Tac%20Toe%20Graphic.png" />
+                           </image></ImageView>
+                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="85.0" text="TicTacToe" />
                      </children>
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2">
                      <children>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" text="MattGame3" />
+                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="85.0" text="MattGame3" />
                      </children>
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
                         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="175.0" text="AngelaGame3" />
+                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="85.0" text="AngelaGame3" />
                      </children>
                   </StackPane>
                </children>
             </GridPane>
-            <Button layoutX="273.0" layoutY="567.0" mnemonicParsing="false" text="Exit" />
+            <Button layoutX="202.0" layoutY="434.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="85.0" text="Exit" />
          </children></AnchorPane>
   </items>
 </SplitPane>
