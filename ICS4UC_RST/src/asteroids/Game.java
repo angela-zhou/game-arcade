@@ -34,7 +34,7 @@ public class Game extends Application{
 	Label lScore, lLives, lLevel, lPaused, lGOver, lFinalScore, lContinue, lLevelComplete, lNextLevel, lLevelStart;
 	
 	//Game Variables
-	int level = 0, score = 0, lives = 1;
+	int level = 0, score = 0, lives = 3;
 	GameTimer timer;
 	boolean timerRunning = false;
 	
