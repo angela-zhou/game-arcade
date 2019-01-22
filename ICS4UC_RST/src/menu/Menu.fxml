@@ -101,7 +101,7 @@
                            <image>
                               <Image url="@../../res/MenuImages/Tetris%20Graphic.png" />
                            </image></ImageView>
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="85.0" text="Tetris Puzzle" />
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#runTetris" prefHeight="40.0" prefWidth="85.0" text="Tetris Puzzle" />
                      </children>
                   </StackPane>
                </children>

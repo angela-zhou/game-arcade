@@ -1,5 +1,12 @@
 package egyptianWar;
 
+/**
+ * @author Angela Zhou
+ * Date: Jan 2019
+ * Course: ICS4U
+ * Teacher: Mrs. Spindler
+ * Deck.java 
+ */
 import java.util.ArrayList;
 import java.util.Arrays;
 

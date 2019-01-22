@@ -9,9 +9,10 @@ public class Menu extends Application{
 
 	private static Menu instance;
 	// instances of games
-	asteroids.Game astGame = new asteroids.Game();
-	pacMan.PacMan pacGame = new pacMan.PacMan();
-	ultimateTicTacToe.Main tttGame = new ultimateTicTacToe.Main();
+	asteroids.Game                astGame    = new asteroids.Game();
+	pacMan.PacMan                 pacGame    = new pacMan.PacMan();
+	ultimateTicTacToe.Main        tttGame    = new ultimateTicTacToe.Main();
+	tetrisPuzzle.TetrisPuzzleGame tetrisGame = new tetrisPuzzle.TetrisPuzzleGame();
 	
 	@Override
 	public void start(Stage stgMenu) throws Exception {
@@ -49,6 +50,14 @@ public class Menu extends Application{
 			tttGame.start(new Stage());
 		} catch (Exception e) {
 			System.out.println("Unable to start game ### Error @ Menu.java - public void runTTT()");
+		}
+	}
+	
+	public void runTetris() {
+		try {
+			tetrisGame.start(new Stage());
+		} catch (Exception e) {
+			System.out.println("Unable to start game ### Error @ Menu.java - public void runTetris()");
 		}
 	}
 	

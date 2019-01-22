@@ -19,4 +19,9 @@ public class MenuController {
 		Menu.getInstance().runTTT();
 	}
 	
+	@FXML
+	private void runTetris() {
+		Menu.getInstance().runTetris();
+	}
+	
 }

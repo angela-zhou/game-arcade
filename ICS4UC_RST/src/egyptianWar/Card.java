@@ -1,5 +1,12 @@
 package egyptianWar;
 
+/**
+ * @author Angela Zhou
+ * Date: Jan 2019
+ * Course: ICS4U
+ * Teacher: Mrs. Spindler
+ * Card.java 
+ */
 import javafx.scene.image.Image;
 
 public class Card {

@@ -1,12 +1,25 @@
 package egyptianWar;
 
+/**
+ * @author Angela Zhou
+ * Date: Jan 2019
+ * Course: ICS4U
+ * Teacher: Mrs. Spindler
+ * WarHand.java 
+ */
 import java.util.ArrayList;
 
 public class WarHand {
 	
+	// array list of cards
 	private ArrayList<Card> hand;
-	private int score;
-	String name;
+	
+	// data fields
+	private int     score;
+	private String  name;
+	private boolean canPlay;
+	private int     numChances;
+	private boolean wins;
 	
 	public WarHand(String name) {
 		// create hand
@@ -14,8 +27,13 @@ public class WarHand {
 		// set score to zero
 		score = 0;
 		// set name
-		// most likely "computer" or "player"
 		this.name = name;
+		// allow user to play
+		canPlay = true;
+		// has no chances yet
+		numChances = -1;
+		// has not won yet
+		wins = false;
 	}
 	
 	public void addCard(Card card) {
@@ -24,9 +42,15 @@ public class WarHand {
 		// add 1 to "score" 
 		// this is the number of cards per hand
 		score += 1;
-		// line for debug purposes - will delete
-		// first 26 are computer, next 26 are player
-		//System.out.println("adding to" + name + " " + card.toString());
+		// set wins to true if hand has all the cards
+		if (score == 52) {
+			wins = true;
+		}
+	}
+	
+	public void addAllCards(ArrayList<Card> playedCards) {
+		hand.addAll(playedCards);
+		playedCards.clear();
 	}
 	
 	public Card playCard() {
@@ -52,6 +76,30 @@ public class WarHand {
 	public int getScore() {
 		//score = hand.size();
 		return score;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public boolean canPlay() {
+		return canPlay;
+	}
+
+	public void setCanPlay(boolean canPlay) {
+		this.canPlay = canPlay;
+	}
+
+	public int getNumChances() {
+		return numChances;
+	}
+
+	public void setNumChances(int numChances) {
+		this.numChances = numChances;
+	}
+
+	public boolean hasWon() {
+		return wins;
 	}
 }
 

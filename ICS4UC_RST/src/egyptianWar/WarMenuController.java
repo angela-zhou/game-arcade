@@ -1,21 +1,28 @@
 package egyptianWar;
 
+/**
+ * @author Angela Zhou
+ * Date: Jan 2019
+ * Course: ICS4U
+ * Teacher: Mrs. Spindler
+ * WarMenuController.java 
+ */
 import javafx.fxml.FXML;
 
 public class WarMenuController {
 
 	@FXML
 	private void play() {
-		Game.getInstance().playGame();
+		EgyptianWarGame.getInstance().playGame();
 	}
 
 	@FXML
 	private void help() {
-		Game.getInstance().getHelp();
+		EgyptianWarGame.getInstance().getHelp();
 	}
 
 	@FXML
 	private void exit() {
-		Game.getInstance().exit();
+		EgyptianWarGame.getInstance().exit();
 	}
 }

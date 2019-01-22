@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="lib/SimpleIO.jar"/>
 	<classpathentry kind="lib" path="lib/xom-1.2.11.jar"/>
 	<classpathentry kind="lib" path="res/PacManImagesMusic.jar"/>
+	<classpathentry kind="lib" path="res/CARDS.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

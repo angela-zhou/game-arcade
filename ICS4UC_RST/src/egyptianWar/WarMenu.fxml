@@ -16,8 +16,14 @@
             <Font name="Broadway" size="32.0" />
          </font>
       </Text>
-      <ImageView fx:id="picCards" fitHeight="150.0" fitWidth="200.0" layoutX="100.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="picSuits" fitHeight="63.0" fitWidth="234.0" layoutX="83.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="picCards" fitHeight="157.0" fitWidth="234.0" layoutX="83.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Playing%20Cards.png" />
+         </image></ImageView>
+      <ImageView fx:id="picSuits" fitHeight="63.0" fitWidth="234.0" layoutX="83.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Suits.png" />
+         </image></ImageView>
       <Button layoutX="58.0" layoutY="369.0" mnemonicParsing="false" onAction="#play" prefHeight="40.0" prefWidth="120.0" text="Start Game">
          <font>
             <Font name="High Tower Text" size="18.0" />
