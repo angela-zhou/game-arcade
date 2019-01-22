@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: green;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="egyptianWar.WarHelpController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="GOLD" height="50.0" layoutY="450.0" stroke="TRANSPARENT" strokeType="INSIDE" width="400.0" />
+      <Button layoutX="30.0" layoutY="455.0" mnemonicParsing="false" onAction="#playGame" prefHeight="40.0" prefWidth="150.0" text="Play Now">
+         <font>
+            <Font name="High Tower Text" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="214.0" layoutY="455.0" mnemonicParsing="false" onAction="#mainMenu" prefHeight="40.0" prefWidth="150.0" text="Return to Menu">
+         <font>
+            <Font name="High Tower Text" size="18.0" />
+         </font>
+      </Button>
+      <Text fill="GOLD" layoutX="95.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Instructions">
+         <font>
+            <Font name="Broadway" size="32.0" />
+         </font>
+      </Text>
+      <Text layoutX="29.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="All cards are dealt evenly to each player. The player cannot look at their cards." wrappingWidth="341.205078125">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Text>
+      <Text fill="GOLD" layoutX="28.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Deal">
+         <font>
+            <Font size="19.0" />
+         </font></Text>
+      <Text fill="GOLD" layoutX="29.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The Play">
+         <font>
+            <Font size="19.0" />
+         </font></Text>
+      <Text layoutX="29.0" layoutY="153.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To start, the player plays their next card face-up in the middle." wrappingWidth="341.205078125">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Text>
+      <Text layoutX="29.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If the card played is a number card, the next player puts down a card, too." wrappingWidth="341.205078125">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Text>
+      <Text layoutX="29.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This continues until somebody puts down a face card or an Ace (J, Q, K, or A)." wrappingWidth="341.205078125">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Text>
+      <Text layoutX="29.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="When a face card or an ace is played, the next person in the sequence must play another face card or an ace in order for play to continue." wrappingWidth="341.205078125">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Text>
+      <Text layoutX="29.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If the next person in the sequence does not play a face card or an ace within their allotted chance, the person who played the last face card or an ace wins the round and the whole pile goes to them. Alotted Chances differ by card" wrappingWidth="341.205078125">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Text>
+      <Text layoutX="29.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The player, who has all of the cards at the end of the game, wins." wrappingWidth="341.205078125">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Text>
+      <Text layoutX="28.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The winner begins the next round of play.">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Text>
+      <Text layoutX="28.0" layoutY="379.0" strokeType="OUTSIDE" strokeWidth="0.0" text="J = 1 chance, Q = 2 chances, K = 3 chances, A = 4 chances">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

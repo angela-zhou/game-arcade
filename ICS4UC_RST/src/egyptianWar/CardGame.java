@@ -26,31 +26,55 @@ public class CardGame extends Application {
 	public WarHand player; 
 	
 	Stage myStage;
+	Stage secondStage;
 	
 	static CardGame instance;
 	
-	Scene scnMenu;
+	Scene scnMenu, scnHelp, scnMain;
 	
 	@Override
 	public void start(Stage myStage) throws Exception {
 		
 		instance = this;
 		this.myStage = myStage;
+		secondStage = new Stage();
 		
 		scnMenu = new Scene(FXMLLoader.load(getClass().getResource("WarMenu.fxml")));
+		scnHelp = new Scene(FXMLLoader.load(getClass().getResource("WarHelp.fxml")));
 		
-	}
-	
-	public void mainMenu() {
 		myStage.setScene(scnMenu);
+		myStage.setTitle("Menu");
+		myStage.show();
+		
 	}
 	
 	static public CardGame getInstance() {
 		return instance;
 	}
 	
+	public void mainMenu() {
+		myStage.setScene(scnMenu);
+	}
+	
+	public void exit() {
+		myStage.hide();
+	}
+
+	public void playGame() {
+		myStage.setScene(scnMain);
+	}
+
+	public void getHelp() {
+		secondStage.setTitle("Game Rules");
+		secondStage.setScene(scnHelp);
+		secondStage.show();
+	}
+	
+	public void hideSecond() {
+		secondStage.hide();
+	}
+
 	public static void main(String[] args) {
 		launch(args);
 	}
-
 }

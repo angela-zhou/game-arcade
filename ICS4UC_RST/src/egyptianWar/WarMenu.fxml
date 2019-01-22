@@ -16,22 +16,19 @@
             <Font name="Broadway" size="32.0" />
          </font>
       </Text>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="100.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="63.0" fitWidth="234.0" layoutX="83.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="\@../../src/egyptianWar.images/Playing Cards.png" />
-         </image></ImageView>
-      <Button layoutX="58.0" layoutY="369.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="Start Game">
+      <ImageView fx:id="picCards" fitHeight="150.0" fitWidth="200.0" layoutX="100.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="picSuits" fitHeight="63.0" fitWidth="234.0" layoutX="83.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="58.0" layoutY="369.0" mnemonicParsing="false" onAction="#play" prefHeight="40.0" prefWidth="120.0" text="Start Game">
          <font>
             <Font name="High Tower Text" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="213.0" layoutY="369.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="How to Play">
+      <Button layoutX="213.0" layoutY="369.0" mnemonicParsing="false" onAction="#help" prefHeight="40.0" prefWidth="120.0" text="How to Play">
          <font>
             <Font name="High Tower Text" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="140.0" layoutY="432.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="Exit">
+      <Button layoutX="140.0" layoutY="432.0" mnemonicParsing="false" onAction="#exit" prefHeight="40.0" prefWidth="120.0" text="Exit">
          <font>
             <Font name="High Tower Text" size="18.0" />
          </font>
