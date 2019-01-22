@@ -32,6 +32,7 @@ public class Board extends GridPane {
 		//may make this feature user-defined
 		NUM_COLUMNS = 8;
 		NUM_ROWS = 8;
+	}
 		
 //		// create the grid of squares
 //		squares = new PlaceHolder[NUM_ROWS][NUM_COLUMNS];
@@ -66,10 +67,10 @@ public class Board extends GridPane {
 //				squares[row][col] = blockHolder;
 //
 //				add(squares[row][col], col, row);
-
-			}
-		}
-	}
+//
+//			}
+//		}
+//	}
 
 	private boolean validPlacement(TetrisBlock blockToBePlaced, PlaceHolder blockHolder) {
 		boolean isValid = false;

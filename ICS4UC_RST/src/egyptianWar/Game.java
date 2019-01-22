@@ -7,7 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class CardGame extends Application {
+public class Game extends Application {
 	
 	static final int GAP   = 15;
 	static final int HEIGHT = 330;
@@ -28,7 +28,7 @@ public class CardGame extends Application {
 	Stage myStage;
 	Stage secondStage;
 	
-	static CardGame instance;
+	static Game instance;
 	
 	Scene scnMenu, scnHelp, scnMain;
 	
@@ -39,6 +39,8 @@ public class CardGame extends Application {
 		this.myStage = myStage;
 		secondStage = new Stage();
 		
+		mainGame();
+		
 		scnMenu = new Scene(FXMLLoader.load(getClass().getResource("WarMenu.fxml")));
 		scnHelp = new Scene(FXMLLoader.load(getClass().getResource("WarHelp.fxml")));
 		
@@ -48,7 +50,12 @@ public class CardGame extends Application {
 		
 	}
 	
-	static public CardGame getInstance() {
+	private void mainGame() {
+		
+		scnMain = new Scene(root);
+	}
+
+	static public Game getInstance() {
 		return instance;
 	}
 	

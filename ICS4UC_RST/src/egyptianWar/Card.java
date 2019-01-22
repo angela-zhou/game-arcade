@@ -65,10 +65,13 @@ public class Card {
     
     @Override
     public boolean equals(Object obj) {
+    	// check if object is a card
     	if (!(obj instanceof Card)) {
     		return false;
     	}
     	
+    	// return the boolean value
+    	// of the comparison b/w card strings
     	Card temp = (Card)obj;
     	return temp.toString().equals(this.toString());
     	

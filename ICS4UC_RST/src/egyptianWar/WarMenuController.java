@@ -6,16 +6,16 @@ public class WarMenuController {
 
 	@FXML
 	private void play() {
-		CardGame.getInstance().playGame();
+		Game.getInstance().playGame();
 	}
 
 	@FXML
 	private void help() {
-		CardGame.getInstance().getHelp();
+		Game.getInstance().getHelp();
 	}
 
 	@FXML
 	private void exit() {
-		CardGame.getInstance().exit();
+		Game.getInstance().exit();
 	}
 }
