@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -87,10 +88,12 @@ public class EgyptianWarGame extends Application {
 		VBox root = new VBox(GAP);
 		root.setPadding(new Insets(GAP, GAP, GAP, GAP));
 		root.setAlignment(Pos.CENTER);
+		root.setStyle("-fx-background-color: #008000;");
 
 		// title label
 		Label lblTitle = new Label("Egyptian War");
-		lblTitle.setFont(Font.font(LARGE_FONT));
+		lblTitle.setFont(new Font("Broadway", LARGE_FONT));
+		lblTitle.setTextFill(Color.GOLD);
 		root.getChildren().add(lblTitle);
 
 		// cards in play image
@@ -99,24 +102,34 @@ public class EgyptianWarGame extends Application {
 
 		// display score/num of cards in hand
 		lblPlayer1 = new Label(player1.getName() + " has " + player1.getScore() + " cards.");
-		lblPlayer1.setFont(Font.font(SMALL_FONT));
+		lblPlayer1.setFont(new Font("Berlin Sans FB", SMALL_FONT));
+		lblPlayer1.setTextFill(Color.GOLD);
 		root.getChildren().add(lblPlayer1);
 		// play instructions
 		Label lblPlay1 = new Label(player1.getName() + " can press the Q key to play their next card.");
+		lblPlay1.setFont(new Font("Berlin Sans FB", SMALL_FONT));
+		lblPlay1.setTextFill(Color.GOLD);
 		root.getChildren().add(lblPlay1);
 		// slap instructions
 		Label lblSlap1 = new Label(player1.getName() + " can press the S key to slap.");
+		lblSlap1.setFont(new Font("Berlin Sans FB", SMALL_FONT));
+		lblSlap1.setTextFill(Color.GOLD);
 		root.getChildren().add(lblSlap1);
 
 		// display score/num of cards in hand
 		lblPlayer2 = new Label(player2.getName() + " has " + player2.getScore() + " cards.");
-		lblPlayer2.setFont(Font.font(SMALL_FONT));
+		lblPlayer2.setFont(new Font("Berlin Sans FB", SMALL_FONT));
+		lblPlayer2.setTextFill(Color.GOLD);
 		root.getChildren().add(lblPlayer2);
 		// play instructions
 		Label lblPlay2 = new Label(player2.getName() + " can press the P key to play their next card.");
+		lblPlay2.setFont(new Font("Berlin Sans FB", SMALL_FONT));
+		lblPlay2.setTextFill(Color.GOLD);
 		root.getChildren().add(lblPlay2);
 		// slap instructions
 		Label lblSlap2 = new Label(player2.getName() + " can press the K key to slap.");
+		lblSlap2.setFont(new Font("Berlin Sans FB", SMALL_FONT));
+		lblSlap2.setTextFill(Color.GOLD);
 		root.getChildren().add(lblSlap2);
 
 		// main scene

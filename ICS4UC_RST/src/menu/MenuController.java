@@ -20,6 +20,11 @@ public class MenuController {
 	}
 	
 	@FXML
+	private void runWar() {
+		Menu.getInstance().runWar();
+	}
+	
+	@FXML
 	private void runTetris() {
 		Menu.getInstance().runTetris();
 	}

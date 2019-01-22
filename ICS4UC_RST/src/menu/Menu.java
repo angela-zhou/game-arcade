@@ -12,7 +12,9 @@ public class Menu extends Application{
 	asteroids.Game                astGame    = new asteroids.Game();
 	pacMan.PacMan                 pacGame    = new pacMan.PacMan();
 	ultimateTicTacToe.Main        tttGame    = new ultimateTicTacToe.Main();
+	egyptianWar.EgyptianWarGame   warGame    = new egyptianWar.EgyptianWarGame();
 	tetrisPuzzle.TetrisPuzzleGame tetrisGame = new tetrisPuzzle.TetrisPuzzleGame();
+	
 	
 	@Override
 	public void start(Stage stgMenu) throws Exception {
@@ -50,6 +52,14 @@ public class Menu extends Application{
 			tttGame.start(new Stage());
 		} catch (Exception e) {
 			System.out.println("Unable to start game ### Error @ Menu.java - public void runTTT()");
+		}
+	}
+	
+	public void runWar() {
+		try {
+			warGame.start(new Stage());
+		} catch (Exception e) {
+			System.out.println("Unable to start game ### Error @ Menu.java - public void runWar()");
 		}
 	}
 	
