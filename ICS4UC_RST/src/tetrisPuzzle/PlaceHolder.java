@@ -30,7 +30,7 @@ public class PlaceHolder extends Region {
         getChildren().clear();
         // update reference to tile in this place
         this.block = newBlock;
-        // ensure tile is displayed in the region
+        // ensure block is displayed in the region
         getChildren().add(block);
     }
 
