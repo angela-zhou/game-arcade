@@ -13,7 +13,7 @@ public class Menu extends Application{
 	pacMan.PacMan                 pacGame    = new pacMan.PacMan();
 	ultimateTicTacToe.Main        tttGame    = new ultimateTicTacToe.Main();
 	egyptianWar.EgyptianWarGame   warGame    = new egyptianWar.EgyptianWarGame();
-	tetrisPuzzle.TetrisPuzzleGame tetrisGame = new tetrisPuzzle.TetrisPuzzleGame();
+	//spaceGame = new 
 	
 	
 	@Override
@@ -63,13 +63,13 @@ public class Menu extends Application{
 		}
 	}
 	
-	public void runTetris() {
-		try {
-			tetrisGame.start(new Stage());
-		} catch (Exception e) {
-			System.out.println("Unable to start game ### Error @ Menu.java - public void runTetris()");
-		}
-	}
+//	public void runSpace() {
+//		try {
+//			spaceGame.start(new Stage());
+//		} catch (Exception e) {
+//			System.out.println("Unable to start game ### Error @ Menu.java - public void runSpace()");
+//		}
+//	}
 	
 	public static Menu getInstance() {
 		return instance;

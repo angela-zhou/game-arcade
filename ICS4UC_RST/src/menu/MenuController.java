@@ -24,9 +24,9 @@ public class MenuController {
 		Menu.getInstance().runWar();
 	}
 	
-	@FXML
-	private void runTetris() {
-		Menu.getInstance().runTetris();
-	}
+//	@FXML
+//	private void runSpace() {
+//		Menu.getInstance().runSpace();
+//	}
 	
 }
