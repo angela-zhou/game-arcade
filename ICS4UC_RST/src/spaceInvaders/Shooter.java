@@ -18,9 +18,9 @@ public class Shooter extends Rectangle {
 	final static String BULLET_STRING = " Bullet";
 
 	// colour constants of shooter
-	final static Color PLAYER_COLOUR = Color.DODGERBLUE;
-	final static Color ENEMY_COLOUR  = Color.RED;
-	final static Color BULLET_COLOUR = Color.BLACK;
+	final static Color PLAYER_COLOUR = Color.LIME;
+	final static Color ENEMY_COLOUR  = Color.WHITE;
+	final static Color BULLET_COLOUR = Color.WHITE;
 
 	// speed constants
 	final static int BULLET_SPEED = 6;

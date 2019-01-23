@@ -118,6 +118,8 @@ public class SpaceGame extends Application {
 			
 		// set screen size
 		root.setPrefSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+		// set screen colour
+		root.setStyle("-fx-background-color: #000000;");
 		
 		// add player to the root
 		root.getChildren().add(player);
