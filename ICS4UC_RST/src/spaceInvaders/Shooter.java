@@ -1,57 +1,48 @@
 package spaceInvaders;
 
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
-public class Shooter extends Rectangle {
+public class Shooter extends ImageView {
+
+	/**
+	 * Constants and Variables
+	 */
+	// invader, ship, or bullet?
 	final String TYPE;
+	// speed at which the shooters will move
+	final int    SPEED          = 2;
+	final int    BULLET_SPEED   = 6;
+	// determine whether or not to hide the bullet
+	boolean      isDead = false;
 
-	// size constants of shooter
-	final static int PLAYER_SIZE   = 40;
-	final static int ENEMY_SIZE    = 30;
-	final static int BULLET_HEIGHT = 20;
-	final static int BULLET_WIDTH  = 5;
-
-	// string constants of shooter
-	final static String PLAYER_STRING = "Player";
-	final static String ENEMY_STRING  = "Enemy";
-	final static String BULLET_STRING = " Bullet";
-
-	// colour constants of shooter
-	final static Color PLAYER_COLOUR = Color.LIME;
-	final static Color ENEMY_COLOUR  = Color.WHITE;
-	final static Color BULLET_COLOUR = Color.WHITE;
-
-	// speed constants
-	final static int BULLET_SPEED = 6;
-	final static int PLAYER_SPEED = 2;
-
-	boolean isDead = false;
-
-	Shooter(int x, int y, int w, int h, String type, Color colour) {
-		super(w, h, colour);
+	/**
+	 * Constructor
+	 */
+	Shooter(int x, int y, String type, Image image) {
+		super(image);
 		this.TYPE = type;
-		setTranslateX(x);
-		setTranslateY(y);
+		setX(x);
+		setY(y);
 	}
 	
 	/**
 	 * Movement methods
 	 */
 	void moveLeft() {
-		setTranslateX(getTranslateX() - PLAYER_SPEED);
+		setX(getX() - SPEED);
 	}
 
 	void moveRight() {
-		setTranslateX(getTranslateX() + PLAYER_SPEED);
+		setX(getX() + SPEED);
 	}
-
+	
 	void moveUp() {
-		setTranslateY(getTranslateY() - BULLET_SPEED);
+		setY(getY() - BULLET_SPEED);
 	}
 
 	void moveDown() {
-		setTranslateY(getTranslateY() + BULLET_SPEED);
+		setY(getY() + BULLET_SPEED);
 	}
 
 }

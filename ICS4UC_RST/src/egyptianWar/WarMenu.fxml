@@ -16,11 +16,11 @@
             <Font name="Broadway" size="32.0" />
          </font>
       </Text>
-      <ImageView fx:id="picCards" fitHeight="157.0" fitWidth="234.0" layoutX="83.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="157.0" fitWidth="234.0" layoutX="83.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/Playing%20Cards.png" />
          </image></ImageView>
-      <ImageView fx:id="picSuits" fitHeight="63.0" fitWidth="234.0" layoutX="83.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="63.0" fitWidth="234.0" layoutX="83.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/Suits.png" />
          </image></ImageView>

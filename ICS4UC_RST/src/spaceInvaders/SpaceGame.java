@@ -7,6 +7,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -15,58 +16,63 @@ public class SpaceGame extends Application {
 	 * Initialization
 	 */	
 	// screen constants
-	public static final int    SCREEN_WIDTH  = 500;
-	public static final int    SCREEN_HEIGHT = 700;
-	
+	public static final int SCREEN_WIDTH  = 500;
+	public static final int SCREEN_HEIGHT = 700;
+
 	// time var
-	public static final double MILISECONDS   = 0.016;
-	public static final int    TIME_PERIOD   = 2;
-	private double             time          = 0;
-	
+	public final double MILISECONDS   = 0.016;
+	public final int    TIME_PERIOD   = 2;
+	private double      time          = 0;
+
 	// gameplay constant
-	public static final int    NUM_ENEMIES   = 5;
-	public static final double PERCENT       = 0.3;
+	public final int    NUM_ENEMIES   = 5;
+	public final double PERCENT       = 0.4;
+	public final int    OFFSET        = 20;
 
 	// boolean variables
 	boolean moveLeft;
 	boolean moveRight;
-	
+
+	// image variables
+	Image shipImage    = new Image(getClass().getResource("images/Ship.png").toString());
+	Image invaderImage = new Image(getClass().getResource("images/Invader.png").toString());
+	Image bulletImage  = new Image(getClass().getResource("images/Bullet.png").toString());
+
 	// root layout
 	private Pane root = new Pane();
-	
+
 	// main player
-	private Shooter player = new Shooter(250, 650, Shooter.PLAYER_SIZE, Shooter.PLAYER_SIZE, 
-			Shooter.PLAYER_STRING, Shooter.PLAYER_COLOUR);
-		
+	private Shooter player = new Shooter(250, 650, "Ship", shipImage);
+
 	/**
-	 * Initializes all the enemies
+	 * Initializes all the invaders
 	 */
-	private void runEnemies() {
-		
+	private void runInvaders() {
+
 		for (int i = 0; i < NUM_ENEMIES; i++) {
-			Shooter s = new Shooter(100 + i*50, 150, Shooter.ENEMY_SIZE , Shooter.ENEMY_SIZE , 
-					Shooter.ENEMY_STRING, Shooter.ENEMY_COLOUR);
-			
-			root.getChildren().add(s);
+			Shooter invader = new Shooter(100 + i*50, 150, "Invader", invaderImage);
+			root.getChildren().add(invader);
 		}
 	}
-	
+
 	/**
 	 * Initializes the bullets
 	 */
 	private void shoot(Shooter shooter) {
-		Shooter bullet = new Shooter((int) (shooter.getTranslateX() + 20), (int) (shooter.getTranslateY()), 
-				Shooter.BULLET_WIDTH, Shooter.BULLET_HEIGHT, shooter.TYPE + Shooter.BULLET_STRING, Shooter.BULLET_COLOUR);
+		// bullet needs to come out of the middle of the ship
+		int x = (int) (shooter.getX() + OFFSET);
+		int y = (int) (shooter.getY());
+		Shooter bullet = new Shooter(x, y, shooter.TYPE + " Bullet", bulletImage);
 		root.getChildren().add(bullet);
 	}
-	
+
 	/**
-	 * Returns list of shooters
+	 * Returns list of all shooters
 	 */
 	private List<Shooter> shooters() {
 		return root.getChildren().stream().map(n -> (Shooter) n).collect(Collectors.toList());
 	}
-	
+
 	/**
 	 * Start Method
 	 */
@@ -90,7 +96,7 @@ public class SpaceGame extends Application {
 				break;
 			}
 		});
-		
+
 		// stops movement
 		scene.setOnKeyReleased(event-> {
 			switch (event.getCode()) {
@@ -110,20 +116,20 @@ public class SpaceGame extends Application {
 		myStage.show();
 	}
 
-	
+
 	/**
 	 * Set up the game
 	 */
 	private Parent initialize() {
-			
+
 		// set screen size
 		root.setPrefSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		// set screen colour
 		root.setStyle("-fx-background-color: #000000;");
-		
+
 		// add player to the root
 		root.getChildren().add(player);
-		
+
 		// create timer to control the animation
 		AnimationTimer timer = new AnimationTimer() {
 			@Override
@@ -132,24 +138,24 @@ public class SpaceGame extends Application {
 				update();
 			}
 		};
-		
+
 		// start the timer
 		timer.start();
-		
+
 		// set up the enemies
-		runEnemies();
+		runInvaders();
 
 		return root;
 	}
-	
-	
+
+
 	/**
 	 * Main Game loop
 	 */
 	private void update() {
 		// increase time when screen updates
 		time += MILISECONDS;
-		
+
 		// smoother movement if the update() method handles movement
 		// compared to the key pressed method
 		if (moveLeft) {
@@ -157,45 +163,47 @@ public class SpaceGame extends Application {
 		} else if (moveRight) {
 			player.moveRight();
 		} 
-		
-		// for the different cases, player or enemy can die
-		shooters().forEach(shooter -> {
-			switch (shooter.TYPE) {
+
+		/**
+		 * Bullet Collision Detection
+		 */
+		shooters().forEach(item -> {
+			switch (item.TYPE) {
 			
-			case Shooter.ENEMY_STRING + Shooter.BULLET_STRING:
-				// enemy bullets move down
-				shooter.moveDown();
+			case "Invader Bullet":
+				// invader bullets move down
+				item.moveDown();
 				
 				// collision detection with bullet and player
-				if (shooter.getBoundsInParent(). intersects(player.getBoundsInParent())) {
+				if (item.getBoundsInParent(). intersects(player.getBoundsInParent())) {
 					// player disappears
 					player.isDead = true;
 					// bullet disappears
-					shooter.isDead = true;
+					item.isDead = true;
 				}
 				
 				break;
 			
-			case Shooter.PLAYER_STRING + Shooter.BULLET_STRING:
+			case "Ship Bullet":
 				// player bullets move up
-				shooter.moveUp();
+				item.moveUp();
 				
 				// collision detection with bullet and enemy
-				shooters().stream().filter(e-> e.TYPE.equals(Shooter.ENEMY_STRING)).forEach(enemy -> {
-					if (shooter.getBoundsInParent().intersects(enemy.getBoundsInParent())) {
+				shooters().stream().filter(e-> e.TYPE.equals("Invader")).forEach(invader -> {
+					if (item.getBoundsInParent().intersects(invader.getBoundsInParent())) {
 						// enemy disappears
-						enemy.isDead = true;
+						invader.isDead = true;
 						// bullet diappears
-						shooter.isDead = true;
+						item.isDead = true;
 					}
 				});
 				break;
-			case Shooter.ENEMY_STRING:
+			case "Invader":
 				// if the time period is up
 				if (time > TIME_PERIOD) {
 					// enemy has a certain percent chance of shooting
 					if (Math.random() < PERCENT) {
-						shoot(shooter);
+						shoot(item);
 					}
 				}
 				break;
@@ -207,13 +215,13 @@ public class SpaceGame extends Application {
 			Shooter shooter = (Shooter) dead;
 			return shooter.isDead;
 		});
-		
+
 		// reset time
 		if (time > TIME_PERIOD) {
 			time = 0;
 		}
 	}
-	
+
 	/**
 	 * Main Method
 	 */
