@@ -12,16 +12,16 @@ import java.util.ArrayList;
 import javafx.scene.image.ImageView;
 
 public class WarHand {
-	
+
 	// array list of cards
 	private ArrayList<Card> hand;
-	
+
 	// data fields
 	private int     score;
 	private String  name;
 	private boolean canPlay;
 	private int     numChances;
-	
+
 	public WarHand(String name) {
 		// create hand
 		hand = new ArrayList<Card>();
@@ -34,7 +34,7 @@ public class WarHand {
 		// set numChances to zero
 		setNumChances(0);
 	}
-	
+
 	public void addCard(Card card) {
 		// add card to hand
 		hand.add(card);
@@ -42,14 +42,18 @@ public class WarHand {
 		// this is the number of cards per hand
 		score += 1;
 	}
-	
+
 	public void addAllCards(ArrayList<Card> playedCards, ImageView cardsInPlay) {
+		// update score
+		score += playedCards.size();
 		hand.addAll(playedCards);
 		playedCards.clear();
-		cardsInPlay.setImage(new Card().getCardImage());
-		
+		//cardsInPlay.setImage(new Card().getCardImage());
+		// line for debug purposes
+		System.out.println(name + " has all the played cards.");
+
 	}
-	
+
 	public Card playCard() {
 		Card nextCard;
 
@@ -57,10 +61,21 @@ public class WarHand {
 
 		// select a random card from the remaining cards
 		int newCardIndex = (int) (cardsLeft * Math.random());
-		
+
 		// find the card
 		nextCard = (hand.get(newCardIndex));
+
+		// line for debug purposes
+		System.out.println(name + " just played a " + hand.get(newCardIndex).toString());
 		
+		if (numChances > 0) {
+			// decrement a chance if the player has them
+			numChances--;
+			System.out.println("Decrementing the Number of Chances for " + name);
+		}
+		
+		System.out.println(name + " now has " + numChances + " chances.");
+
 		// remove it from the deck
 		hand.remove(newCardIndex);
 		// subtract 1 from score
@@ -74,7 +89,7 @@ public class WarHand {
 		//score = hand.size();
 		return score;
 	}
-	
+
 	public String getName() {
 		return name;
 	}

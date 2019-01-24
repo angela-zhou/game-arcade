@@ -41,8 +41,8 @@ public class EgyptianWarGame extends Application {
 	int currentState  = NO_CHANCES;
 	int nextState;
 
-	int numChancesA;
-	int numChancesB;
+	//int numChancesA;
+	//int numChancesB;
 
 	Deck playingDeck;
 	public WarHand playerA;
@@ -201,11 +201,19 @@ public class EgyptianWarGame extends Application {
 				playerA.setCanPlay(false);
 				// allow player B to play (they won the round)
 				playerB.setCanPlay(true);
+				// B gets all the cards
+				opposingPlayer.addAllCards(playedCards, imgCardInPlay);
+				// update the score
+				updateScore();
 			} else if (currentState == B_CHANCES) {
 				// block player B from playing (they lost the round)
 				playerB.setCanPlay(false);
 				// allow player A to play (they won the round)
 				playerA.setCanPlay(true);
+				// A gets all the cards
+				opposingPlayer.addAllCards(playedCards, imgCardInPlay);
+				// update the score
+				updateScore();
 			} else {
 				// block current player from playing (they just placed a card)
 				currentPlayer.setCanPlay(false);
@@ -218,12 +226,59 @@ public class EgyptianWarGame extends Application {
 			playerB.setCanPlay(false);
 			// ensure player A can play
 			playerA.setCanPlay(true);
+			if (currentState == NO_CHANCES) { 
+				// player A now has chances
+				setChances(newCard, opposingPlayer);
+				// line for debug purposes
+				System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
+			} else if (currentState == B_CHANCES) {
+				// player A now has chances
+				setChances(newCard, opposingPlayer);
+				// line for debug purposes
+				System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
+				// reset num chances to 0
+				playerB.setNumChances(0);
+				// line for debug purposes
+				System.out.println("Resetting numChancesB to 0");
+				System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
+			} 
+//				else if (currentState == A_CHANCES){
+//				// decrement numChances
+//				//numChancesA--;
+//				// line for debug purposes
+//				//System.out.println("Decrementing numChancesA");
+//				//System.out.println("numChancesA = " + numChancesA);
+//			}
 			break;
 		case B_CHANCES:
 			// block player A from playing
 			playerA.setCanPlay(false);
 			// ensure player B can play
 			playerB.setCanPlay(true);
+			if (currentState == NO_CHANCES) { 
+				// player B now has chances
+				setChances(newCard, opposingPlayer);
+				// line for debug purposes
+				System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
+			} else if (currentState == A_CHANCES) {
+				// player B now has chances
+				setChances(newCard, opposingPlayer);
+				// line for debug purposes
+				System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
+				// reset num chances to 0
+				playerA.setNumChances(0);
+				// line for debug purposes
+				System.out.println("Resetting numChancesA to 0");
+				System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
+				
+			} 
+//              else if (currentState == B_CHANCES) {
+//				// decrement numChances
+//				//numChancesB--;
+//				// line for debug purposes
+//				//System.out.println("Decrementing numChancesB");
+//				//System.out.println("numChancesB = " + numChancesB);
+//			}
 			break;
 		}
 
@@ -243,37 +298,52 @@ public class EgyptianWarGame extends Application {
 				// if player A plays a face card
 				if (this.playerA == currentPlayer) {
 					// player B now has chances
-					setChances(newCard, opposingPlayer);
+					//setChances(newCard, opposingPlayer);
+					// line for debug purposes
+					//System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
 					nextState = B_CHANCES;
 					// if player B plays a face card
 				} else if (this.playerB == currentPlayer) {
 					// player A now has chances
-					setChances(newCard, opposingPlayer);
+					//setChances(newCard, opposingPlayer);
+					// line for debug purposes
+					//System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
 					nextState = A_CHANCES;
 				}
 			}
 			break;
 
-
+			
 		case A_CHANCES:
 			// decrement numChances
-			numChancesA--;
+			//numChancesA--;
+			// line for debug purposes
+			//System.out.println("Decrementing numChancesA");
+			//System.out.println("numChancesA = " + numChancesA);
 			// if it is not a face card 
 			if (!checkFaceCard(newCard)) {
 				// and numChances is greater than 0
-				if (numChancesA > 0) {
+				if (playerA.getNumChances() > 0) {
 					// next state stays the same
 					nextState = A_CHANCES;
-				} else if (numChancesA == 0) {
-					// B gets all the cards
-					opposingPlayer.addAllCards(playedCards, imgCardInPlay);
+				} else if (playerA.getNumChances() == 0) {
+//					// B gets all the cards
+//					opposingPlayer.addAllCards(playedCards, imgCardInPlay);
+//					// update the score
+//					updateScore();
 					// next state is no chances
 					nextState = NO_CHANCES;
 				}
 				// if it is a face card
 			} else {
-				// reset num chances to 0
-				numChancesA = 0;
+//				// reset num chances to 0
+//				numChancesA = 0;
+//				// line for debug purposes
+//				System.out.println("Resetting numChancesA to 0");
+//				// player B now has chances
+//				setChances(newCard, opposingPlayer);
+//				// line for debug purposes
+//				System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
 				// next state will be B chances
 				nextState = B_CHANCES;	
 			}
@@ -281,24 +351,35 @@ public class EgyptianWarGame extends Application {
 
 
 		case B_CHANCES:
-			// decrement numChances
-			numChancesB--;
+//			// decrement numChances
+//			numChancesB--;
+//			// line for debug purposes
+//			System.out.println("Decrementing numChancesB");
+//			System.out.println("numChancesB = " + numChancesB);
 			// if it is not a face card 
 			if (!checkFaceCard(newCard)) {
 				// and numChances is greater than 0
-				if (numChancesB > 0) {
+				if (playerB.getNumChances() > 0) {
 					// next state stays the same
 					nextState = B_CHANCES;
-				} else if (numChancesB == 0) {
-					// A gets all the cards
-					opposingPlayer.addAllCards(playedCards, imgCardInPlay);
+				} else if (playerB.getNumChances() == 0) {
+//					// A gets all the cards
+//					opposingPlayer.addAllCards(playedCards, imgCardInPlay);
+//					// update the score
+//					updateScore();
 					// next state is no chances
 					nextState = NO_CHANCES;
 				}
 				// if it is a face card
 			} else {
-				// reset num chances to 0
-				numChancesB = 0;
+//				// reset num chances to 0
+//				numChancesB = 0;
+//				// line for debug purposes
+//				System.out.println("Resetting numChancesB to 0");
+//				// player A now has chances
+//				setChances(newCard, opposingPlayer);
+//				// line for debug purposes
+//				System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
 				// next state will be A chances
 				nextState = A_CHANCES;	
 			}
@@ -372,6 +453,10 @@ public class EgyptianWarGame extends Application {
 		lblPlayerA.setFont(Font.font(SMALL_FONT));
 		lblPlayerB.setText(playerB.getName() + " has " + playerB.getScore() + " cards.");
 		lblPlayerB.setFont(Font.font(SMALL_FONT));
+		
+		// line for debug purposes
+		//		System.out.println(playerA.getName() + " has " + playerA.getNumChances() + " chances.");
+		//		System.out.println(playerB.getName() + " has " + playerB.getNumChances() + " chances.");
 	}
 
 	/**
