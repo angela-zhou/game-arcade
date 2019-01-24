@@ -193,7 +193,7 @@ public class EgyptianWarGame extends Application {
 		// updates nextState
 		runStateMachine(newCard, currentPlayer, opposingPlayer);
 
-		// block players from playing depending on the next state and the state they came from
+		// the next scenario depends on the next state and the state they came from
 		switch (nextState) {
 		case NO_CHANCES:
 			if (currentState == A_CHANCES) {
@@ -242,13 +242,6 @@ public class EgyptianWarGame extends Application {
 				System.out.println("Resetting numChancesB to 0");
 				System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
 			} 
-//				else if (currentState == A_CHANCES){
-//				// decrement numChances
-//				//numChancesA--;
-//				// line for debug purposes
-//				//System.out.println("Decrementing numChancesA");
-//				//System.out.println("numChancesA = " + numChancesA);
-//			}
 			break;
 		case B_CHANCES:
 			// block player A from playing
@@ -272,13 +265,6 @@ public class EgyptianWarGame extends Application {
 				System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
 				
 			} 
-//              else if (currentState == B_CHANCES) {
-//				// decrement numChances
-//				//numChancesB--;
-//				// line for debug purposes
-//				//System.out.println("Decrementing numChancesB");
-//				//System.out.println("numChancesB = " + numChancesB);
-//			}
 			break;
 		}
 
@@ -286,9 +272,11 @@ public class EgyptianWarGame extends Application {
 		currentState = nextState;
 	}
 
+	/**
+	 * The state machine only changes the NEXT STATE based on the current state
+	 */
 	private void runStateMachine(Card newCard, WarHand currentPlayer, WarHand opposingPlayer) {
 		switch (currentState) {
-
 		case NO_CHANCES:
 			// if it is not a face card
 			if (!checkFaceCard(newCard)) {
@@ -297,98 +285,52 @@ public class EgyptianWarGame extends Application {
 			} else {
 				// if player A plays a face card
 				if (this.playerA == currentPlayer) {
-					// player B now has chances
-					//setChances(newCard, opposingPlayer);
-					// line for debug purposes
-					//System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
+					// the next state is B chances
 					nextState = B_CHANCES;
 					// if player B plays a face card
 				} else if (this.playerB == currentPlayer) {
-					// player A now has chances
-					//setChances(newCard, opposingPlayer);
-					// line for debug purposes
-					//System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
+					// the next state is A chances
 					nextState = A_CHANCES;
 				}
 			}
 			break;
-
-			
 		case A_CHANCES:
-			// decrement numChances
-			//numChancesA--;
-			// line for debug purposes
-			//System.out.println("Decrementing numChancesA");
-			//System.out.println("numChancesA = " + numChancesA);
-			// if it is not a face card 
 			if (!checkFaceCard(newCard)) {
 				// and numChances is greater than 0
 				if (playerA.getNumChances() > 0) {
 					// next state stays the same
 					nextState = A_CHANCES;
+				// and numChances is equal to zero
 				} else if (playerA.getNumChances() == 0) {
-//					// B gets all the cards
-//					opposingPlayer.addAllCards(playedCards, imgCardInPlay);
-//					// update the score
-//					updateScore();
 					// next state is no chances
 					nextState = NO_CHANCES;
 				}
 				// if it is a face card
 			} else {
-//				// reset num chances to 0
-//				numChancesA = 0;
-//				// line for debug purposes
-//				System.out.println("Resetting numChancesA to 0");
-//				// player B now has chances
-//				setChances(newCard, opposingPlayer);
-//				// line for debug purposes
-//				System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
 				// next state will be B chances
 				nextState = B_CHANCES;	
 			}
 			break;
-
-
 		case B_CHANCES:
-//			// decrement numChances
-//			numChancesB--;
-//			// line for debug purposes
-//			System.out.println("Decrementing numChancesB");
-//			System.out.println("numChancesB = " + numChancesB);
 			// if it is not a face card 
 			if (!checkFaceCard(newCard)) {
 				// and numChances is greater than 0
 				if (playerB.getNumChances() > 0) {
 					// next state stays the same
 					nextState = B_CHANCES;
+				// and numChances is equal to zero
 				} else if (playerB.getNumChances() == 0) {
-//					// A gets all the cards
-//					opposingPlayer.addAllCards(playedCards, imgCardInPlay);
-//					// update the score
-//					updateScore();
 					// next state is no chances
 					nextState = NO_CHANCES;
 				}
 				// if it is a face card
 			} else {
-//				// reset num chances to 0
-//				numChancesB = 0;
-//				// line for debug purposes
-//				System.out.println("Resetting numChancesB to 0");
-//				// player A now has chances
-//				setChances(newCard, opposingPlayer);
-//				// line for debug purposes
-//				System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
 				// next state will be A chances
 				nextState = A_CHANCES;	
 			}
 			break;
-
-
 		default:
 			break;
-
 		}  // end of switch
 	}  // end of method
 
