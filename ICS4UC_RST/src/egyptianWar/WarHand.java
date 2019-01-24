@@ -9,6 +9,7 @@ package egyptianWar;
  */
 import java.util.ArrayList;
 
+import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 
 public class WarHand {
@@ -21,6 +22,7 @@ public class WarHand {
 	private String  name;
 	private boolean canPlay;
 	private int     numChances;
+	private boolean isLoser;
 
 	public WarHand(String name) {
 		// create hand
@@ -43,18 +45,19 @@ public class WarHand {
 		score += 1;
 	}
 
-	public void addAllCards(ArrayList<Card> playedCards, ImageView cardsInPlay) {
+	public void addAllCards(ArrayList<Card> playedCards, ImageView cardsInPlay, ListView<String> list) {
 		// update score
 		score += playedCards.size();
 		hand.addAll(playedCards);
 		playedCards.clear();
 		//cardsInPlay.setImage(new Card().getCardImage());
-		// line for debug purposes
-		System.out.println(name + " has all the played cards.");
+		// display in listview
+		list.getItems().add(name + " has all the played cards.");
+		list.getItems().add(name + " can play their next card");
 
 	}
 
-	public Card playCard() {
+	public Card playCard(ListView<String> list) {
 		Card nextCard;
 
 		int cardsLeft = hand.size();
@@ -66,15 +69,15 @@ public class WarHand {
 		nextCard = (hand.get(newCardIndex));
 
 		// line for debug purposes
-		System.out.println(name + " just played a " + hand.get(newCardIndex).toString());
+		//System.out.println(name + " just played a " + hand.get(newCardIndex).toString());
 		
 		if (numChances > 0) {
 			// decrement a chance if the player has them
 			numChances--;
-			System.out.println("Decrementing the Number of Chances for " + name);
+			//System.out.println("Decrementing the Number of Chances for " + name);
 		}
 		
-		System.out.println(name + " now has " + numChances + " chances.");
+		//list.getItems().add(name + " now has " + numChances + " chances.");
 
 		// remove it from the deck
 		hand.remove(newCardIndex);

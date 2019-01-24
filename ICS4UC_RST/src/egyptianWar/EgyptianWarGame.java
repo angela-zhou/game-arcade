@@ -14,10 +14,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -25,11 +26,12 @@ import javafx.stage.Stage;
 public class EgyptianWarGame extends Application {
 	// display constants
 	static final int GAP         = 15;
-	static final int HEIGHT      = 330;
-	static final int WIDTH       = 100;
 	static final int LARGE_FONT  = 28;
 	static final int MEDIUM_FONT = 18;
 	static final int SMALL_FONT  = 14;
+	static final int FIRST_COL   = 0;
+	static final int SECOND_COL  = 6;
+	static final int THIRD_COL   = 12;
 
 	// state constants
 	static final int NO_CHANCES = 0;
@@ -37,12 +39,8 @@ public class EgyptianWarGame extends Application {
 	static final int  B_CHANCES = 2;
 
 	// state var
-	// int previousState = NO_CHANCES;
 	int currentState  = NO_CHANCES;
 	int nextState;
-
-	//int numChancesA;
-	//int numChancesB;
 
 	Deck playingDeck;
 	public WarHand playerA;
@@ -55,8 +53,15 @@ public class EgyptianWarGame extends Application {
 	ArrayList<Card> playedCards;
 
 	// labels to display score
-	Label lblPlayerA;
-	Label lblPlayerB;
+	Label lblScoreA;
+	Label lblScoreB;
+	
+	// labels to display who wins each round 
+	Label lblStatus;
+
+	// listViews to display instructions and numChances
+	ListView<String> lstPlayerA;
+	ListView<String> lstPlayerB;
 
 	Stage myStage;
 	Stage secondStage;
@@ -91,60 +96,60 @@ public class EgyptianWarGame extends Application {
 	 */
 	private void mainGame() {
 
+		// instantiate the deck and the arrayList of played cards
 		playingDeck = new Deck();
 		playedCards = new ArrayList<Card>();
 
 		// may implement feature to allow user to enter their name
 		playerA = new WarHand("Player A");
 		playerB = new WarHand("Player B");
+		
+		lstPlayerA = new ListView<String>();
+		lstPlayerB = new ListView<String>();
 
 		// root layout
-		VBox root = new VBox(GAP);
+		GridPane root = new GridPane();
+		root.setHgap(GAP);
+		root.setVgap(GAP);
 		root.setPadding(new Insets(GAP, GAP, GAP, GAP));
 		root.setAlignment(Pos.CENTER);
 		root.setStyle("-fx-background-color: #008000;");
 
-		// title label
-		Label lblTitle = new Label("Egyptian War");
-		lblTitle.setFont(new Font("Broadway", LARGE_FONT));
-		lblTitle.setTextFill(Color.GOLD);
-		root.getChildren().add(lblTitle);
+		// player A's "hub"
+		// score
+		lblScoreA = new Label("Score: " + playerA.getScore());
+		lblScoreA.setFont(new Font("Candara", SMALL_FONT));
+		lblScoreA.setTextFill(Color.GOLD);
+		root.add(lblScoreA, FIRST_COL, 2, 1, 1); 
+		// listView
+		lstPlayerA.getItems().add(playerA.getName() + " can press the Q key to play.");
+		lstPlayerA.getItems().add(playerA.getName() + " can press the S key to slap.");
+		root.add(lstPlayerA, FIRST_COL, 3, 1, 5);
+
+
+		// player B's "hub"
+		// score
+		lblScoreB = new Label("Score: " + playerB.getScore());
+		lblScoreB.setFont(new Font("Candara", SMALL_FONT));
+		lblScoreB.setTextFill(Color.GOLD);
+		root.add(lblScoreB, THIRD_COL, 2, 1, 1); 
+		// listView 
+		lstPlayerB.getItems().add(playerB.getName() + " can press the P key to play.");
+		lstPlayerB.getItems().add(playerB.getName() + " can press the K key to slap.");
+		root.add(lstPlayerB, THIRD_COL, 3, 1, 5);
+
+		
+		// center 
+		// status
+		lblStatus = new Label("Egyptian War");
+		lblStatus.setFont(new Font("Candara", LARGE_FONT));
+		lblStatus.setTextFill(Color.GOLD);
+		lblStatus.setAlignment(Pos.CENTER);
+		root.add(lblStatus, SECOND_COL, 0, 1, 1); 
 
 		// cards in play image
 		imgCardInPlay = new ImageView(new Card().getCardImage());
-		root.getChildren().add(imgCardInPlay);
-
-		// display score/num of cards in hand
-		lblPlayerA = new Label(playerA.getName() + " has " + playerA.getScore() + " cards.");
-		lblPlayerA.setFont(new Font("Berlin Sans FB", SMALL_FONT));
-		lblPlayerA.setTextFill(Color.GOLD);
-		root.getChildren().add(lblPlayerA);
-		// play instructions
-		Label lblPlayA = new Label(playerA.getName() + " can press the Q key to play their next card.");
-		lblPlayA.setFont(new Font("Berlin Sans FB", SMALL_FONT));
-		lblPlayA.setTextFill(Color.GOLD);
-		root.getChildren().add(lblPlayA);
-		// slap instructions
-		Label lblSlapA = new Label(playerA.getName() + " can press the S key to slap.");
-		lblSlapA.setFont(new Font("Berlin Sans FB", SMALL_FONT));
-		lblSlapA.setTextFill(Color.GOLD);
-		root.getChildren().add(lblSlapA);
-
-		// display score/num of cards in hand
-		lblPlayerB = new Label(playerB.getName() + " has " + playerB.getScore() + " cards.");
-		lblPlayerB.setFont(new Font("Berlin Sans FB", SMALL_FONT));
-		lblPlayerB.setTextFill(Color.GOLD);
-		root.getChildren().add(lblPlayerB);
-		// play instructions
-		Label lblPlayB = new Label(playerB.getName() + " can press the P key to play their next card.");
-		lblPlayB.setFont(new Font("Berlin Sans FB", SMALL_FONT));
-		lblPlayB.setTextFill(Color.GOLD);
-		root.getChildren().add(lblPlayB);
-		// slap instructions
-		Label lblSlapB = new Label(playerB.getName() + " can press the K key to slap.");
-		lblSlapB.setFont(new Font("Berlin Sans FB", SMALL_FONT));
-		lblSlapB.setTextFill(Color.GOLD);
-		root.getChildren().add(lblSlapB);
+		root.add(imgCardInPlay, SECOND_COL, 1, 1, 1); 
 
 		// main scene
 		scnMain = new Scene(root);
@@ -182,7 +187,12 @@ public class EgyptianWarGame extends Application {
 	 */
 	private void playCard(WarHand currentPlayer, WarHand opposingPlayer) {
 		// make new card from the play
-		Card newCard = currentPlayer.playCard();
+		Card newCard;
+		if (currentPlayer == this.playerA) {
+			newCard = currentPlayer.playCard(lstPlayerA);
+		} else {
+			newCard = currentPlayer.playCard(lstPlayerB);
+		}
 
 		// set image
 		imgCardInPlay.setImage(newCard.getCardImage());
@@ -201,8 +211,9 @@ public class EgyptianWarGame extends Application {
 				playerA.setCanPlay(false);
 				// allow player B to play (they won the round)
 				playerB.setCanPlay(true);
+				lblStatus.setText(playerB.getName() + " just won the round.");
 				// B gets all the cards
-				opposingPlayer.addAllCards(playedCards, imgCardInPlay);
+				opposingPlayer.addAllCards(playedCards, imgCardInPlay, lstPlayerB);
 				// update the score
 				updateScore();
 			} else if (currentState == B_CHANCES) {
@@ -210,8 +221,9 @@ public class EgyptianWarGame extends Application {
 				playerB.setCanPlay(false);
 				// allow player A to play (they won the round)
 				playerA.setCanPlay(true);
+				lblStatus.setText(playerA.getName() + " just won the round.");
 				// A gets all the cards
-				opposingPlayer.addAllCards(playedCards, imgCardInPlay);
+				opposingPlayer.addAllCards(playedCards, imgCardInPlay, lstPlayerA);
 				// update the score
 				updateScore();
 			} else {
@@ -229,18 +241,18 @@ public class EgyptianWarGame extends Application {
 			if (currentState == NO_CHANCES) { 
 				// player A now has chances
 				setChances(newCard, opposingPlayer);
-				// line for debug purposes
-				System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
+				// display in list View
+				lstPlayerA.getItems().add(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chance(s).");
 			} else if (currentState == B_CHANCES) {
 				// player A now has chances
 				setChances(newCard, opposingPlayer);
-				// line for debug purposes
-				System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
+				// display in list view
+				lstPlayerA.getItems().add(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chance(s).");
 				// reset num chances to 0
 				playerB.setNumChances(0);
-				// line for debug purposes
-				System.out.println("Resetting numChancesB to 0");
-				System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
+				// display in list View
+				lstPlayerB.getItems().add(playerB.getName() + " now has 0 chances.");
+				//lstPlayerA.getItems().add(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
 			} 
 			break;
 		case B_CHANCES:
@@ -251,19 +263,19 @@ public class EgyptianWarGame extends Application {
 			if (currentState == NO_CHANCES) { 
 				// player B now has chances
 				setChances(newCard, opposingPlayer);
-				// line for debug purposes
-				System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
+				// display in list View
+				lstPlayerB.getItems().add(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chance(s).");
 			} else if (currentState == A_CHANCES) {
 				// player B now has chances
 				setChances(newCard, opposingPlayer);
-				// line for debug purposes
-				System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
+				// display in list View
+				lstPlayerB.getItems().add(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chance(s).");
 				// reset num chances to 0
 				playerA.setNumChances(0);
-				// line for debug purposes
-				System.out.println("Resetting numChancesA to 0");
-				System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
-				
+				// display in list View
+				lstPlayerA.getItems().add(playerA.getName() + " now has 0 chances.");
+				//System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
+
 			} 
 			break;
 		}
@@ -300,7 +312,7 @@ public class EgyptianWarGame extends Application {
 				if (playerA.getNumChances() > 0) {
 					// next state stays the same
 					nextState = A_CHANCES;
-				// and numChances is equal to zero
+					// and numChances is equal to zero
 				} else if (playerA.getNumChances() == 0) {
 					// next state is no chances
 					nextState = NO_CHANCES;
@@ -318,7 +330,7 @@ public class EgyptianWarGame extends Application {
 				if (playerB.getNumChances() > 0) {
 					// next state stays the same
 					nextState = B_CHANCES;
-				// and numChances is equal to zero
+					// and numChances is equal to zero
 				} else if (playerB.getNumChances() == 0) {
 					// next state is no chances
 					nextState = NO_CHANCES;
@@ -391,14 +403,10 @@ public class EgyptianWarGame extends Application {
 	 * Updates the number of cards each player has
 	 */
 	private void updateScore() {
-		lblPlayerA.setText(playerA.getName() + " has " + playerA.getScore() + " cards.");
-		lblPlayerA.setFont(Font.font(SMALL_FONT));
-		lblPlayerB.setText(playerB.getName() + " has " + playerB.getScore() + " cards.");
-		lblPlayerB.setFont(Font.font(SMALL_FONT));
-		
-		// line for debug purposes
-		//		System.out.println(playerA.getName() + " has " + playerA.getNumChances() + " chances.");
-		//		System.out.println(playerB.getName() + " has " + playerB.getNumChances() + " chances.");
+		lblScoreA.setText(playerA.getName() + " has " + playerA.getScore() + " cards.");
+		lblScoreA.setFont(Font.font(SMALL_FONT));
+		lblScoreB.setText(playerB.getName() + " has " + playerB.getScore() + " cards.");
+		lblScoreB.setFont(Font.font(SMALL_FONT));
 	}
 
 	/**
