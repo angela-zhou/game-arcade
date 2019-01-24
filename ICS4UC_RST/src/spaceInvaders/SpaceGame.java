@@ -19,12 +19,14 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import simpleIO.Console;
 
 public class SpaceGame extends Application {
 	/**
 	 * Initialization
 	 */	
+	
+	// remember to use font OCR A Extended
+	
 	// screen constants
 	public static final int SCREEN_WIDTH  = 400;
 	public static final int SCREEN_HEIGHT = 600;
