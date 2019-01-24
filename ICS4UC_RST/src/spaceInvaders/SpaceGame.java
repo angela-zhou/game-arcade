@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import simpleIO.Console;
 
 public class SpaceGame extends Application {
 	/**
@@ -37,12 +38,15 @@ public class SpaceGame extends Application {
 
 	// gameplay constant
 	public final int    NUM_INVADERS  = 5;
-	public final double PERCENT       = 0.4;
+	public final double PERCENT       = 0.25;
 	public final int    OFFSET        = 20;
 
 	// boolean variables
 	boolean moveLeft;
 	boolean moveRight;
+
+	// invader array
+	Shooter [][] invaders = new Shooter[NUM_INVADERS][NUM_INVADERS];
 
 	// image variables
 	Image shipImage    = new Image(getClass().getResource("images/Ship.png").toString());
@@ -60,9 +64,18 @@ public class SpaceGame extends Application {
 	 */
 	private void runInvaders() {
 
-		for (int i = 0; i < NUM_INVADERS; i++) {
-			Shooter invader = new Shooter(SCREEN_WIDTH / 5 + i*50, 150, "Invader", invaderImage);
-			root.getChildren().add(invader);
+		//		for (int i = 0; i < NUM_INVADERS; i++) {
+		//			Shooter invader = new Shooter(SCREEN_WIDTH / 5 + i*50, 150, "Invader", invaderImage);
+		//			root.getChildren().add(invader);
+		//		}
+
+		// row the number of new lines
+		for (int row = 0; row < invaders.length; row++) {
+			// col the number of invaders per line
+			for (int col = 0; col < invaders[row].length; col++) {
+				Shooter invader = new Shooter(SCREEN_WIDTH / 5 + col*50, 50 + row * 50, "Invader", invaderImage);
+				root.getChildren().add(invader);
+			}
 		}
 	}
 
@@ -180,11 +193,11 @@ public class SpaceGame extends Application {
 		 */
 		shooters().forEach(item -> {
 			switch (item.TYPE) {
-			
+
 			case "Invader Bullet":
 				// invader bullets move down
 				item.moveDown();
-				
+
 				// collision detection with bullet and player
 				if (item.getBoundsInParent(). intersects(player.getBoundsInParent())) {
 					// player disappears
@@ -192,13 +205,13 @@ public class SpaceGame extends Application {
 					// bullet disappears
 					item.isDead = true;
 				}
-				
+
 				break;
-			
+
 			case "Ship Bullet":
 				// player bullets move up
 				item.moveUp();
-				
+
 				// collision detection with bullet and invader
 				shooters().stream().filter(e-> e.TYPE.equals("Invader")).forEach(invader -> {
 					if (item.getBoundsInParent().intersects(invader.getBoundsInParent())) {
@@ -218,32 +231,32 @@ public class SpaceGame extends Application {
 					}
 				}
 				break;
-				
+
 			case "Ship":
 				// do not allow ship to exit screen
 				Bounds ship = item.getBoundsInParent();
-				
+
 				// find distance b/w left and right of screen
 				double distRight = SCREEN_WIDTH - ship.getMaxX();
 				double distLeft  = ship.getMinX();
-				
+
 				// if ship hits the edge of the screen from the right
 				if (distRight >= 0 && distRight <= item.SPEED) {
 					// then we reset the ship back left to its previous position 
 					// by subtracting speed from X
 					item.setX(item.getX() - item.SPEED);
 				}
-				
+
 				// if ship hits the edge of the screen from the left
 				if (distLeft >= 0 && distLeft <= item.SPEED) {
 					// then we reset the ship back right to its previous position 
 					// by adding speed to X
 					item.setX(item.getX() + item.SPEED);
 				}
-				
+
 			}
 		});
-		
+
 		// removes dead invaders or players
 		root.getChildren().removeIf(dead -> {
 			Shooter shooter = (Shooter) dead;

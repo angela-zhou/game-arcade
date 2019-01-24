@@ -9,6 +9,8 @@ package egyptianWar;
  */
 import java.util.ArrayList;
 
+import javafx.scene.image.ImageView;
+
 public class WarHand {
 	
 	// array list of cards
@@ -19,7 +21,6 @@ public class WarHand {
 	private String  name;
 	private boolean canPlay;
 	private int     numChances;
-	private boolean wins;
 	
 	public WarHand(String name) {
 		// create hand
@@ -28,12 +29,10 @@ public class WarHand {
 		score = 0;
 		// set name
 		this.name = name;
-		// allow user to play
+		// allow them to play
 		canPlay = true;
-		// has no chances yet
-		numChances = -1;
-		// has not won yet
-		wins = false;
+		// set numChances to zero
+		setNumChances(0);
 	}
 	
 	public void addCard(Card card) {
@@ -42,15 +41,13 @@ public class WarHand {
 		// add 1 to "score" 
 		// this is the number of cards per hand
 		score += 1;
-		// set wins to true if hand has all the cards
-		if (score == 52) {
-			wins = true;
-		}
 	}
 	
-	public void addAllCards(ArrayList<Card> playedCards) {
+	public void addAllCards(ArrayList<Card> playedCards, ImageView cardsInPlay) {
 		hand.addAll(playedCards);
 		playedCards.clear();
+		cardsInPlay.setImage(new Card().getCardImage());
+		
 	}
 	
 	public Card playCard() {
@@ -96,10 +93,6 @@ public class WarHand {
 
 	public void setNumChances(int numChances) {
 		this.numChances = numChances;
-	}
-
-	public boolean hasWon() {
-		return wins;
 	}
 }
 

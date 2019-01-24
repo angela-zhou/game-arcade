@@ -23,6 +23,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class EgyptianWarGame extends Application {
+	// display constants
 	static final int GAP         = 15;
 	static final int HEIGHT      = 330;
 	static final int WIDTH       = 100;
@@ -30,19 +31,32 @@ public class EgyptianWarGame extends Application {
 	static final int MEDIUM_FONT = 18;
 	static final int SMALL_FONT  = 14;
 
+	// state constants
+	static final int NO_CHANCES = 0;
+	static final int  A_CHANCES = 1;
+	static final int  B_CHANCES = 2;
+
+	// state var
+	// int previousState = NO_CHANCES;
+	int currentState  = NO_CHANCES;
+	int nextState;
+
+	int numChancesA;
+	int numChancesB;
+
 	Deck playingDeck;
-	public WarHand player1;
-	public WarHand player2;
+	public WarHand playerA;
+	public WarHand playerB;
 
 	// show the cards that have been played
 	ImageView imgCardInPlay;
 
 	// array list of all the previously played cards
-	ArrayList<Card>  playedCards;
+	ArrayList<Card> playedCards;
 
 	// labels to display score
-	Label lblPlayer1;
-	Label lblPlayer2;
+	Label lblPlayerA;
+	Label lblPlayerB;
 
 	Stage myStage;
 	Stage secondStage;
@@ -81,8 +95,8 @@ public class EgyptianWarGame extends Application {
 		playedCards = new ArrayList<Card>();
 
 		// may implement feature to allow user to enter their name
-		player1 = new WarHand("Player 1");
-		player2 = new WarHand("Player 2");
+		playerA = new WarHand("Player A");
+		playerB = new WarHand("Player B");
 
 		// root layout
 		VBox root = new VBox(GAP);
@@ -101,36 +115,36 @@ public class EgyptianWarGame extends Application {
 		root.getChildren().add(imgCardInPlay);
 
 		// display score/num of cards in hand
-		lblPlayer1 = new Label(player1.getName() + " has " + player1.getScore() + " cards.");
-		lblPlayer1.setFont(new Font("Berlin Sans FB", SMALL_FONT));
-		lblPlayer1.setTextFill(Color.GOLD);
-		root.getChildren().add(lblPlayer1);
+		lblPlayerA = new Label(playerA.getName() + " has " + playerA.getScore() + " cards.");
+		lblPlayerA.setFont(new Font("Berlin Sans FB", SMALL_FONT));
+		lblPlayerA.setTextFill(Color.GOLD);
+		root.getChildren().add(lblPlayerA);
 		// play instructions
-		Label lblPlay1 = new Label(player1.getName() + " can press the Q key to play their next card.");
-		lblPlay1.setFont(new Font("Berlin Sans FB", SMALL_FONT));
-		lblPlay1.setTextFill(Color.GOLD);
-		root.getChildren().add(lblPlay1);
+		Label lblPlayA = new Label(playerA.getName() + " can press the Q key to play their next card.");
+		lblPlayA.setFont(new Font("Berlin Sans FB", SMALL_FONT));
+		lblPlayA.setTextFill(Color.GOLD);
+		root.getChildren().add(lblPlayA);
 		// slap instructions
-		Label lblSlap1 = new Label(player1.getName() + " can press the S key to slap.");
-		lblSlap1.setFont(new Font("Berlin Sans FB", SMALL_FONT));
-		lblSlap1.setTextFill(Color.GOLD);
-		root.getChildren().add(lblSlap1);
+		Label lblSlapA = new Label(playerA.getName() + " can press the S key to slap.");
+		lblSlapA.setFont(new Font("Berlin Sans FB", SMALL_FONT));
+		lblSlapA.setTextFill(Color.GOLD);
+		root.getChildren().add(lblSlapA);
 
 		// display score/num of cards in hand
-		lblPlayer2 = new Label(player2.getName() + " has " + player2.getScore() + " cards.");
-		lblPlayer2.setFont(new Font("Berlin Sans FB", SMALL_FONT));
-		lblPlayer2.setTextFill(Color.GOLD);
-		root.getChildren().add(lblPlayer2);
+		lblPlayerB = new Label(playerB.getName() + " has " + playerB.getScore() + " cards.");
+		lblPlayerB.setFont(new Font("Berlin Sans FB", SMALL_FONT));
+		lblPlayerB.setTextFill(Color.GOLD);
+		root.getChildren().add(lblPlayerB);
 		// play instructions
-		Label lblPlay2 = new Label(player2.getName() + " can press the P key to play their next card.");
-		lblPlay2.setFont(new Font("Berlin Sans FB", SMALL_FONT));
-		lblPlay2.setTextFill(Color.GOLD);
-		root.getChildren().add(lblPlay2);
+		Label lblPlayB = new Label(playerB.getName() + " can press the P key to play their next card.");
+		lblPlayB.setFont(new Font("Berlin Sans FB", SMALL_FONT));
+		lblPlayB.setTextFill(Color.GOLD);
+		root.getChildren().add(lblPlayB);
 		// slap instructions
-		Label lblSlap2 = new Label(player2.getName() + " can press the K key to slap.");
-		lblSlap2.setFont(new Font("Berlin Sans FB", SMALL_FONT));
-		lblSlap2.setTextFill(Color.GOLD);
-		root.getChildren().add(lblSlap2);
+		Label lblSlapB = new Label(playerB.getName() + " can press the K key to slap.");
+		lblSlapB.setFont(new Font("Berlin Sans FB", SMALL_FONT));
+		lblSlapB.setTextFill(Color.GOLD);
+		root.getChildren().add(lblSlapB);
 
 		// main scene
 		scnMain = new Scene(root);
@@ -143,21 +157,21 @@ public class EgyptianWarGame extends Application {
 	public void handleKeyPressed(KeyEvent event) {
 		KeyCode code = event.getCode();
 		if (event.getEventType() == KeyEvent.KEY_PRESSED) {
-			// Q key press: player 1 next card
-			if (code == KeyCode.Q && player1.canPlay()) {
-				playCard(player1, player2);
+			// Q key press: player A next card
+			if (code == KeyCode.Q && playerA.canPlay()) {
+				playCard(playerA, playerB);
 				updateScore();
-				// P key press: player 2 next card
-			} else if (code == KeyCode.P && player2.canPlay()) {
-				playCard(player2, player1);
+				// P key press: player B next card
+			} else if (code == KeyCode.P && playerB.canPlay()) {
+				playCard(playerB, playerA);
 				updateScore();
-				// S key press: player 1 slap
+				// S key press: player A slap
 			} else if (code == KeyCode.S) {
-				slap(player1);
+				slap(playerA);
 				updateScore();
-				// K key press: player 2 slap
+				// K key press: player B slap
 			} else if (code == KeyCode.K) {
-				slap(player2);
+				slap(playerB);
 				updateScore();
 			}
 		}
@@ -176,52 +190,126 @@ public class EgyptianWarGame extends Application {
 		// add to array list of played cards
 		playedCards.add(newCard);
 
+		// updates nextState
+		runStateMachine(newCard, currentPlayer, opposingPlayer);
 
-		// if the player plays an number card and runs out of chances
-		if ((checkFaceCard(newCard) == false) && (currentPlayer.getNumChances() == 0)) {
-			currentPlayer.setCanPlay(false);
-			opposingPlayer.setCanPlay(true);
-			
-			// opposing player gets all the cards
-			opposingPlayer.addAllCards(playedCards);
-			
-			// reset num of chances
-			currentPlayer.setNumChances(-1);
-			
-			
-		// if the player plays a number card and still has chances
-		} else if ((checkFaceCard(newCard) == false) && (currentPlayer.getNumChances() > 0)) {
-			currentPlayer.setCanPlay(true);
-			opposingPlayer.setCanPlay(false);
-			
-			// subtract a chance
-			currentPlayer.setNumChances((currentPlayer.getNumChances() - 1));
-			
-			
-		// if the player plays a face card and still has chances
-		} else if (checkFaceCard(newCard) && (currentPlayer.getNumChances() > 0)) {
-			currentPlayer.setCanPlay(false);
-			opposingPlayer.setCanPlay(true);
-			
-			// reset num of chances
-			currentPlayer.setNumChances(-1);
-			
-			
-		// if the player plays a face card and has no chances
-		} else if (checkFaceCard(newCard) && (currentPlayer.getNumChances() == -1)) {
-			currentPlayer.setCanPlay(false);
-			opposingPlayer.setCanPlay(true);
-			
-			// chances are set on the opposing player
-			setChances(newCard, opposingPlayer);
-			
-			
-		// if the player plays a number card and has no chances
-		} else if ((checkFaceCard(newCard) == false) && (currentPlayer.getNumChances() == -1)) {
-			currentPlayer.setCanPlay(false);
-			opposingPlayer.setCanPlay(true);
+		// block players from playing depending on the next state and the state they came from
+		switch (nextState) {
+		case NO_CHANCES:
+			if (currentState == A_CHANCES) {
+				// block player A from playing (they lost the round)
+				playerA.setCanPlay(false);
+				// allow player B to play (they won the round)
+				playerB.setCanPlay(true);
+			} else if (currentState == B_CHANCES) {
+				// block player B from playing (they lost the round)
+				playerB.setCanPlay(false);
+				// allow player A to play (they won the round)
+				playerA.setCanPlay(true);
+			} else {
+				// block current player from playing (they just placed a card)
+				currentPlayer.setCanPlay(false);
+				// allow opposing player to play
+				opposingPlayer.setCanPlay(true);
+			}
+			break;
+		case A_CHANCES:
+			// block player B from playing
+			playerB.setCanPlay(false);
+			// ensure player A can play
+			playerA.setCanPlay(true);
+			break;
+		case B_CHANCES:
+			// block player A from playing
+			playerA.setCanPlay(false);
+			// ensure player B can play
+			playerB.setCanPlay(true);
+			break;
 		}
+
+		// update the state once changes have been made
+		currentState = nextState;
 	}
+
+	private void runStateMachine(Card newCard, WarHand currentPlayer, WarHand opposingPlayer) {
+		switch (currentState) {
+
+		case NO_CHANCES:
+			// if it is not a face card
+			if (!checkFaceCard(newCard)) {
+				// next state stays the same
+				nextState = NO_CHANCES;
+			} else {
+				// if player A plays a face card
+				if (this.playerA == currentPlayer) {
+					// player B now has chances
+					setChances(newCard, opposingPlayer);
+					nextState = B_CHANCES;
+					// if player B plays a face card
+				} else if (this.playerB == currentPlayer) {
+					// player A now has chances
+					setChances(newCard, opposingPlayer);
+					nextState = A_CHANCES;
+				}
+			}
+			break;
+
+
+		case A_CHANCES:
+			// decrement numChances
+			numChancesA--;
+			// if it is not a face card 
+			if (!checkFaceCard(newCard)) {
+				// and numChances is greater than 0
+				if (numChancesA > 0) {
+					// next state stays the same
+					nextState = A_CHANCES;
+				} else if (numChancesA == 0) {
+					// B gets all the cards
+					opposingPlayer.addAllCards(playedCards, imgCardInPlay);
+					// next state is no chances
+					nextState = NO_CHANCES;
+				}
+				// if it is a face card
+			} else {
+				// reset num chances to 0
+				numChancesA = 0;
+				// next state will be B chances
+				nextState = B_CHANCES;	
+			}
+			break;
+
+
+		case B_CHANCES:
+			// decrement numChances
+			numChancesB--;
+			// if it is not a face card 
+			if (!checkFaceCard(newCard)) {
+				// and numChances is greater than 0
+				if (numChancesB > 0) {
+					// next state stays the same
+					nextState = B_CHANCES;
+				} else if (numChancesB == 0) {
+					// A gets all the cards
+					opposingPlayer.addAllCards(playedCards, imgCardInPlay);
+					// next state is no chances
+					nextState = NO_CHANCES;
+				}
+				// if it is a face card
+			} else {
+				// reset num chances to 0
+				numChancesB = 0;
+				// next state will be A chances
+				nextState = A_CHANCES;	
+			}
+			break;
+
+
+		default:
+			break;
+
+		}  // end of switch
+	}  // end of method
 
 	/**
 	 * the events that occur when a user slaps
@@ -253,16 +341,16 @@ public class EgyptianWarGame extends Application {
 	/**
 	 * Sets the users chances depending on the card
 	 */
-	private void setChances(Card card, WarHand opposingPlayer) {
+	private void setChances(Card card, WarHand player) {
 
 		// if card is Jack
-		if      (card.getIntValue() == 11) opposingPlayer.setNumChances(1);
+		if      (card.getIntValue() == 11) player.setNumChances(1);
 		// if card is Queen
-		else if (card.getIntValue() == 12) opposingPlayer.setNumChances(2);
+		else if (card.getIntValue() == 12) player.setNumChances(2);
 		// if card is King
-		else if (card.getIntValue() == 13) opposingPlayer.setNumChances(3);
+		else if (card.getIntValue() == 13) player.setNumChances(3);
 		// if card is Ace
-		else if (card.getIntValue() == 14) opposingPlayer.setNumChances(4);
+		else if (card.getIntValue() == 14) player.setNumChances(4);
 	}
 
 	/**
@@ -270,8 +358,8 @@ public class EgyptianWarGame extends Application {
 	 */
 	private void startGame(Deck deck) {
 		for (int i = 0; i < 26; i++) {
-			player1.addCard(deck.dealNextCard());
-			player2.addCard(deck.dealNextCard());
+			playerA.addCard(deck.dealNextCard());
+			playerB.addCard(deck.dealNextCard());
 			updateScore();
 		}
 	}
@@ -280,30 +368,10 @@ public class EgyptianWarGame extends Application {
 	 * Updates the number of cards each player has
 	 */
 	private void updateScore() {
-		lblPlayer1.setText(player1.getName() + " has " + player1.getScore() + " cards.");
-		lblPlayer1.setFont(Font.font(SMALL_FONT));
-		lblPlayer2.setText(player2.getName() + " has " + player2.getScore() + " cards.");
-		lblPlayer2.setFont(Font.font(SMALL_FONT));
-
-		if (player1.hasWon()) {
-			// players cannot play anymore
-			player1.setCanPlay(false);
-			player2.setCanPlay(false);
-			// tell user player 1 has won
-			lblPlayer1.setText(player1.getName() + " wins!");
-			lblPlayer1.setFont(Font.font(SMALL_FONT));
-			lblPlayer2.setText(player2.getName() + " loses.");
-			lblPlayer2.setFont(Font.font(SMALL_FONT));
-		} else if (player2.hasWon()) {
-			// players cannot play anymore
-			player1.setCanPlay(false);
-			player2.setCanPlay(false);
-			// tell user player 2 has won
-			lblPlayer1.setText(player1.getName() + " loses.");
-			lblPlayer1.setFont(Font.font(SMALL_FONT));
-			lblPlayer2.setText(player2.getName() + " wins!");
-			lblPlayer2.setFont(Font.font(SMALL_FONT));
-		}
+		lblPlayerA.setText(playerA.getName() + " has " + playerA.getScore() + " cards.");
+		lblPlayerA.setFont(Font.font(SMALL_FONT));
+		lblPlayerB.setText(playerB.getName() + " has " + playerB.getScore() + " cards.");
+		lblPlayerB.setFont(Font.font(SMALL_FONT));
 	}
 
 	/**
