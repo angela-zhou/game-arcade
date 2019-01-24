@@ -1,10 +1,19 @@
 package spaceInvaders;
 
+/**
+ * @author Angela Zhou
+ * Date: Jan 2019
+ * Course: ICS4U
+ * Teacher: Mrs. Spindler
+ * SpaceGame.java 
+ * Inspired by https://youtu.be/FVo1fm52hz0
+ */
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.geometry.Bounds;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -16,8 +25,10 @@ public class SpaceGame extends Application {
 	 * Initialization
 	 */	
 	// screen constants
-	public static final int SCREEN_WIDTH  = 500;
-	public static final int SCREEN_HEIGHT = 700;
+	public static final int SCREEN_WIDTH  = 400;
+	public static final int SCREEN_HEIGHT = 600;
+	// gap b/w invaders
+	public static final int GAP           = 50;
 
 	// time var
 	public final double MILISECONDS   = 0.016;
@@ -25,7 +36,7 @@ public class SpaceGame extends Application {
 	private double      time          = 0;
 
 	// gameplay constant
-	public final int    NUM_ENEMIES   = 5;
+	public final int    NUM_INVADERS  = 5;
 	public final double PERCENT       = 0.4;
 	public final int    OFFSET        = 20;
 
@@ -42,15 +53,15 @@ public class SpaceGame extends Application {
 	private Pane root = new Pane();
 
 	// main player
-	private Shooter player = new Shooter(250, 650, "Ship", shipImage);
+	private Shooter player = new Shooter(SCREEN_WIDTH / 2 - OFFSET, SCREEN_HEIGHT - 60, "Ship", shipImage);
 
 	/**
 	 * Initializes all the invaders
 	 */
 	private void runInvaders() {
 
-		for (int i = 0; i < NUM_ENEMIES; i++) {
-			Shooter invader = new Shooter(100 + i*50, 150, "Invader", invaderImage);
+		for (int i = 0; i < NUM_INVADERS; i++) {
+			Shooter invader = new Shooter(SCREEN_WIDTH / 5 + i*50, 150, "Invader", invaderImage);
 			root.getChildren().add(invader);
 		}
 	}
@@ -142,7 +153,7 @@ public class SpaceGame extends Application {
 		// start the timer
 		timer.start();
 
-		// set up the enemies
+		// set up the invaders
 		runInvaders();
 
 		return root;
@@ -188,10 +199,10 @@ public class SpaceGame extends Application {
 				// player bullets move up
 				item.moveUp();
 				
-				// collision detection with bullet and enemy
+				// collision detection with bullet and invader
 				shooters().stream().filter(e-> e.TYPE.equals("Invader")).forEach(invader -> {
 					if (item.getBoundsInParent().intersects(invader.getBoundsInParent())) {
-						// enemy disappears
+						// invader disappears
 						invader.isDead = true;
 						// bullet diappears
 						item.isDead = true;
@@ -201,16 +212,39 @@ public class SpaceGame extends Application {
 			case "Invader":
 				// if the time period is up
 				if (time > TIME_PERIOD) {
-					// enemy has a certain percent chance of shooting
+					// invader has a certain percent chance of shooting
 					if (Math.random() < PERCENT) {
 						shoot(item);
 					}
 				}
 				break;
+				
+			case "Ship":
+				// do not allow ship to exit screen
+				Bounds ship = item.getBoundsInParent();
+				
+				// find distance b/w left and right of screen
+				double distRight = SCREEN_WIDTH - ship.getMaxX();
+				double distLeft  = ship.getMinX();
+				
+				// if ship hits the edge of the screen from the right
+				if (distRight >= 0 && distRight <= item.SPEED) {
+					// then we reset the ship back left to its previous position 
+					// by subtracting speed from X
+					item.setX(item.getX() - item.SPEED);
+				}
+				
+				// if ship hits the edge of the screen from the left
+				if (distLeft >= 0 && distLeft <= item.SPEED) {
+					// then we reset the ship back right to its previous position 
+					// by adding speed to X
+					item.setX(item.getX() + item.SPEED);
+				}
+				
 			}
 		});
 		
-		// removes dead enemies or players
+		// removes dead invaders or players
 		root.getChildren().removeIf(dead -> {
 			Shooter shooter = (Shooter) dead;
 			return shooter.isDead;

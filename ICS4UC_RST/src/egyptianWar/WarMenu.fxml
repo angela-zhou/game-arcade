@@ -11,16 +11,16 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #008000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="egyptianWar.WarMenuController">
    <children>
-      <Text fill="#ffd400" layoutX="83.0" layoutY="119.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Egyptian War">
+      <Text fill="#ffd400" layoutX="83.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Egyptian War">
          <font>
             <Font name="Broadway" size="32.0" />
          </font>
       </Text>
-      <ImageView fitHeight="157.0" fitWidth="234.0" layoutX="83.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="187.0" fitWidth="265.0" layoutX="68.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/Playing%20Cards.png" />
          </image></ImageView>
-      <ImageView fitHeight="63.0" fitWidth="234.0" layoutX="83.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="67.0" fitWidth="234.0" layoutX="68.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/Suits.png" />
          </image></ImageView>

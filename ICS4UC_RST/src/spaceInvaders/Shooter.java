@@ -1,5 +1,13 @@
 package spaceInvaders;
 
+/**
+ * @author Angela Zhou
+ * Date: Jan 2019
+ * Course: ICS4U
+ * Teacher: Mrs. Spindler
+ * Shooter.java 
+ * Inspired by https://youtu.be/FVo1fm52hz0
+ */
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
