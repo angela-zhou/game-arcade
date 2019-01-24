@@ -50,14 +50,13 @@ public class WarHand {
 		score += playedCards.size();
 		hand.addAll(playedCards);
 		playedCards.clear();
-		//cardsInPlay.setImage(new Card().getCardImage());
 		// display in listview
 		list.getItems().add(name + " has all the played cards.");
 		list.getItems().add(name + " can play their next card");
 
 	}
 
-	public Card playCard(ListView<String> list) {
+	public Card playCard() {
 		Card nextCard;
 
 		int cardsLeft = hand.size();
@@ -67,18 +66,12 @@ public class WarHand {
 
 		// find the card
 		nextCard = (hand.get(newCardIndex));
-
-		// line for debug purposes
-		//System.out.println(name + " just played a " + hand.get(newCardIndex).toString());
 		
 		if (numChances > 0) {
 			// decrement a chance if the player has them
 			numChances--;
-			//System.out.println("Decrementing the Number of Chances for " + name);
 		}
 		
-		//list.getItems().add(name + " now has " + numChances + " chances.");
-
 		// remove it from the deck
 		hand.remove(newCardIndex);
 		// subtract 1 from score
@@ -86,6 +79,11 @@ public class WarHand {
 		score -= 1;
 
 		return nextCard;
+	}
+	
+	public void clearHand() {
+		score -= hand.size();
+		hand.clear();
 	}
 
 	public int getScore() {

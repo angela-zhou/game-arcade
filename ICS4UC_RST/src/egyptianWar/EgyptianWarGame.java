@@ -10,9 +10,11 @@ package egyptianWar;
 import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.ImageView;
@@ -120,36 +122,52 @@ public class EgyptianWarGame extends Application {
 		lblScoreA = new Label("Score: " + playerA.getScore());
 		lblScoreA.setFont(new Font("Candara", SMALL_FONT));
 		lblScoreA.setTextFill(Color.GOLD);
-		root.add(lblScoreA, FIRST_COL, 2, 1, 1); 
+		root.add(lblScoreA, FIRST_COL, 2); 
+		GridPane.setHalignment(lblScoreA, HPos.CENTER);
 		// listView
 		lstPlayerA.getItems().add(playerA.getName() + " can press the Q key to play.");
-		lstPlayerA.getItems().add(playerA.getName() + " can press the S key to slap.");
+		//lstPlayerA.getItems().add(playerA.getName() + " can press the S key to slap.");
 		root.add(lstPlayerA, FIRST_COL, 3, 1, 5);
-
+		GridPane.setHalignment(lstPlayerA, HPos.CENTER);
 
 		// player B's "hub"
 		// score
 		lblScoreB = new Label("Score: " + playerB.getScore());
 		lblScoreB.setFont(new Font("Candara", SMALL_FONT));
 		lblScoreB.setTextFill(Color.GOLD);
-		root.add(lblScoreB, THIRD_COL, 2, 1, 1); 
+		root.add(lblScoreB, THIRD_COL, 2); 
+		GridPane.setHalignment(lblScoreB, HPos.CENTER);
 		// listView 
 		lstPlayerB.getItems().add(playerB.getName() + " can press the P key to play.");
-		lstPlayerB.getItems().add(playerB.getName() + " can press the K key to slap.");
+		//lstPlayerB.getItems().add(playerB.getName() + " can press the K key to slap.");
 		root.add(lstPlayerB, THIRD_COL, 3, 1, 5);
-
+		GridPane.setHalignment(lstPlayerB, HPos.CENTER);
 		
 		// center 
 		// status
 		lblStatus = new Label("Egyptian War");
 		lblStatus.setFont(new Font("Candara", LARGE_FONT));
 		lblStatus.setTextFill(Color.GOLD);
-		lblStatus.setAlignment(Pos.CENTER);
-		root.add(lblStatus, SECOND_COL, 0, 1, 1); 
+		root.add(lblStatus, SECOND_COL, 0); 
+		GridPane.setHalignment(lblStatus, HPos.CENTER);
 
 		// cards in play image
 		imgCardInPlay = new ImageView(new Card().getCardImage());
-		root.add(imgCardInPlay, SECOND_COL, 1, 1, 1); 
+		root.add(imgCardInPlay, SECOND_COL, 1); 
+		GridPane.setHalignment(imgCardInPlay, HPos.CENTER);
+		
+		Button btnReset = new Button("Reset");
+		btnReset.setOnAction(event -> reset());
+		root.add(btnReset, SECOND_COL, 4);
+		GridPane.setHalignment(btnReset, HPos.CENTER);
+		Button btnExit  = new Button("Exit");
+		btnExit.setOnAction(event ->  exit());
+		root.add(btnExit, SECOND_COL, 5);
+		GridPane.setHalignment(btnExit, HPos.CENTER);
+		Button btnMain  = new Button("Return to Main Menu");
+		btnMain.setOnAction(event -> mainMenu());
+		root.add(btnMain, SECOND_COL, 6);
+		GridPane.setHalignment(btnMain, HPos.CENTER);
 
 		// main scene
 		scnMain = new Scene(root);
@@ -187,12 +205,7 @@ public class EgyptianWarGame extends Application {
 	 */
 	private void playCard(WarHand currentPlayer, WarHand opposingPlayer) {
 		// make new card from the play
-		Card newCard;
-		if (currentPlayer == this.playerA) {
-			newCard = currentPlayer.playCard(lstPlayerA);
-		} else {
-			newCard = currentPlayer.playCard(lstPlayerB);
-		}
+		Card newCard = currentPlayer.playCard();
 
 		// set image
 		imgCardInPlay.setImage(newCard.getCardImage());
@@ -252,7 +265,6 @@ public class EgyptianWarGame extends Application {
 				playerB.setNumChances(0);
 				// display in list View
 				lstPlayerB.getItems().add(playerB.getName() + " now has 0 chances.");
-				//lstPlayerA.getItems().add(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
 			} 
 			break;
 		case B_CHANCES:
@@ -274,7 +286,6 @@ public class EgyptianWarGame extends Application {
 				playerA.setNumChances(0);
 				// display in list View
 				lstPlayerA.getItems().add(playerA.getName() + " now has 0 chances.");
-				//System.out.println(opposingPlayer.getName() + " now has " + opposingPlayer.getNumChances() + " chances.");
 
 			} 
 			break;
@@ -407,8 +418,46 @@ public class EgyptianWarGame extends Application {
 		lblScoreA.setFont(Font.font(SMALL_FONT));
 		lblScoreB.setText(playerB.getName() + " has " + playerB.getScore() + " cards.");
 		lblScoreB.setFont(Font.font(SMALL_FONT));
+		// if player A's score is zero
+		if (playerA.getScore() == 0) {
+			// player B wins
+			lblStatus.setText(playerB.getName() + " Wins!");
+		// if player B's score is zero
+		} else if (playerB.getScore() == 0) {
+			// player A wins
+			lblStatus.setText(playerA.getName() + " Wins!");
+		}
 	}
 
+	/**
+	 * Resets the game to the original state
+	 */
+	private void reset() {
+		// reset status to the title
+		lblStatus.setText("Egyptian War");
+		
+		// clear the hands
+		playerA.clearHand();
+		playerB.clearHand();
+		
+		// redeal
+		playingDeck.reset();
+		startGame(playingDeck);
+		
+		// clear the listviews
+		lstPlayerA.getItems().clear();
+		lstPlayerB.getItems().clear();
+		lstPlayerA.getItems().add(playerA.getName() + " can press the Q key to play.");
+		lstPlayerB.getItems().add(playerB.getName() + " can press the P key to play.");
+		
+		// clear the played cards
+		playedCards.clear();
+		
+		//reset the card image
+		imgCardInPlay.setImage(new Card().getCardImage());
+		
+	}
+	
 	/**
 	 * Button and Stage control methods
 	 */

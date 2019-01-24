@@ -69,4 +69,12 @@ public class Deck {
 		// add all the cards in the discard pile
 		deck.addAll(discardDeck);
 	}
+	
+	/**
+	 * clears the deck then adds all the cards back in
+	 */
+	public void reset() {
+		deck.clear();
+		deck.addAll(Arrays.asList(CARDS));
+	}
 }
