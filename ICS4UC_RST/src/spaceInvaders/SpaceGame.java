@@ -24,6 +24,9 @@ public class SpaceGame extends Application {
 	/**
 	 * Initialization
 	 */	
+	// timer to control the animations
+	AnimationTimer timer;
+
 	// screen constants
 	public static final int SCREEN_WIDTH  = 400;
 	public static final int SCREEN_HEIGHT = 600;
@@ -37,12 +40,16 @@ public class SpaceGame extends Application {
 
 	// gameplay constant
 	public final int    NUM_INVADERS  = 5;
-	public final double PERCENT       = 0.25;
+	public final double PERCENT       = 0.1;
 	public final int    OFFSET        = 20;
 
-	// boolean variables
+	// moving booleans
 	boolean moveLeft;
 	boolean moveRight;
+
+	// game over var
+	boolean gameOver;
+	int deadInvaders;
 
 	// invader array
 	Shooter [][] invaders = new Shooter[NUM_INVADERS][NUM_INVADERS];
@@ -57,7 +64,7 @@ public class SpaceGame extends Application {
 
 	// main player
 	private Shooter player = new Shooter(SCREEN_WIDTH / 2 - OFFSET, SCREEN_HEIGHT - 60, "Ship", shipImage);
-	
+
 	/**
 	 * Variables for switching stages and button actions
 	 */
@@ -65,64 +72,31 @@ public class SpaceGame extends Application {
 	Stage secondStage;
 
 	static SpaceGame instance;
-	
-	GameOverController gameOver;
+
+	GameOverController gameOverControl;
 
 	Scene scnMenu, scnMain, scnOver;
 
-	/**
-	 * Initializes all the invaders
-	 */
-	private void runInvaders() {
-
-		//		for (int i = 0; i < NUM_INVADERS; i++) {
-		//			Shooter invader = new Shooter(SCREEN_WIDTH / 5 + i*50, 150, "Invader", invaderImage);
-		//			root.getChildren().add(invader);
-		//		}
-
-		// row the number of new lines
-		for (int row = 0; row < invaders.length; row++) {
-			// col the number of invaders per line
-			for (int col = 0; col < invaders[row].length; col++) {
-				Shooter invader = new Shooter(SCREEN_WIDTH / 5 + col*50, 50 + row * 50, "Invader", invaderImage);
-				root.getChildren().add(invader);
-			}
-		}
-	}
-
-	/**
-	 * Initializes the bullets
-	 */
-	private void shoot(Shooter shooter) {
-		// bullet needs to come out of the middle of the ship
-		int x = (int) (shooter.getX() + OFFSET);
-		int y = (int) (shooter.getY());
-		Shooter bullet = new Shooter(x, y, shooter.TYPE + " Bullet", bulletImage);
-		root.getChildren().add(bullet);
-	}
-
-	/**
-	 * Returns list of all shooters
-	 */
-	private List<Shooter> shooters() {
-		return root.getChildren().stream().map(n -> (Shooter) n).collect(Collectors.toList());
-	}
+	FXMLLoader loadOver;
 
 	/**
 	 * Start Method
 	 */
 	@Override
 	public void start(Stage myStage) throws Exception {
-		
+
 		instance = this;
 		this.myStage = myStage;
 		secondStage = new Stage();
-		
-		mainGame();
-		
-		scnMenu = new Scene(FXMLLoader.load(getClass().getResource("SpaceMenu.fxml")));
-		scnOver = new Scene(FXMLLoader.load(getClass().getResource("GameOver.fxml")));
 
+		mainGame();
+
+		scnMenu = new Scene(FXMLLoader.load(getClass().getResource("SpaceMenu.fxml")));
+		loadOver = new FXMLLoader(getClass().getResource("GameOver.fxml"));
+
+		Parent parOver = loadOver.load();
+		scnOver = new Scene(parOver);
+		gameOverControl = loadOver.getController();
 		myStage.setScene(scnMenu);
 		myStage.setTitle("Space Invaders");
 		myStage.show();
@@ -164,7 +138,7 @@ public class SpaceGame extends Application {
 				break;
 			}
 		});
-		
+
 		scnMain = scene;
 	}
 
@@ -182,11 +156,12 @@ public class SpaceGame extends Application {
 		root.getChildren().add(player);
 
 		// create timer to control the animation
-		AnimationTimer timer = new AnimationTimer() {
+		timer = new AnimationTimer() {
 			@Override
 			public void handle(long now) {
 				// main game loop
 				update();
+
 			}
 		};
 
@@ -229,8 +204,6 @@ public class SpaceGame extends Application {
 				if (item.getBoundsInParent(). intersects(player.getBoundsInParent())) {
 					// player disappears
 					player.isDead = true;
-					// game is over
-					//gameOver("Invader");
 					// bullet disappears
 					item.isDead = true;
 				}
@@ -246,6 +219,7 @@ public class SpaceGame extends Application {
 					if (item.getBoundsInParent().intersects(invader.getBoundsInParent())) {
 						// invader disappears
 						invader.isDead = true;
+						deadInvaders++;
 						// bullet diappears
 						item.isDead = true;
 					}
@@ -286,29 +260,75 @@ public class SpaceGame extends Application {
 			}
 		});
 
-		// removes dead invaders or players (makes them disappear)
+		// removes dead invaders or players and bullets(makes them disappear)
 		root.getChildren().removeIf(dead -> {
 			Shooter shooter = (Shooter) dead;
 			return shooter.isDead;
 		});
+
+		if (player.isDead) {
+			gameOver = true;
+			timer.stop();
+			gameOver("Invader Wins");
+
+		}
+
+		if (deadInvaders == (NUM_INVADERS * NUM_INVADERS)) {
+			gameOver = true;
+			timer.stop();
+			gameOver("Ship Wins");
+		}
 
 		// reset time
 		if (time > TIME_PERIOD) {
 			time = 0;
 		}
 	}
-	
+
+	/**
+	 * Initializes all the invaders
+	 */
+	private void runInvaders() {
+		// row the number of new lines
+		for (int row = 0; row < invaders.length; row++) {
+			// col the number of invaders per line
+			for (int col = 0; col < invaders[row].length; col++) {
+				invaders[row][col] = new Shooter(SCREEN_WIDTH / 5 + col*50, 50 + row * 50, "Invader", invaderImage);
+				root.getChildren().add(invaders[row][col]);
+			}
+		}
+	}
+
+	/**
+	 * Initializes the bullets
+	 */
+	private void shoot(Shooter shooter) {
+		// bullet needs to come out of the middle of the ship
+		int x = (int) (shooter.getX() + OFFSET);
+		int y = (int) (shooter.getY());
+		Shooter bullet = new Shooter(x, y, shooter.TYPE + " Bullet", bulletImage);
+		root.getChildren().add(bullet);
+	}
+
+	/**
+	 * Returns list of all shooters
+	 */
+	private List<Shooter> shooters() {
+		return root.getChildren().stream().map(n -> (Shooter) n).collect(Collectors.toList());
+	}
+
 	/**
 	 * Button control method
 	 */
 	static public SpaceGame getInstance() {
 		return instance;
 	}
-	
+
 	public void playGame() {
 		myStage.setScene(scnMain);
+		myStage.show();
 	}
-	
+
 	public void mainMenu() {
 		myStage.setScene(scnMenu);
 	}
@@ -318,15 +338,27 @@ public class SpaceGame extends Application {
 	}
 
 	public void reset() {
-		// TODO Auto-generated method stub
-		
+		// reset player
+		player.isDead = false;
+		player.setX(SCREEN_WIDTH / 2 - OFFSET);
+		player.setY(SCREEN_HEIGHT - 60);
+		// reset invaders
+		for (int row = 0; row < invaders.length; row++) {
+			for (int col = 0; col < invaders[row].length; col++) {
+				invaders[row][col].isDead = false;
+			}
+		}
+		runInvaders();
+		// start the timer
+		timer.start();
+
 	}
-	
+
 	public void gameOver(String winner) {
-		gameOver.setWinnerText(winner);
-		gameOver.setWinnerImage(winner);
-		secondStage.setTitle("Game Over");
+		gameOverControl.setWinnerText(winner);
+		gameOverControl.setWinnerImage(winner);
 		secondStage.setScene(scnOver);
+		secondStage.setTitle("Game Over");
 		secondStage.show();
 	}
 

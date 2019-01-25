@@ -29,10 +29,5 @@
             <Font name="OCR A Extended" size="18.0" />
          </font>
       </Button>
-      <Button layoutX="125.0" layoutY="486.0" mnemonicParsing="false" onAction="#mainMenu" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: BLACK; -fx-border-color: WHITE;" text="Main Menu" textFill="WHITE">
-         <font>
-            <Font name="OCR A Extended" size="18.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>
