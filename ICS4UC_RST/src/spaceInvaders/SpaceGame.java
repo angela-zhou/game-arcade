@@ -352,10 +352,11 @@ public class SpaceGame extends Application {
 			}
 		}
 		runInvaders();
+		myStage.show();
 		// start the timer
 		timer.start();
 
-	}
+ 	}
 
 	public void gameOver(String winner) {
 		gameOverControl.setWinnerText(winner);
@@ -363,6 +364,7 @@ public class SpaceGame extends Application {
 		secondStage.setScene(scnOver);
 		secondStage.setTitle("Game Over");
 		secondStage.show();
+		myStage.hide();
 	}
 
 	/**
