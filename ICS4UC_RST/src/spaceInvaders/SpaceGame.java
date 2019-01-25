@@ -10,10 +10,9 @@ package spaceInvaders;
  */
 import java.util.List;
 import java.util.stream.Collectors;
-
-import egyptianWar.EgyptianWarGame;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -65,9 +64,9 @@ public class SpaceGame extends Application {
 	Stage myStage;
 	Stage secondStage;
 
-	static EgyptianWarGame instance;
+	static SpaceGame instance;
 
-	Scene scnMenu;
+	Scene scnMenu, scnMain;
 
 	/**
 	 * Initializes all the invaders
@@ -112,6 +111,24 @@ public class SpaceGame extends Application {
 	 */
 	@Override
 	public void start(Stage myStage) throws Exception {
+		
+		instance = this;
+		this.myStage = myStage;
+		secondStage = new Stage();
+		
+		mainGame();
+		
+		scnMenu = new Scene(FXMLLoader.load(getClass().getResource("SpaceMenu.fxml")));
+
+		myStage.setScene(scnMenu);
+		myStage.setTitle("Space Invaders");
+		myStage.show();
+	}
+
+	/**
+	 * Main Game Method
+	 */
+	private void mainGame() {
 		Scene scene = new Scene(initialize());
 
 		// starts movement and shooting
@@ -144,12 +161,9 @@ public class SpaceGame extends Application {
 				break;
 			}
 		});
-
-		myStage.setScene(scene);
-		myStage.setTitle("Space Invaders");
-		myStage.show();
+		
+		scnMain = scene;
 	}
-
 
 	/**
 	 * Set up the game
@@ -277,6 +291,18 @@ public class SpaceGame extends Application {
 		if (time > TIME_PERIOD) {
 			time = 0;
 		}
+	}
+	
+	/**
+	 * Button control method
+	 */
+	static public SpaceGame getInstance() {
+		return instance;
+	}
+
+	
+	public void playGame() {
+		myStage.setScene(scnMain);
 	}
 
 	/**
