@@ -191,7 +191,7 @@ public class SpaceGame extends Application {
 		} 
 
 		/**
-		 * Bullet Collision Detection
+		 * Loop through each item for Bullet Collision Detection
 		 */
 		shooters().forEach(item -> {
 			switch (item.TYPE) {
@@ -338,14 +338,21 @@ public class SpaceGame extends Application {
 	}
 
 	public void reset() {
+		// reset game
+		gameOver     = false;
+		moveRight    = false;
+		moveLeft     = false;
+		deadInvaders = 0;
 		// reset player
-		player.isDead = false;
-		player.setX(SCREEN_WIDTH / 2 - OFFSET);
-		player.setY(SCREEN_HEIGHT - 60);
+		player = new Shooter(SCREEN_WIDTH / 2 - OFFSET, SCREEN_HEIGHT - 60, "Ship", shipImage);
+		root.getChildren().add(player);
 		// reset invaders
+		invaders = resetArray(NUM_INVADERS, NUM_INVADERS);
 		for (int row = 0; row < invaders.length; row++) {
 			for (int col = 0; col < invaders[row].length; col++) {
+				invaders[row][col] = new Shooter(SCREEN_WIDTH / 5 + col*50, 50 + row * 50, "Invader", invaderImage);
 				invaders[row][col].isDead = false;
+				root.getChildren().add(invaders[row][col]);
 			}
 		}
 		runInvaders();
@@ -353,6 +360,10 @@ public class SpaceGame extends Application {
 		timer.start();
 
 	}
+	
+	public Shooter[][] resetArray(int row, int col) {
+		   return new Shooter[row][col];
+		}
 
 	public void gameOver(String winner) {
 		gameOverControl.setWinnerText(winner);
