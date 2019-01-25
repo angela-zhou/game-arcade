@@ -23,6 +23,9 @@ public class Shooter extends ImageView {
 	final int    BULLET_SPEED   = 6;
 	// determine whether or not to hide the bullet
 	boolean      isDead = false;
+	// original coordinate location
+	int x;
+	int y;
 
 	/**
 	 * Constructor
@@ -30,10 +33,17 @@ public class Shooter extends ImageView {
 	Shooter(int x, int y, String type, Image image) {
 		super(image);
 		this.TYPE = type;
-		setX(x);
-		setY(y);
+		this.x    = x;
+		this.y    = y;
+		setX(this.x);
+		setY(this.y);
 	}
 	
+	void reset() {
+		isDead = false;
+		setX(this.x);
+		setY(this.y);
+	}
 	/**
 	 * Movement methods
 	 */
