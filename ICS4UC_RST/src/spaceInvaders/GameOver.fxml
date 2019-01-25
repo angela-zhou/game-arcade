@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spaceInvaders.GameOverController">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Background.jpg" />
+         </image>
+      </ImageView>
+      <Text fx:id="winner" fill="LIME" layoutX="104.0" layoutY="370.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You Win!">
+         <font>
+            <Font name="OCR A Extended" size="40.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="alien" fitHeight="218.0" fitWidth="287.0" layoutX="57.0" layoutY="88.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/You%20Win.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="125.0" layoutY="421.0" mnemonicParsing="false" onAction="#playAgain" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: BLACK; -fx-border-color: WHITE;" text="Play Again" textFill="WHITE">
+         <font>
+            <Font name="OCR A Extended" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="125.0" layoutY="486.0" mnemonicParsing="false" onAction="#mainMenu" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: BLACK; -fx-border-color: WHITE;" text="Main Menu" textFill="WHITE">
+         <font>
+            <Font name="OCR A Extended" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

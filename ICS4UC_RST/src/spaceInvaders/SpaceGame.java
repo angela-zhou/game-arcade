@@ -65,8 +65,10 @@ public class SpaceGame extends Application {
 	Stage secondStage;
 
 	static SpaceGame instance;
+	
+	GameOverController gameOver;
 
-	Scene scnMenu, scnMain;
+	Scene scnMenu, scnMain, scnOver;
 
 	/**
 	 * Initializes all the invaders
@@ -119,6 +121,7 @@ public class SpaceGame extends Application {
 		mainGame();
 		
 		scnMenu = new Scene(FXMLLoader.load(getClass().getResource("SpaceMenu.fxml")));
+		scnOver = new Scene(FXMLLoader.load(getClass().getResource("GameOver.fxml")));
 
 		myStage.setScene(scnMenu);
 		myStage.setTitle("Space Invaders");
@@ -226,6 +229,8 @@ public class SpaceGame extends Application {
 				if (item.getBoundsInParent(). intersects(player.getBoundsInParent())) {
 					// player disappears
 					player.isDead = true;
+					// game is over
+					//gameOver("Invader");
 					// bullet disappears
 					item.isDead = true;
 				}
@@ -281,7 +286,7 @@ public class SpaceGame extends Application {
 			}
 		});
 
-		// removes dead invaders or players
+		// removes dead invaders or players (makes them disappear)
 		root.getChildren().removeIf(dead -> {
 			Shooter shooter = (Shooter) dead;
 			return shooter.isDead;
@@ -299,10 +304,30 @@ public class SpaceGame extends Application {
 	static public SpaceGame getInstance() {
 		return instance;
 	}
-
 	
 	public void playGame() {
 		myStage.setScene(scnMain);
+	}
+	
+	public void mainMenu() {
+		myStage.setScene(scnMenu);
+	}
+
+	public void hideSecond() {
+		secondStage.hide();
+	}
+
+	public void reset() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void gameOver(String winner) {
+		gameOver.setWinnerText(winner);
+		gameOver.setWinnerImage(winner);
+		secondStage.setTitle("Game Over");
+		secondStage.setScene(scnOver);
+		secondStage.show();
 	}
 
 	/**
