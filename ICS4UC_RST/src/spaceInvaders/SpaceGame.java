@@ -11,6 +11,7 @@ package spaceInvaders;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import egyptianWar.EgyptianWarGame;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Bounds;
@@ -24,9 +25,6 @@ public class SpaceGame extends Application {
 	/**
 	 * Initialization
 	 */	
-	
-	// remember to use font OCR A Extended
-	
 	// screen constants
 	public static final int SCREEN_WIDTH  = 400;
 	public static final int SCREEN_HEIGHT = 600;
@@ -60,6 +58,16 @@ public class SpaceGame extends Application {
 
 	// main player
 	private Shooter player = new Shooter(SCREEN_WIDTH / 2 - OFFSET, SCREEN_HEIGHT - 60, "Ship", shipImage);
+	
+	/**
+	 * Variables for switching stages and button actions
+	 */
+	Stage myStage;
+	Stage secondStage;
+
+	static EgyptianWarGame instance;
+
+	Scene scnMenu;
 
 	/**
 	 * Initializes all the invaders

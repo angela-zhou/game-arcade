@@ -65,6 +65,9 @@ public class EgyptianWarGame extends Application {
 	ListView<String> lstPlayerA;
 	ListView<String> lstPlayerB;
 
+	/**
+	 * Variables for switching stages and button actions
+	 */
 	Stage myStage;
 	Stage secondStage;
 
@@ -120,7 +123,7 @@ public class EgyptianWarGame extends Application {
 		// player A's "hub"
 		// score
 		lblScoreA = new Label("Score: " + playerA.getScore());
-		lblScoreA.setFont(new Font("Candara", SMALL_FONT));
+		lblScoreA.setFont(new Font("High Tower Text", MEDIUM_FONT));
 		lblScoreA.setTextFill(Color.GOLD);
 		root.add(lblScoreA, FIRST_COL, 2); 
 		GridPane.setHalignment(lblScoreA, HPos.CENTER);
@@ -133,7 +136,7 @@ public class EgyptianWarGame extends Application {
 		// player B's "hub"
 		// score
 		lblScoreB = new Label("Score: " + playerB.getScore());
-		lblScoreB.setFont(new Font("Candara", SMALL_FONT));
+		lblScoreB.setFont(new Font("High Tower Text", MEDIUM_FONT));
 		lblScoreB.setTextFill(Color.GOLD);
 		root.add(lblScoreB, THIRD_COL, 2); 
 		GridPane.setHalignment(lblScoreB, HPos.CENTER);
@@ -156,16 +159,20 @@ public class EgyptianWarGame extends Application {
 		root.add(imgCardInPlay, SECOND_COL, 1); 
 		GridPane.setHalignment(imgCardInPlay, HPos.CENTER);
 		
+		// buttons
 		Button btnReset = new Button("Reset");
 		btnReset.setOnAction(event -> reset());
+		btnReset.setFont(new Font("High Tower Text", SMALL_FONT));
 		root.add(btnReset, SECOND_COL, 4);
 		GridPane.setHalignment(btnReset, HPos.CENTER);
 		Button btnExit  = new Button("Exit");
 		btnExit.setOnAction(event ->  exit());
+		btnExit.setFont(new Font("High Tower Text", SMALL_FONT));
 		root.add(btnExit, SECOND_COL, 5);
 		GridPane.setHalignment(btnExit, HPos.CENTER);
 		Button btnMain  = new Button("Return to Main Menu");
 		btnMain.setOnAction(event -> mainMenu());
+		btnMain.setFont(new Font("High Tower Text", SMALL_FONT));
 		root.add(btnMain, SECOND_COL, 6);
 		GridPane.setHalignment(btnMain, HPos.CENTER);
 
