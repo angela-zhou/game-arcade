@@ -351,6 +351,9 @@ public class SpaceGame extends Application {
 				invaders[row][col].reset();
 			}
 		}
+//		shooters().forEach(item -> {
+//			item.reset();
+//		});
 		runInvaders();
 		myStage.show();
 		// start the timer
