@@ -1,5 +1,12 @@
 package spaceInvaders;
 
+/**
+ * @author Angela Zhou
+ * Date: Jan 2019
+ * Course: ICS4U
+ * Teacher: Mrs. Spindler
+ * Bullet.java 
+ */
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 

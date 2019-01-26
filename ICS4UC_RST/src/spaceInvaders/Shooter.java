@@ -18,12 +18,18 @@ public abstract class Shooter extends ImageView {
 	 */
 	// offset bullets
 	public static final int OFFSET = 20;
+	// location
+	final int x;
+	final int y;
 	// invader or ship?
 	final String TYPE;
 	// speed at which the shooters will move
 	final int    SPEED  = 2;
 	// determine whether or not to hide the shooter
 	boolean isDead = false;
+	// movement booleans
+	boolean moveLeft;
+	boolean moveRight;
 
 	/**
 	 * Constructor
@@ -31,6 +37,8 @@ public abstract class Shooter extends ImageView {
 	Shooter(int x, int y, String type, Image image) {
 		super(image);
 		this.TYPE = type;
+		this.x = x;
+		this.y = y;
 		setX(x);
 		setY(y);
 	}
@@ -60,5 +68,11 @@ public abstract class Shooter extends ImageView {
 	/**
 	 * Abstract Methods
 	 */
-	public abstract void reset();
+	public void reset() {
+		isDead = false;
+		moveLeft = false;
+		moveRight = false;
+		setX(x);
+		setY(y);
+	}
 }

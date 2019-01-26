@@ -1,6 +1,5 @@
 package spaceInvaders;
 
-import java.util.ArrayList;
 /**
  * @author Angela Zhou
  * Date: Jan 2019
@@ -9,6 +8,7 @@ import java.util.ArrayList;
  * SpaceGame.java 
  * Inspired by https://youtu.be/FVo1fm52hz0
  */
+import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,8 +16,6 @@ import javafx.geometry.Bounds;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -36,7 +34,7 @@ public class SpaceGame extends Application {
 
 	// gameplay constant
 	public final int    NUM_INVADERS  = 5;
-	public final double PERCENT       = 0.05;
+	public final double PERCENT       = 0.045;
 
 	// game over var
 	boolean gameOver;
@@ -121,10 +119,16 @@ public class SpaceGame extends Application {
 				player.moveRight = true;
 				break;
 			case SPACE:
-				Bullet newBullet = player.shoot(shipString);
-				root.getChildren().add(newBullet);
-				bullets.add(newBullet);
-				bullets.get(bullets.size() - 1).moveUp = true;
+				if (!player.isDead) {
+					//create new bullet
+					Bullet newBullet = player.shoot(shipString);
+					// display new bullet
+					root.getChildren().add(newBullet);
+					// add new bullet to the array
+					bullets.add(newBullet);
+					// ship bullets move up
+					bullets.get(bullets.size() - 1).moveUp = true;
+				}
 				break;
 			default:
 				break;
@@ -161,11 +165,11 @@ public class SpaceGame extends Application {
 	 * Initializes all the invaders
 	 */
 	private void runInvaders() {
-		// row the number of new lines
 		for (int row = 0; row < invaders.length; row++) {
-			// col the number of invaders per line
 			for (int col = 0; col < invaders[row].length; col++) {
+				// create new invader
 				invaders[row][col] = new Alien(SCREEN_WIDTH / 5 + col * GAP, GAP + row * GAP, "Invader", invaderImage);
+				// display invader
 				root.getChildren().add(invaders[row][col]);
 			}
 		}
@@ -173,6 +177,9 @@ public class SpaceGame extends Application {
 
 	/**
 	 * Game Timer
+	 * 	Handle method (Main game loop)
+	 * 		Movement Control
+	 * 		Collision Detection
 	 */
 	class GameTimer extends AnimationTimer {
 
@@ -195,9 +202,13 @@ public class SpaceGame extends Application {
 						if (Math.random() < PERCENT) {
 							// if they are not dead
 							if (!invaders[row][col].isDead) {
+								// create new bullet
 								Bullet newBullet = invaders[row][col].shoot(invaderString);
+								// display new bullet
 								root.getChildren().add(newBullet);
+								// add bullet to the array
 								bullets.add(newBullet);
+								// invader bullets move down
 								bullets.get(bullets.size() - 1).moveDown = true;
 							}
 						}
@@ -255,7 +266,7 @@ public class SpaceGame extends Application {
 			for (int i = 0; i < bullets.size(); i++) {
 				// if the bullet is a invader bullet
 				if (bullets.get(i).TYPE.equals(invaderString)) {
-					// and the bullet is not dead
+					// and the bullet is not dead 
 					if (!bullets.get(i).isDead) {
 						// and the bullet and ship collide
 						if (bullets.get(i).getBoundsInParent().intersects(player.getBoundsInParent())) {
@@ -264,6 +275,7 @@ public class SpaceGame extends Application {
 							player.setVisible(false);
 							// bullet disappears
 							bullets.get(i).isDead = true;
+							//bullets.get(i).setVisible(false);
 							root.getChildren().remove(bullets.get(i));
 						}
 					}
@@ -278,7 +290,7 @@ public class SpaceGame extends Application {
 					for (int col = 0; col < invaders[row].length; col++) {
 						// if the bullet is a ship bullet
 						if (bullets.get(i).TYPE.equals(shipString)) {
-							// and the bullet is not dead
+							// and the bullet and the invader are not dead
 							if (!bullets.get(i).isDead && !invaders[row][col].isDead) {
 								// and the bullet and alien collide
 								if (bullets.get(i).getBoundsInParent().intersects(invaders[row][col].getBoundsInParent())) {
@@ -288,12 +300,26 @@ public class SpaceGame extends Application {
 									root.getChildren().remove(invaders[row][col]);
 									// bullet disappears
 									bullets.get(i).isDead = true;
+									//bullets.get(i).setVisible(false);
 									root.getChildren().remove(bullets.get(i));
 								}
 							}
 						}
 					}
 				}
+			}
+			
+			if (player.isDead) {
+				gameOver = true;
+				timer.stop();
+				gameOver("Invader Wins");
+
+			}
+
+			if (deadInvaders == (NUM_INVADERS * NUM_INVADERS)) {
+				gameOver = true;
+				timer.stop();
+				gameOver("Ship Wins");
 			}
 		}
 	}
@@ -305,17 +331,40 @@ public class SpaceGame extends Application {
 		return instance;
 	}
 
+	public void hideSecond() {
+		secondStage.hide();
+	}
+	
+	public void mainMenu() {
+		myStage.setScene(scnMenu);
+	}
+	
 	public void playGame() {
 		myStage.setScene(scnMain);
 		myStage.show();
 	}
-
-	public void mainMenu() {
-		myStage.setScene(scnMenu);
-	}
-
-	public void hideSecond() {
-		secondStage.hide();
+	
+	public void reset() {
+		// reset game
+		gameOver = false;
+		// reset player
+		player.reset();
+		player.setVisible(true);
+		// reset bullets 
+		for (int i = 0; i < bullets.size(); i++) {
+			root.getChildren().remove(bullets.get(i));
+		}
+		bullets.clear();
+		// reset invaders
+		deadInvaders = 0;
+		for (int row = 0; row < invaders.length; row++) {
+			for (int col = 0; col < invaders[row].length; col++) {
+				root.getChildren().remove(invaders[row][col]);
+			}
+		}
+		runInvaders();
+		//start timer
+		timer.start();
 	}
 
 	public void gameOver(String winner) {

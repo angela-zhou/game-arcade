@@ -23,7 +23,7 @@ public class SpaceOverController {
 
 	@FXML
 	private void playAgain() {
-		//SpaceGame.getInstance().reset();
+		SpaceGame.getInstance().reset();
 		SpaceGame.getInstance().hideSecond();
 		SpaceGame.getInstance().playGame();
 	}
