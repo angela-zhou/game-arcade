@@ -22,8 +22,8 @@ public abstract class Shooter extends ImageView {
 	final String TYPE;
 	// speed at which the shooters will move
 	final int    SPEED  = 2;
-	// determine whether or not to hide the bullet
-	//boolean      isDead = false;
+	// determine whether or not to hide the shooter
+	boolean isDead = false;
 
 	/**
 	 * Constructor

@@ -36,7 +36,7 @@ public class SpaceGame extends Application {
 
 	// gameplay constant
 	public final int    NUM_INVADERS  = 5;
-	public final double PERCENT       = 0.1;
+	public final double PERCENT       = 0.05;
 
 	// game over var
 	boolean gameOver;
@@ -193,10 +193,13 @@ public class SpaceGame extends Application {
 					for (int col = 0; col < invaders[row].length; col++) {
 						// invader has a certain percent chance of shooting
 						if (Math.random() < PERCENT) {
-							Bullet newBullet = invaders[row][col].shoot(invaderString);
-							root.getChildren().add(newBullet);
-							bullets.add(newBullet);
-							bullets.get(bullets.size() - 1).moveDown = true;
+							// if they are not dead
+							if (!invaders[row][col].isDead) {
+								Bullet newBullet = invaders[row][col].shoot(invaderString);
+								root.getChildren().add(newBullet);
+								bullets.add(newBullet);
+								bullets.get(bullets.size() - 1).moveDown = true;
+							}
 						}
 					}
 				}	
@@ -212,7 +215,7 @@ public class SpaceGame extends Application {
 			} else if (player.moveRight) {
 				player.moveRight();
 			} 
-			
+
 			// bullet movement
 			for (int i = 0; i < bullets.size(); i++) {
 				if (bullets.get(i).moveUp) {
@@ -252,12 +255,17 @@ public class SpaceGame extends Application {
 			for (int i = 0; i < bullets.size(); i++) {
 				// if the bullet is a invader bullet
 				if (bullets.get(i).TYPE.equals(invaderString)) {
-					// and the bullet and ship collide
-					if (bullets.get(i).getBoundsInParent(). intersects(player.getBoundsInParent())) {
-						// player disappears
-						player.setVisible(false);
-						// bullet disappears
-						bullets.get(i).setVisible(false);
+					// and the bullet is not dead
+					if (!bullets.get(i).isDead) {
+						// and the bullet and ship collide
+						if (bullets.get(i).getBoundsInParent().intersects(player.getBoundsInParent())) {
+							// player disappears (did not remove them from the root so reset is easier)
+							player.isDead = true;
+							player.setVisible(false);
+							// bullet disappears
+							bullets.get(i).isDead = true;
+							root.getChildren().remove(bullets.get(i));
+						}
 					}
 				}
 			}
@@ -270,13 +278,18 @@ public class SpaceGame extends Application {
 					for (int col = 0; col < invaders[row].length; col++) {
 						// if the bullet is a ship bullet
 						if (bullets.get(i).TYPE.equals(shipString)) {
-							// and the bullet and alien collide
-							if (bullets.get(i).getBoundsInParent().intersects(invaders[row][col].getBoundsInParent())) {
-								// alien disappears
-								invaders[row][col].setVisible(false);
-								deadInvaders++;
-								// bullet disappears
-								bullets.get(i).setVisible(false);
+							// and the bullet is not dead
+							if (!bullets.get(i).isDead && !invaders[row][col].isDead) {
+								// and the bullet and alien collide
+								if (bullets.get(i).getBoundsInParent().intersects(invaders[row][col].getBoundsInParent())) {
+									// alien disappears
+									invaders[row][col].isDead = true;
+									deadInvaders++;
+									root.getChildren().remove(invaders[row][col]);
+									// bullet disappears
+									bullets.get(i).isDead = true;
+									root.getChildren().remove(bullets.get(i));
+								}
 							}
 						}
 					}

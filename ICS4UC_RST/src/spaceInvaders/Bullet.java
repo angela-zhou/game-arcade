@@ -5,11 +5,15 @@ import javafx.scene.shape.Rectangle;
 
 public class Bullet extends Rectangle {
 	
-	final int BULLET_SPEED = 10;
-	// invader bullet or ship bullet
+	// speed constant
+	final int BULLET_SPEED = 6;
+	// invader bullet or ship bullet?
 	final String TYPE;
+	//movement var
 	boolean moveUp;
 	boolean moveDown;
+	//determine whether or not to hide the bullet
+	boolean isDead = false;
 	
 	Bullet(int x, int y, String type) {
 		super(5, 20, Color.WHITE);
@@ -20,10 +24,10 @@ public class Bullet extends Rectangle {
 	}
 	
 	void moveUp() {
-		setY(getTranslateY() - BULLET_SPEED);
+		setTranslateY(getTranslateY() - BULLET_SPEED);
 	}
 
 	void moveDown() {
-		setY(getTranslateY() + BULLET_SPEED);
+		setTranslateY(getTranslateY() + BULLET_SPEED);
 	}
 }
