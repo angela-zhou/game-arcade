@@ -17,6 +17,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class SpaceGame extends Application {
@@ -39,6 +43,11 @@ public class SpaceGame extends Application {
 	// game over var
 	boolean gameOver;
 	int deadInvaders;
+	
+	// score var
+	int losses;
+	int wins;
+	Text txtScore;
 
 	// string var
 	String shipString    = "Ship";
@@ -103,6 +112,17 @@ public class SpaceGame extends Application {
 		root.setPrefSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		// set screen colour
 		root.setStyle("-fx-background-color: #000000;");
+		
+		// rectangle for decorative purposes
+		Rectangle homeBase = new Rectangle(350, 3, Color.LIME);
+		homeBase.setX(25);
+		homeBase.setY(SCREEN_HEIGHT - 20);
+		root.getChildren().add(homeBase);
+		
+		txtScore = new Text(14, 34, "Wins: <" + wins + ">   Losses: <" + losses + ">");
+		txtScore.setFont(new Font("OCR A Extended", 18));
+		txtScore.setFill(Color.WHITE);
+		root.getChildren().add(txtScore);
 
 		// add player to the root
 		root.getChildren().add(player);
@@ -168,7 +188,7 @@ public class SpaceGame extends Application {
 		for (int row = 0; row < invaders.length; row++) {
 			for (int col = 0; col < invaders[row].length; col++) {
 				// create new invader
-				invaders[row][col] = new Alien(SCREEN_WIDTH / 5 + col * GAP, GAP + row * GAP, "Invader", invaderImage);
+				invaders[row][col] = new Alien(SCREEN_WIDTH / 5 + col * GAP, GAP + 10 + row * GAP, "Invader", invaderImage);
 				// display invader
 				root.getChildren().add(invaders[row][col]);
 			}
@@ -311,6 +331,7 @@ public class SpaceGame extends Application {
 			
 			if (player.isDead) {
 				gameOver = true;
+				losses ++;
 				timer.stop();
 				gameOver("Invader Wins");
 
@@ -318,6 +339,7 @@ public class SpaceGame extends Application {
 
 			if (deadInvaders == (NUM_INVADERS * NUM_INVADERS)) {
 				gameOver = true;
+				wins++;
 				timer.stop();
 				gameOver("Ship Wins");
 			}
@@ -363,6 +385,8 @@ public class SpaceGame extends Application {
 			}
 		}
 		runInvaders();
+		// set text
+		txtScore.setText("Wins: <" + wins + ">   Losses: <" + losses + ">");
 		//start timer
 		timer.start();
 	}
