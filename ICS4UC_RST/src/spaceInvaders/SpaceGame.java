@@ -38,19 +38,18 @@ public class SpaceGame extends Application {
 	public final int    NUM_INVADERS  = 5;
 	public final double PERCENT       = 0.1;
 
-	// moving booleans
-	boolean moveLeft;
-	boolean moveRight;
-
 	// game over var
 	boolean gameOver;
 	int deadInvaders;
+
+	// string var
+	String shipString    = "Ship";
+	String invaderString = "Invaders";
 
 	// image variables
 	Image shipImage    = new Image(getClass().getResource("images/Ship.png").toString());
 	Image invaderImage = new Image(getClass().getResource("images/Invader.png").toString());
 
-	// Sprites
 	// invader array
 	Shooter [][] invaders = new Alien[NUM_INVADERS][NUM_INVADERS];
 	// bullet array
@@ -116,16 +115,16 @@ public class SpaceGame extends Application {
 		scene.setOnKeyPressed(event-> {
 			switch (event.getCode()) {
 			case LEFT:
-				moveLeft  = true;
+				player.moveLeft  = true;
 				break;
 			case RIGHT:
-				moveRight = true;
+				player.moveRight = true;
 				break;
 			case SPACE:
-				Bullet newBullet = player.shoot();
+				Bullet newBullet = player.shoot(shipString);
 				root.getChildren().add(newBullet);
-				newBullet.moveUp();
 				bullets.add(newBullet);
+				bullets.get(bullets.size() - 1).moveUp = true;
 				break;
 			default:
 				break;
@@ -136,10 +135,10 @@ public class SpaceGame extends Application {
 		scene.setOnKeyReleased(event-> {
 			switch (event.getCode()) {
 			case LEFT:
-				moveLeft  = false;
+				player.moveLeft  = false;
 				break;
 			case RIGHT:
-				moveRight = false;
+				player.moveRight = false;
 				break;
 			default:
 				break;
@@ -172,46 +171,6 @@ public class SpaceGame extends Application {
 		}
 	}
 
-//	/**
-//	 * Event handling
-//	 */
-//	public void handleKeyPressed(KeyEvent event) {
-//		KeyCode code = event.getCode();
-//		if (event.getEventType() == KeyEvent.KEY_PRESSED) {
-//			switch (code) {
-//			case LEFT:
-//				moveLeft  = true;
-//				break;
-//			case RIGHT:
-//				moveRight = true;
-//				break;
-//			case SPACE:
-//				Bullet newBullet = player.shoot();
-//				root.getChildren().add(newBullet);
-//				newBullet.moveUp();
-//				bullets.add(newBullet);
-//				break;
-//			default:
-//				break;
-//			}
-//		}
-//	}
-//
-//	public void handleKeyReleased(KeyEvent event) {
-//		KeyCode code = event.getCode();
-//		switch (code) {
-//		case LEFT:
-//			moveLeft  = false;
-//			break;
-//		case RIGHT:
-//			moveRight = false;
-//			break;
-//		default:
-//			break;
-//		}
-//	}
-
-
 	/**
 	 * Game Timer
 	 */
@@ -234,10 +193,10 @@ public class SpaceGame extends Application {
 					for (int col = 0; col < invaders[row].length; col++) {
 						// invader has a certain percent chance of shooting
 						if (Math.random() < PERCENT) {
-//							Bullet newBullet = invaders[row][col].shoot();
-//							root.getChildren().add(newBullet);
-//							newBullet.moveDown();
-//							bullets.add(newBullet);
+							Bullet newBullet = invaders[row][col].shoot(invaderString);
+							root.getChildren().add(newBullet);
+							bullets.add(newBullet);
+							bullets.get(bullets.size() - 1).moveDown = true;
 						}
 					}
 				}	
@@ -247,11 +206,21 @@ public class SpaceGame extends Application {
 			/**
 			 * Handling Movement
 			 */
-			if (moveLeft) {
+			// player movement
+			if (player.moveLeft) {
 				player.moveLeft();
-			} else if (moveRight) {
+			} else if (player.moveRight) {
 				player.moveRight();
 			} 
+			
+			// bullet movement
+			for (int i = 0; i < bullets.size(); i++) {
+				if (bullets.get(i).moveUp) {
+					bullets.get(i).moveUp();
+				} else if (bullets.get(i).moveDown) {
+					bullets.get(i).moveDown();
+				}
+			}
 
 			/**
 			 * Ship/Screen Collision detection
@@ -278,29 +247,37 @@ public class SpaceGame extends Application {
 			}
 
 			/**
-			 * Bullet/Ship Collision Detection
+			 * Alien Bullet/Ship Collision Detection
 			 */
 			for (int i = 0; i < bullets.size(); i++) {
-				if (bullets.get(i).getBoundsInParent(). intersects(player.getBoundsInParent())) {
-					// player disappears
-					player.setVisible(false);
-					// bullet disappears
-					bullets.get(i).setVisible(false);
+				// if the bullet is a invader bullet
+				if (bullets.get(i).TYPE.equals(invaderString)) {
+					// and the bullet and ship collide
+					if (bullets.get(i).getBoundsInParent(). intersects(player.getBoundsInParent())) {
+						// player disappears
+						player.setVisible(false);
+						// bullet disappears
+						bullets.get(i).setVisible(false);
+					}
 				}
 			}
 
 			/**
-			 * Bullet/Aliens Collision Detection
+			 * Ship Bullet/Aliens Collision Detection
 			 */
 			for (int i = 0; i < bullets.size(); i++) {
 				for (int row = 0; row < invaders.length; row++) {
 					for (int col = 0; col < invaders[row].length; col++) {
-						if (bullets.get(i).getBoundsInParent().intersects(invaders[row][col].getBoundsInParent())) {
-//							// alien disappears
-//							invaders[row][col].setVisible(false);
-//							deadInvaders++;
-//							// bullet disappears
-//							bullets.get(i).setVisible(false);
+						// if the bullet is a ship bullet
+						if (bullets.get(i).TYPE.equals(shipString)) {
+							// and the bullet and alien collide
+							if (bullets.get(i).getBoundsInParent().intersects(invaders[row][col].getBoundsInParent())) {
+								// alien disappears
+								invaders[row][col].setVisible(false);
+								deadInvaders++;
+								// bullet disappears
+								bullets.get(i).setVisible(false);
+							}
 						}
 					}
 				}

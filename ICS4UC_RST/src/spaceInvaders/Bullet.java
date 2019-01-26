@@ -5,10 +5,15 @@ import javafx.scene.shape.Rectangle;
 
 public class Bullet extends Rectangle {
 	
-	final int BULLET_SPEED   = 10;
+	final int BULLET_SPEED = 10;
+	// invader bullet or ship bullet
+	final String TYPE;
+	boolean moveUp;
+	boolean moveDown;
 	
-	Bullet(int x, int y) {
+	Bullet(int x, int y, String type) {
 		super(5, 20, Color.WHITE);
+		this.TYPE = type;
 		setTranslateX(x);
 		setTranslateY(y);
 		

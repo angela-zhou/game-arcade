@@ -49,11 +49,11 @@ public abstract class Shooter extends ImageView {
 	/**
 	 * Shooting Method
 	 */
-	public Bullet shoot() {
+	public Bullet shoot(String shooter) {
 		// bullet needs to come out of the middle of the shooter
 		int x = (int) (getX() + OFFSET);
 		int y = (int) (getY());
-		Bullet bullet = new Bullet(x, y);
+		Bullet bullet = new Bullet(x, y, shooter);
 		return bullet;
 	}
 
