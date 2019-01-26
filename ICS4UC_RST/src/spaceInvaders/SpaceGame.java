@@ -234,10 +234,10 @@ public class SpaceGame extends Application {
 					for (int col = 0; col < invaders[row].length; col++) {
 						// invader has a certain percent chance of shooting
 						if (Math.random() < PERCENT) {
-							Bullet newBullet = invaders[row][col].shoot();
-							root.getChildren().add(newBullet);
-							newBullet.moveDown();
-							bullets.add(newBullet);
+//							Bullet newBullet = invaders[row][col].shoot();
+//							root.getChildren().add(newBullet);
+//							newBullet.moveDown();
+//							bullets.add(newBullet);
 						}
 					}
 				}	
@@ -296,11 +296,11 @@ public class SpaceGame extends Application {
 				for (int row = 0; row < invaders.length; row++) {
 					for (int col = 0; col < invaders[row].length; col++) {
 						if (bullets.get(i).getBoundsInParent().intersects(invaders[row][col].getBoundsInParent())) {
-							// alien disappears
-							invaders[row][col].setVisible(false);
-							deadInvaders++;
-							// bullet disappears
-							bullets.get(i).setVisible(false);
+//							// alien disappears
+//							invaders[row][col].setVisible(false);
+//							deadInvaders++;
+//							// bullet disappears
+//							bullets.get(i).setVisible(false);
 						}
 					}
 				}

@@ -5,7 +5,7 @@ import javafx.scene.shape.Rectangle;
 
 public class Bullet extends Rectangle {
 	
-	final int BULLET_SPEED   = 6;
+	final int BULLET_SPEED   = 10;
 	
 	Bullet(int x, int y) {
 		super(5, 20, Color.WHITE);
