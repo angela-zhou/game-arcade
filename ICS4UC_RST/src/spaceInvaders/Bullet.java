@@ -15,11 +15,11 @@ public class Bullet extends Rectangle {
 	}
 	
 	void moveUp() {
-		setY(getY() - BULLET_SPEED);
+		setY(getTranslateY() - BULLET_SPEED);
 	}
 
 	void moveDown() {
-		setY(getY() + BULLET_SPEED);
+		setY(getTranslateY() + BULLET_SPEED);
 	}
 }
 

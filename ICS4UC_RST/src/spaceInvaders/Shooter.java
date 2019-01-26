@@ -51,8 +51,8 @@ public abstract class Shooter extends ImageView {
 	 */
 	public Bullet shoot() {
 		// bullet needs to come out of the middle of the shooter
-		int x = (int) (getTranslateX() + OFFSET);
-		int y = (int) (getTranslateY());
+		int x = (int) (getX() + OFFSET);
+		int y = (int) (getY());
 		Bullet bullet = new Bullet(x, y);
 		return bullet;
 	}

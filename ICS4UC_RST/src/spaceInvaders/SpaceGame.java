@@ -234,10 +234,10 @@ public class SpaceGame extends Application {
 					for (int col = 0; col < invaders[row].length; col++) {
 						// invader has a certain percent chance of shooting
 						if (Math.random() < PERCENT) {
-							Bullet newBullet = invaders[row][col].shoot();
-							root.getChildren().add(newBullet);
-							newBullet.moveDown();
-							bullets.add(newBullet);
+//							Bullet newBullet = invaders[row][col].shoot();
+//							root.getChildren().add(newBullet);
+//							newBullet.moveDown();
+//							bullets.add(newBullet);
 						}
 					}
 				}	
