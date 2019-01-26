@@ -27,6 +27,11 @@ public class SpaceOverController {
 		SpaceGame.getInstance().hideSecond();
 		SpaceGame.getInstance().playGame();
 	}
+	
+	@FXML
+	private void exit() {
+		SpaceGame.getInstance().exit();
+	}
 
 	public void setWinnerText(String win) {
 		// if player loses

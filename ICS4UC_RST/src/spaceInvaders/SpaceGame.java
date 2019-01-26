@@ -139,6 +139,8 @@ public class SpaceGame extends Application {
 				player.moveRight = true;
 				break;
 			case SPACE:
+				// start the timer
+				timer.start();
 				if (!player.isDead) {
 					//create new bullet
 					Bullet newBullet = player.shoot(shipString);
@@ -171,9 +173,6 @@ public class SpaceGame extends Application {
 
 		// create timer to control the animation
 		timer = new GameTimer();
-
-		// start the timer
-		timer.start();
 
 		// set up the invaders
 		runInvaders();
@@ -398,6 +397,11 @@ public class SpaceGame extends Application {
 		secondStage.setTitle("Game Over");
 		secondStage.show();
 		myStage.hide();
+	}
+	
+	public void exit() {
+		myStage.hide();
+		secondStage.hide();
 	}
 
 	/**
