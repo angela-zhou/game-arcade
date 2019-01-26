@@ -22,4 +22,3 @@ public class Bullet extends Rectangle {
 		setY(getTranslateY() + BULLET_SPEED);
 	}
 }
-
