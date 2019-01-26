@@ -112,6 +112,40 @@ public class SpaceGame extends Application {
 
 		Scene scene = new Scene(root);
 
+		// starts movement and shooting
+		scene.setOnKeyPressed(event-> {
+			switch (event.getCode()) {
+			case LEFT:
+				moveLeft  = true;
+				break;
+			case RIGHT:
+				moveRight = true;
+				break;
+			case SPACE:
+				Bullet newBullet = player.shoot();
+				root.getChildren().add(newBullet);
+				newBullet.moveUp();
+				bullets.add(newBullet);
+				break;
+			default:
+				break;
+			}
+		});
+
+		// stops movement
+		scene.setOnKeyReleased(event-> {
+			switch (event.getCode()) {
+			case LEFT:
+				moveLeft  = false;
+				break;
+			case RIGHT:
+				moveRight = false;
+				break;
+			default:
+				break;
+			}
+		});
+
 		// create timer to control the animation
 		timer = new GameTimer();
 
@@ -138,44 +172,44 @@ public class SpaceGame extends Application {
 		}
 	}
 
-	/**
-	 * Event handling
-	 */
-	public void handleKeyPressed(KeyEvent event) {
-		KeyCode code = event.getCode();
-		if (event.getEventType() == KeyEvent.KEY_PRESSED) {
-			switch (code) {
-			case LEFT:
-				moveLeft  = true;
-				break;
-			case RIGHT:
-				moveRight = true;
-				break;
-			case SPACE:
-				Bullet newBullet = player.shoot();
-				root.getChildren().add(newBullet);
-				newBullet.moveUp();
-				bullets.add(newBullet);
-				break;
-			default:
-				break;
-			}
-		}
-	}
-
-	public void handleKeyReleased(KeyEvent event) {
-		KeyCode code = event.getCode();
-		switch (code) {
-		case LEFT:
-			moveLeft  = false;
-			break;
-		case RIGHT:
-			moveRight = false;
-			break;
-		default:
-			break;
-		}
-	}
+//	/**
+//	 * Event handling
+//	 */
+//	public void handleKeyPressed(KeyEvent event) {
+//		KeyCode code = event.getCode();
+//		if (event.getEventType() == KeyEvent.KEY_PRESSED) {
+//			switch (code) {
+//			case LEFT:
+//				moveLeft  = true;
+//				break;
+//			case RIGHT:
+//				moveRight = true;
+//				break;
+//			case SPACE:
+//				Bullet newBullet = player.shoot();
+//				root.getChildren().add(newBullet);
+//				newBullet.moveUp();
+//				bullets.add(newBullet);
+//				break;
+//			default:
+//				break;
+//			}
+//		}
+//	}
+//
+//	public void handleKeyReleased(KeyEvent event) {
+//		KeyCode code = event.getCode();
+//		switch (code) {
+//		case LEFT:
+//			moveLeft  = false;
+//			break;
+//		case RIGHT:
+//			moveRight = false;
+//			break;
+//		default:
+//			break;
+//		}
+//	}
 
 
 	/**
