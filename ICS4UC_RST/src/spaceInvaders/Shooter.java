@@ -11,21 +11,19 @@ package spaceInvaders;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Shooter extends ImageView {
+public abstract class Shooter extends ImageView {
 
 	/**
 	 * Constants and Variables
 	 */
-	// invader, ship, or bullet?
+	// offset bullets
+	public static final int OFFSET = 20;
+	// invader or ship?
 	final String TYPE;
 	// speed at which the shooters will move
-	final int    SPEED          = 2;
-	final int    BULLET_SPEED   = 6;
+	final int    SPEED  = 2;
 	// determine whether or not to hide the bullet
-	boolean      isDead = false;
-	// original coordinate location
-	int x;
-	int y;
+	//boolean      isDead = false;
 
 	/**
 	 * Constructor
@@ -33,19 +31,12 @@ public class Shooter extends ImageView {
 	Shooter(int x, int y, String type, Image image) {
 		super(image);
 		this.TYPE = type;
-		this.x    = x;
-		this.y    = y;
-		setX(this.x);
-		setY(this.y);
+		setX(x);
+		setY(y);
 	}
-	
-	void reset() {
-		isDead = false;
-		setX(this.x);
-		setY(this.y);
-	}
+
 	/**
-	 * Movement methods
+	 * Movement Methods
 	 */
 	void moveLeft() {
 		setX(getX() - SPEED);
@@ -55,12 +46,19 @@ public class Shooter extends ImageView {
 		setX(getX() + SPEED);
 	}
 	
-	void moveUp() {
-		setY(getY() - BULLET_SPEED);
+	/**
+	 * Shooting Method
+	 */
+	public Bullet shoot() {
+		// bullet needs to come out of the middle of the shooter
+		int x = (int) (getTranslateX() + OFFSET);
+		int y = (int) (getTranslateY());
+		Bullet bullet = new Bullet(x, y);
+		return bullet;
 	}
 
-	void moveDown() {
-		setY(getY() + BULLET_SPEED);
-	}
-
+	/**
+	 * Abstract Methods
+	 */
+	public abstract void reset();
 }

@@ -13,7 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-public class GameOverController {
+public class SpaceOverController {
 
 	@FXML
 	Text winner;
@@ -23,7 +23,7 @@ public class GameOverController {
 
 	@FXML
 	private void playAgain() {
-		SpaceGame.getInstance().reset();
+		//SpaceGame.getInstance().reset();
 		SpaceGame.getInstance().hideSecond();
 		SpaceGame.getInstance().playGame();
 	}

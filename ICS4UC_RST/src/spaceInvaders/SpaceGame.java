@@ -1,5 +1,6 @@
 package spaceInvaders;
 
+import java.util.ArrayList;
 /**
  * @author Angela Zhou
  * Date: Jan 2019
@@ -8,8 +9,6 @@ package spaceInvaders;
  * SpaceGame.java 
  * Inspired by https://youtu.be/FVo1fm52hz0
  */
-import java.util.List;
-import java.util.stream.Collectors;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,15 +16,17 @@ import javafx.geometry.Bounds;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class SpaceGame extends Application {
 	/**
-	 * Initialization
+	 * Variables and Constants
 	 */	
 	// timer to control the animations
-	AnimationTimer timer;
+	GameTimer timer;
 
 	// screen constants
 	public static final int SCREEN_WIDTH  = 400;
@@ -33,15 +34,9 @@ public class SpaceGame extends Application {
 	// gap b/w invaders
 	public static final int GAP           = 50;
 
-	// time var
-	public final double MILISECONDS   = 0.016;
-	public final int    TIME_PERIOD   = 2;
-	private double      time          = 0;
-
 	// gameplay constant
 	public final int    NUM_INVADERS  = 5;
 	public final double PERCENT       = 0.1;
-	public final int    OFFSET        = 20;
 
 	// moving booleans
 	boolean moveLeft;
@@ -51,19 +46,20 @@ public class SpaceGame extends Application {
 	boolean gameOver;
 	int deadInvaders;
 
-	// invader array
-	Shooter [][] invaders = new Shooter[NUM_INVADERS][NUM_INVADERS];
-
 	// image variables
 	Image shipImage    = new Image(getClass().getResource("images/Ship.png").toString());
 	Image invaderImage = new Image(getClass().getResource("images/Invader.png").toString());
-	Image bulletImage  = new Image(getClass().getResource("images/Bullet.png").toString());
+
+	// Sprites
+	// invader array
+	Shooter [][] invaders = new Alien[NUM_INVADERS][NUM_INVADERS];
+	// bullet array
+	ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+	// main player
+	private Ship player = new Ship(SCREEN_WIDTH / 2 - Shooter.OFFSET, SCREEN_HEIGHT - 60, "Ship", shipImage);
 
 	// root layout
 	private Pane root = new Pane();
-
-	// main player
-	private Shooter player = new Shooter(SCREEN_WIDTH / 2 - OFFSET, SCREEN_HEIGHT - 60, "Ship", shipImage);
 
 	/**
 	 * Variables for switching stages and button actions
@@ -73,7 +69,7 @@ public class SpaceGame extends Application {
 
 	static SpaceGame instance;
 
-	GameOverController gameOverControl;
+	SpaceOverController gameOverControl;
 
 	Scene scnMenu, scnMain, scnOver;
 
@@ -92,7 +88,7 @@ public class SpaceGame extends Application {
 		mainGame();
 
 		scnMenu = new Scene(FXMLLoader.load(getClass().getResource("SpaceMenu.fxml")));
-		loadOver = new FXMLLoader(getClass().getResource("GameOver.fxml"));
+		loadOver = new FXMLLoader(getClass().getResource("SpaceOver.fxml"));
 
 		Parent parOver = loadOver.load();
 		scnOver = new Scene(parOver);
@@ -106,47 +102,6 @@ public class SpaceGame extends Application {
 	 * Main Game Method
 	 */
 	private void mainGame() {
-		Scene scene = new Scene(initialize());
-
-		// starts movement and shooting
-		scene.setOnKeyPressed(event-> {
-			switch (event.getCode()) {
-			case LEFT:
-				moveLeft  = true;
-				break;
-			case RIGHT:
-				moveRight = true;
-				break;
-			case SPACE:
-				shoot(player);
-				break;
-			default:
-				break;
-			}
-		});
-
-		// stops movement
-		scene.setOnKeyReleased(event-> {
-			switch (event.getCode()) {
-			case LEFT:
-				moveLeft  = false;
-				break;
-			case RIGHT:
-				moveRight = false;
-				break;
-			default:
-				break;
-			}
-		});
-
-		scnMain = scene;
-	}
-
-	/**
-	 * Set up the game
-	 */
-	private Parent initialize() {
-
 		// set screen size
 		root.setPrefSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		// set screen colour
@@ -155,15 +110,10 @@ public class SpaceGame extends Application {
 		// add player to the root
 		root.getChildren().add(player);
 
-		// create timer to control the animation
-		timer = new AnimationTimer() {
-			@Override
-			public void handle(long now) {
-				// main game loop
-				update();
+		Scene scene = new Scene(root);
 
-			}
-		};
+		// create timer to control the animation
+		timer = new GameTimer();
 
 		// start the timer
 		timer.start();
@@ -171,118 +121,7 @@ public class SpaceGame extends Application {
 		// set up the invaders
 		runInvaders();
 
-		return root;
-	}
-
-
-	/**
-	 * Main Game loop
-	 */
-	private void update() {
-		// increase time when screen updates
-		time += MILISECONDS;
-
-		// smoother movement if the update() method handles movement
-		// compared to the key pressed method
-		if (moveLeft) {
-			player.moveLeft();
-		} else if (moveRight) {
-			player.moveRight();
-		} 
-
-		/**
-		 * Loop through each item for Bullet Collision Detection
-		 */
-		shooters().forEach(item -> {
-			switch (item.TYPE) {
-
-			case "Invader Bullet":
-				// invader bullets move down
-				item.moveDown();
-
-				// collision detection with bullet and player
-				if (item.getBoundsInParent(). intersects(player.getBoundsInParent())) {
-					// player disappears
-					player.isDead = true;
-					// bullet disappears
-					item.isDead = true;
-				}
-
-				break;
-
-			case "Ship Bullet":
-				// player bullets move up
-				item.moveUp();
-
-				// collision detection with bullet and invader
-				shooters().stream().filter(e-> e.TYPE.equals("Invader")).forEach(invader -> {
-					if (item.getBoundsInParent().intersects(invader.getBoundsInParent())) {
-						// invader disappears
-						invader.isDead = true;
-						deadInvaders++;
-						// bullet diappears
-						item.isDead = true;
-					}
-				});
-				break;
-			case "Invader":
-				// if the time period is up
-				if (time > TIME_PERIOD) {
-					// invader has a certain percent chance of shooting
-					if (Math.random() < PERCENT) {
-						shoot(item);
-					}
-				}
-				break;
-
-			case "Ship":
-				// do not allow ship to exit screen
-				Bounds ship = item.getBoundsInParent();
-
-				// find distance b/w left and right of screen
-				double distRight = SCREEN_WIDTH - ship.getMaxX();
-				double distLeft  = ship.getMinX();
-
-				// if ship hits the edge of the screen from the right
-				if (distRight >= 0 && distRight <= item.SPEED) {
-					// then we reset the ship back left to its previous position 
-					// by subtracting speed from X
-					item.setX(item.getX() - item.SPEED);
-				}
-
-				// if ship hits the edge of the screen from the left
-				if (distLeft >= 0 && distLeft <= item.SPEED) {
-					// then we reset the ship back right to its previous position 
-					// by adding speed to X
-					item.setX(item.getX() + item.SPEED);
-				}
-
-			}
-		});
-
-		// removes dead invaders or players and bullets(makes them disappear)
-		root.getChildren().removeIf(dead -> {
-			Shooter shooter = (Shooter) dead;
-			return shooter.isDead;
-		});
-
-		if (player.isDead) {
-			gameOver = true;
-			timer.stop();
-			gameOver("Invader Wins");
-
-		}
-
-		if (deadInvaders == (NUM_INVADERS * NUM_INVADERS)) {
-			gameOver = true;
-			timer.stop();
-			gameOver("Ship Wins");
-		}
-
-		// reset time
-		if (time > TIME_PERIOD) {
-			time = 0;
-		}
+		scnMain = scene;
 	}
 
 	/**
@@ -293,28 +132,146 @@ public class SpaceGame extends Application {
 		for (int row = 0; row < invaders.length; row++) {
 			// col the number of invaders per line
 			for (int col = 0; col < invaders[row].length; col++) {
-				invaders[row][col] = new Shooter(SCREEN_WIDTH / 5 + col*50, 50 + row * 50, "Invader", invaderImage);
+				invaders[row][col] = new Alien(SCREEN_WIDTH / 5 + col * GAP, GAP + row * GAP, "Invader", invaderImage);
 				root.getChildren().add(invaders[row][col]);
 			}
 		}
 	}
 
 	/**
-	 * Initializes the bullets
+	 * Event handling
 	 */
-	private void shoot(Shooter shooter) {
-		// bullet needs to come out of the middle of the ship
-		int x = (int) (shooter.getX() + OFFSET);
-		int y = (int) (shooter.getY());
-		Shooter bullet = new Shooter(x, y, shooter.TYPE + " Bullet", bulletImage);
-		root.getChildren().add(bullet);
+	public void handleKeyPressed(KeyEvent event) {
+		KeyCode code = event.getCode();
+		if (event.getEventType() == KeyEvent.KEY_PRESSED) {
+			switch (code) {
+			case LEFT:
+				moveLeft  = true;
+				break;
+			case RIGHT:
+				moveRight = true;
+				break;
+			case SPACE:
+				Bullet newBullet = player.shoot();
+				root.getChildren().add(newBullet);
+				newBullet.moveUp();
+				bullets.add(newBullet);
+				break;
+			default:
+				break;
+			}
+		}
 	}
 
+	public void handleKeyReleased(KeyEvent event) {
+		KeyCode code = event.getCode();
+		switch (code) {
+		case LEFT:
+			moveLeft  = false;
+			break;
+		case RIGHT:
+			moveRight = false;
+			break;
+		default:
+			break;
+		}
+	}
+
+
 	/**
-	 * Returns list of all shooters
+	 * Game Timer
 	 */
-	private List<Shooter> shooters() {
-		return root.getChildren().stream().map(n -> (Shooter) n).collect(Collectors.toList());
+	class GameTimer extends AnimationTimer {
+
+		long lastUpdate = 0;
+
+		/**
+		 * Main Game Loop
+		 */
+		@Override
+		public void handle(long now) {
+
+			/**
+			 * Method to control events that happen every second
+			 */
+			// invaders will shoot about every second
+			if (now - lastUpdate >= 1_000_000_000) {
+				for (int row = 0; row < invaders.length; row++) {
+					for (int col = 0; col < invaders[row].length; col++) {
+						// invader has a certain percent chance of shooting
+						if (Math.random() < PERCENT) {
+							Bullet newBullet = invaders[row][col].shoot();
+							root.getChildren().add(newBullet);
+							newBullet.moveDown();
+							bullets.add(newBullet);
+						}
+					}
+				}	
+				lastUpdate = now;
+			}
+
+			/**
+			 * Handling Movement
+			 */
+			if (moveLeft) {
+				player.moveLeft();
+			} else if (moveRight) {
+				player.moveRight();
+			} 
+
+			/**
+			 * Ship/Screen Collision detection
+			 */
+			// do not allow ship to exit screen
+			Bounds ship = player.getBoundsInParent();
+
+			// find distance b/w left and right of screen
+			double distRight = SCREEN_WIDTH - ship.getMaxX();
+			double distLeft  = ship.getMinX();
+
+			// if ship hits the edge of the screen from the right
+			if (distRight >= 0 && distRight <= player.SPEED) {
+				// then we reset the ship back left to its previous position 
+				// by subtracting speed from X
+				player.setX(player.getX() - player.SPEED);
+			}
+
+			// if ship hits the edge of the screen from the left
+			if (distLeft >= 0 && distLeft <= player.SPEED) {
+				// then we reset the ship back right to its previous position 
+				// by adding speed to X
+				player.setX(player.getX() + player.SPEED);
+			}
+
+			/**
+			 * Bullet/Ship Collision Detection
+			 */
+			for (int i = 0; i < bullets.size(); i++) {
+				if (bullets.get(i).getBoundsInParent(). intersects(player.getBoundsInParent())) {
+					// player disappears
+					player.setVisible(false);
+					// bullet disappears
+					bullets.get(i).setVisible(false);
+				}
+			}
+
+			/**
+			 * Bullet/Aliens Collision Detection
+			 */
+			for (int i = 0; i < bullets.size(); i++) {
+				for (int row = 0; row < invaders.length; row++) {
+					for (int col = 0; col < invaders[row].length; col++) {
+						if (bullets.get(i).getBoundsInParent().intersects(invaders[row][col].getBoundsInParent())) {
+							// alien disappears
+							invaders[row][col].setVisible(false);
+							deadInvaders++;
+							// bullet disappears
+							bullets.get(i).setVisible(false);
+						}
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -336,30 +293,6 @@ public class SpaceGame extends Application {
 	public void hideSecond() {
 		secondStage.hide();
 	}
-
-	public void reset() {
-		// reset game
-		gameOver     = false;
-		moveRight    = false;
-		moveLeft     = false;
-		deadInvaders = 0;
-		// reset player
-		player.reset();
-		// reset invaders
-		for (int row = 0; row < invaders.length; row++) {
-			for (int col = 0; col < invaders[row].length; col++) {
-				invaders[row][col].reset();
-			}
-		}
-//		shooters().forEach(item -> {
-//			item.reset();
-//		});
-		runInvaders();
-		myStage.show();
-		// start the timer
-		timer.start();
-
- 	}
 
 	public void gameOver(String winner) {
 		gameOverControl.setWinnerText(winner);
