@@ -328,6 +328,10 @@ public class SpaceGame extends Application {
 				}
 			}
 			
+			/**
+			 * Determine if the game is over
+			 */
+			// if player loses
 			if (player.isDead) {
 				gameOver = true;
 				losses ++;
@@ -336,6 +340,7 @@ public class SpaceGame extends Application {
 
 			}
 
+			// if player wins
 			if (deadInvaders == (NUM_INVADERS * NUM_INVADERS)) {
 				gameOver = true;
 				wins++;
