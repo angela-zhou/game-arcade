@@ -19,4 +19,19 @@ public class MenuController {
 		Menu.getInstance().runTTT();
 	}
 	
+	@FXML
+	private void runWar() {
+		Menu.getInstance().runWar();
+	}
+	
+	@FXML
+	private void runSpace() {
+		Menu.getInstance().runSpace();
+	}
+	
+	@FXML
+	private void exit() {
+		Menu.getInstance().exit();
+	}
+	
 }
