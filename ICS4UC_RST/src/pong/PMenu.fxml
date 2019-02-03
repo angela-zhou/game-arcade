@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,7 +17,7 @@
          </font>
       </Text>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00000032" height="500.0" stroke="TRANSPARENT" strokeType="INSIDE" width="52.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00000032" height="500.0" layoutX="348.0" layoutY="1.0" stroke="TRANSPARENT" strokeType="INSIDE" width="52.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#00000032" height="500.0" layoutX="348.0" stroke="TRANSPARENT" strokeType="INSIDE" width="52.0" />
       <Button layoutX="174.0" layoutY="399.0" mnemonicParsing="false" onAction="#exit" style="-fx-background-color: #ef0b0b; -fx-background-insets: 0, 1, 2; -fx-background-radius: 8, 7, 6;" text="Exit">
          <font>
             <Font name="Webdings" size="18.0" />
@@ -24,6 +25,9 @@
          <effect>
             <DropShadow color="#000000e7" height="15.0" radius="7.0" spread="0.2" width="15.0" />
          </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button layoutX="145.0" layoutY="161.0" mnemonicParsing="false" onAction="#play" style="-fx-background-color: #0acc0a; -fx-background-insets: 0, 1, 2; -fx-background-radius: 8, 7, 6;" text="Play Game!">
          <font>
@@ -32,6 +36,9 @@
          <effect>
             <DropShadow color="#000000e7" height="15.0" radius="7.0" spread="0.2" width="15.0" />
          </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button layoutX="157.0" layoutY="276.0" mnemonicParsing="false" onAction="#settings" style="-fx-background-color: #d3d3d3; -fx-background-insets: 0, 1, 2; -fx-background-radius: 8, 7, 6;" text="Settings">
          <font>
@@ -40,6 +47,9 @@
          <effect>
             <DropShadow color="#000000e7" height="15.0" radius="7.0" spread="0.2" width="15.0" />
          </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
    </children>
 </AnchorPane>
