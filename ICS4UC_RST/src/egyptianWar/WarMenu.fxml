@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #008000;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="egyptianWar.WarMenuController">
+   <children>
+      <Text fill="#ffd400" layoutX="83.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Egyptian War">
+         <font>
+            <Font name="Broadway" size="32.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="187.0" fitWidth="265.0" layoutX="68.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Playing%20Cards.png" />
+         </image></ImageView>
+      <ImageView fitHeight="67.0" fitWidth="234.0" layoutX="68.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Suits.png" />
+         </image></ImageView>
+      <Button layoutX="58.0" layoutY="369.0" mnemonicParsing="false" onAction="#play" prefHeight="40.0" prefWidth="120.0" text="Start Game">
+         <font>
+            <Font name="High Tower Text" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="213.0" layoutY="369.0" mnemonicParsing="false" onAction="#help" prefHeight="40.0" prefWidth="120.0" text="How to Play">
+         <font>
+            <Font name="High Tower Text" size="18.0" />
+         </font>
+      </Button>
+      <Button layoutX="140.0" layoutY="432.0" mnemonicParsing="false" onAction="#exit" prefHeight="40.0" prefWidth="120.0" text="Exit">
+         <font>
+            <Font name="High Tower Text" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

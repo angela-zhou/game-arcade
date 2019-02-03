@@ -8,13 +8,20 @@ import javafx.stage.Stage;
 public class Menu extends Application{
 
 	private static Menu instance;
+	Stage stgMenu;
+	
 	// instances of games
-	asteroids.Game astGame = new asteroids.Game();
-	pacMan.PacMan pacGame = new pacMan.PacMan();
+	asteroids.Game                astGame   = new asteroids.Game();
+	pacMan.PacMan                 pacGame   = new pacMan.PacMan();
+	ultimateTicTacToe.Main        tttGame   = new ultimateTicTacToe.Main();
+	egyptianWar.EgyptianWarGame   warGame   = new egyptianWar.EgyptianWarGame();
+	spaceInvaders.SpaceGame       spaceGame = new spaceInvaders.SpaceGame();
+	
 	
 	@Override
 	public void start(Stage stgMenu) throws Exception {
 		instance = this;
+		this.stgMenu = stgMenu;
 		FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("Menu.fxml"));
 		Scene scnMenu = new Scene(menuLoader.load());
 		
@@ -23,6 +30,9 @@ public class Menu extends Application{
 		stgMenu.show();
 	}
 	
+	public void exit() {
+		stgMenu.hide();
+	}
 	
 	/**
 	 * Methods to start a new stage with games
@@ -40,6 +50,30 @@ public class Menu extends Application{
 			pacGame.start(new Stage());
 		} catch (Exception e) {
 			System.out.println("Unable to start game ### Error @ Menu.java - public void runPac()");
+		}
+	}
+	
+	public void runTTT() {
+		try {
+			tttGame.start(new Stage());
+		} catch (Exception e) {
+			System.out.println("Unable to start game ### Error @ Menu.java - public void runTTT()");
+		}
+	}
+	
+	public void runWar() {
+		try {
+			warGame.start(new Stage());
+		} catch (Exception e) {
+			System.out.println("Unable to start game ### Error @ Menu.java - public void runWar()");
+		}
+	}
+	
+	public void runSpace() {
+		try {
+			spaceGame.start(new Stage());
+		} catch (Exception e) {
+			System.out.println("Unable to start game ### Error @ Menu.java - public void runSpace()");
 		}
 	}
 	
