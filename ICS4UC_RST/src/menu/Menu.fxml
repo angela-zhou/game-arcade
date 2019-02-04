@@ -16,7 +16,7 @@
 
 <SplitPane dividerPositions="0.23546511627906977" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="690.0" prefWidth="490.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="menu.MenuController">
   <items>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="600.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="250.0" prefWidth="600.0" style="-fx-background-color: #00bfff;">
          <children>
             <ImageView fitHeight="690.0" fitWidth="490.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -33,7 +33,7 @@
                </image>
             </ImageView>
          </children></AnchorPane>
-    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="600.0">
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="600.0" style="-fx-background-color: #00bfff;">
          <children>
             <ImageView fitHeight="521.0" fitWidth="488.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -65,7 +65,7 @@
                            <image>
                               <Image url="@../../res/MenuImages/Cards%20Graphic.png" />
                            </image></ImageView>
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="85.0" text="War" />
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#runWar" prefHeight="40.0" prefWidth="85.0" text="War" />
                      </children>
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
@@ -83,24 +83,30 @@
                            <image>
                               <Image url="@../../res/MenuImages/Tic%20Tac%20Toe%20Graphic.png" />
                            </image></ImageView>
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="85.0" text="TicTacToe" />
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#runTTT" prefHeight="40.0" prefWidth="85.0" text="TicTacToe" />
                      </children>
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2">
                      <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="85.0" text="MattGame3" />
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../res/MenuImages/Pong%20Graphic.png" />
+                           </image></ImageView>
+                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="85.0" text="Pong" />
                      </children>
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="85.0" text="AngelaGame3" />
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../res/MenuImages/Invaders%20Graphic.png" />
+                           </image></ImageView>
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#runSpace" prefHeight="40.0" prefWidth="85.0" text="Invaders" />
                      </children>
                   </StackPane>
                </children>
             </GridPane>
-            <Button layoutX="202.0" layoutY="434.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="85.0" text="Exit" />
+            <Button layoutX="204.0" layoutY="434.0" mnemonicParsing="false" onAction="#exit" prefHeight="40.0" prefWidth="80.0" text="Exit" />
          </children></AnchorPane>
   </items>
 </SplitPane>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="spaceInvaders.SpaceMenuController">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Background.jpg" />
+         </image>
+      </ImageView>
+      <Text fill="LIME" layoutX="31.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Space Invaders">
+         <font>
+            <Font name="OCR A Extended" size="40.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="58.0" fitWidth="65.0" layoutX="31.0" layoutY="184.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Invader0.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="77.0" fitWidth="96.0" layoutX="104.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Invader1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="77.0" fitWidth="77.0" layoutX="198.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Invader2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="90.0" fitWidth="111.0" layoutX="279.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Invader3.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="125.0" layoutY="355.0" mnemonicParsing="false" onAction="#play" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: BLACK; -fx-border-color: WHITE;" text="Start Game" textFill="WHITE">
+         <font>
+            <Font name="OCR A Extended" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
