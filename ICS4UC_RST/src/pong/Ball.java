@@ -21,6 +21,13 @@ public class Ball extends Circle{
 	long lastHit;
 	
 	/**
+	 * Creates a blank ball object for JUnit tests.
+	 */
+	Ball() {
+		
+	}
+	
+	/**
 	 * Creates a new ball object.
 	 * @param minSpeed
 	 *			Ball minimum speed.
@@ -177,7 +184,7 @@ public class Ball extends Circle{
 	 * @return
 	 *			A double between the min and max value
 	 */
-	private double rand(double min, double max) {
+	public double rand(double min, double max) {
 		Random rand = new Random();
 		return (rand.nextDouble() * (max - min)) + min;
 	}
