@@ -30,8 +30,8 @@ public class Main extends Application{
 	//Game states, values, nodes, and objects
 	static Main instance;
 	double SCREEN_HEIGHT = 600, SCREEN_WIDTH = 800;
-	double BALL_SIZE = 10, MIN_SPEED = 10, MAX_SPEED = 10;
-	double PADDLE_WIDTH = 10, PADDLE_HEIGHT = 70, PADDLE_SPEED = 5, PADDLE_DECAY = 100, PADDLE_GAP = 30;
+	double BALL_SIZE = 8, MIN_SPEED = 8, MAX_SPEED = 12;
+	double PADDLE_WIDTH = 5, PADDLE_HEIGHT = 80, PADDLE_SPEED = 6, PADDLE_DECAY = 100, PADDLE_GAP = 30;
 	int MAX_SCORE = 7;
 	final static double SCORE_INDENT = 80, SCORE_VERT = 40, SCORE_SIZE = 35, PAUSE_VERT = 120;
 	PSettingsControl setControl;

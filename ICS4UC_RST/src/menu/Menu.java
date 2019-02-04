@@ -16,6 +16,7 @@ public class Menu extends Application{
 	ultimateTicTacToe.Main        tttGame   = new ultimateTicTacToe.Main();
 	egyptianWar.EgyptianWarGame   warGame   = new egyptianWar.EgyptianWarGame();
 	spaceInvaders.SpaceGame       spaceGame = new spaceInvaders.SpaceGame();
+	pong.Main					  pongGame  = new pong.Main();
 	
 	
 	@Override
@@ -53,6 +54,14 @@ public class Menu extends Application{
 		}
 	}
 	
+	public void runPong() {
+		try {
+			pongGame.start(new Stage());
+		} catch (Exception e) {
+			System.out.println("Unable to start game ### Error @ Menu.java - public void runPong()");
+		}
+	}
+	
 	public void runTTT() {
 		try {
 			tttGame.start(new Stage());
@@ -70,6 +79,7 @@ public class Menu extends Application{
 	}
 	
 	public void runSpace() {
+		spaceGame = new spaceInvaders.SpaceGame();
 		try {
 			spaceGame.start(new Stage());
 		} catch (Exception e) {

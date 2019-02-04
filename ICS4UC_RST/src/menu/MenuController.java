@@ -20,6 +20,11 @@ public class MenuController {
 	}
 	
 	@FXML
+	private void runPong() {
+		Menu.getInstance().runPong();
+	}
+	
+	@FXML
 	private void runWar() {
 		Menu.getInstance().runWar();
 	}
