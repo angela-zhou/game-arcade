@@ -494,6 +494,9 @@ public class Game extends Application{
 			KeyCode code = ev.getCode();
 			EventType<KeyEvent> type = ev.getEventType();
 			
+			if(code == KeyCode.ESCAPE)
+				myStage.close();
+			
 			//Runs this block if the user pressed a key and game is not currently in any animation
 			if(type == KeyEvent.KEY_PRESSED && !hitAnim && !levelAnim) {
 				
